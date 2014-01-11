@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RepetierServerApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="ServerSelection">Seleziona Server:</string>
+    <string name="createServer">CREA SERVER</string>
+    <string name="loadServer">CARICA SERVER</string>
+    <string name="serverList">LISTA SERVER DISPONIBILI</string>
+    <string name="title_activity_printer_control">PrinterControl</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_add_server">AddServer</string>
+    <string name="newServer">Alias server:</string>
+    <string name="newUrl">Indirizzo server:</string>
+
+</resources>

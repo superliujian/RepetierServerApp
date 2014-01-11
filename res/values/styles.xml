@@ -1,0 +1,59 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="control_buttons" parent="android:Widget.Button">
+        <item name="android:textSize">@dimen/controlButtonText</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+    
+    <style name="home_buttons" parent="android:Widget.Button">
+        <item name="android:textSize">@dimen/homeButtonText</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="controlTextView" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/controlTextView</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+    
+    <style name="xcontrol_buttons" parent="android:Widget.Button">
+        <item name="android:textSize">@dimen/controlButtonText</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">#FF0000</item>
+    </style>
+    
+    <style name="ycontrol_buttons" parent="android:Widget.Button">
+        <item name="android:textSize">@dimen/controlButtonText</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">#0000FF</item>
+    </style>
+    
+    <style name="zcontrol_buttons" parent="android:Widget.Button">
+        <item name="android:textSize">@dimen/controlButtonText</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">#00FF00</item>
+    </style>
+         
+</resources>
