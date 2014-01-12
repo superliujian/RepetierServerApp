@@ -27,70 +27,84 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08002c;
+        public static final int action_settings=0x7f080038;
+        public static final int bedSwitch=0x7f080014;
+        public static final int bedTempReadTextView=0x7f080017;
+        public static final int bedTempSetTextView=0x7f08001a;
+        public static final int bedTextView=0x7f080015;
+        public static final int bedtempTextView=0x7f080016;
         public static final int createServerBtn=0x7f080005;
-        public static final int extruderSwitch=0x7f080010;
-        public static final int extruderTextView=0x7f080011;
+        public static final int extrTempReadTextView=0x7f080012;
+        public static final int extrTempSetTextView=0x7f080019;
+        public static final int extrtempTextView=0x7f080013;
+        public static final int extruderSwitch=0x7f080011;
+        public static final int extruderTextView=0x7f080010;
         public static final int feedrateSeekBar=0x7f08000b;
         public static final int feedrateTextView=0x7f08000a;
         public static final int feedrateValueTextView=0x7f08000e;
         public static final int flowrateSeekBar=0x7f08000d;
         public static final int flowrateTextView=0x7f08000c;
         public static final int flowrateValueTextView=0x7f08000f;
-        public static final int homeButton=0x7f080015;
-        public static final int homexbutton=0x7f08001c;
-        public static final int homeybutton=0x7f08001d;
-        public static final int homezbutton=0x7f08001f;
+        public static final int homeButton=0x7f080021;
+        public static final int homexbutton=0x7f080028;
+        public static final int homeybutton=0x7f080029;
+        public static final int homezbutton=0x7f08002b;
         public static final int listView=0x7f080009;
         public static final int loadServerBtn=0x7f080008;
+        public static final int nameServer=0x7f080037;
+        public static final int newBedTempBtn=0x7f08001e;
+        public static final int newBedTempEt=0x7f08001d;
+        public static final int newExtrTempBtn=0x7f08001c;
+        public static final int newExtrTempEt=0x7f08001b;
         public static final int newServerBtn=0x7f080007;
         public static final int newServerTV=0x7f080000;
         public static final int newUrlTV=0x7f080003;
         public static final int serverNameET=0x7f080001;
         public static final int serverSelectionTV=0x7f080006;
         public static final int serverUrlET=0x7f080004;
-        public static final int statusTextView=0x7f080029;
-        public static final int tempTextView=0x7f080012;
+        public static final int statusTextView=0x7f080035;
         public static final int textView1=0x7f080002;
-        public static final int textViewName=0x7f08002a;
-        public static final int textViewUrl=0x7f08002b;
-        public static final int textViewX=0x7f080023;
-        public static final int textViewY=0x7f080024;
-        public static final int textViewZ=0x7f080025;
-        public static final int xValueTextView=0x7f080027;
-        public static final int x_10button=0x7f080017;
-        public static final int x_1button=0x7f080016;
-        public static final int xp10button=0x7f080013;
-        public static final int xp1button=0x7f080014;
-        public static final int yValueTextView=0x7f080026;
-        public static final int y_10button=0x7f08001b;
-        public static final int y_1button=0x7f08001a;
-        public static final int yp10button=0x7f080019;
-        public static final int yp1button=0x7f080018;
-        public static final int zValueTextView=0x7f080028;
-        public static final int z_10button=0x7f08001e;
-        public static final int z_1button=0x7f080020;
-        public static final int zp10button=0x7f080022;
-        public static final int zp1button=0x7f080021;
+        public static final int textView2=0x7f080018;
+        public static final int textViewX=0x7f08002f;
+        public static final int textViewY=0x7f080030;
+        public static final int textViewZ=0x7f080031;
+        public static final int urlServer=0x7f080036;
+        public static final int xValueTextView=0x7f080033;
+        public static final int x_10button=0x7f080023;
+        public static final int x_1button=0x7f080022;
+        public static final int xp10button=0x7f08001f;
+        public static final int xp1button=0x7f080020;
+        public static final int yValueTextView=0x7f080032;
+        public static final int y_10button=0x7f080027;
+        public static final int y_1button=0x7f080026;
+        public static final int yp10button=0x7f080025;
+        public static final int yp1button=0x7f080024;
+        public static final int zValueTextView=0x7f080034;
+        public static final int z_10button=0x7f08002a;
+        public static final int z_1button=0x7f08002c;
+        public static final int zp10button=0x7f08002e;
+        public static final int zp1button=0x7f08002d;
     }
     public static final class layout {
         public static final int activity_add_server=0x7f030000;
         public static final int activity_login=0x7f030001;
         public static final int control2_ui=0x7f030002;
         public static final int control_ui=0x7f030003;
-        public static final int serverview=0x7f030004;
+        public static final int serverlineview=0x7f030004;
     }
     public static final class menu {
         public static final int add_server=0x7f070000;
         public static final int login=0x7f070001;
         public static final int main=0x7f070002;
         public static final int printer_control=0x7f070003;
+        public static final int printer_control2=0x7f070004;
     }
     public static final class string {
         public static final int ServerSelection=0x7f040002;
         public static final int action_settings=0x7f040001;
         public static final int app_name=0x7f040000;
         public static final int createServer=0x7f040003;
+        public static final int hello_world=0x7f04000c;
         public static final int loadServer=0x7f040004;
         public static final int newServer=0x7f040009;
         public static final int newUrl=0x7f04000a;
@@ -98,6 +112,7 @@ public final class R {
         public static final int title_activity_add_server=0x7f040008;
         public static final int title_activity_login=0x7f040007;
         public static final int title_activity_printer_control=0x7f040006;
+        public static final int title_activity_printer_control2=0x7f04000b;
     }
     public static final class style {
         /** 

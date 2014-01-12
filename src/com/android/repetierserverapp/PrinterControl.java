@@ -114,7 +114,7 @@ public class PrinterControl extends Activity implements PrinterStatusCallbacks, 
 		s.setCallbacks(this);
 
 		s.updatePrinterList(this);
-
+		
 
 
 	}

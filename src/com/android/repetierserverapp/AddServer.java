@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,8 +38,39 @@ public class AddServer extends Activity implements OnClickListener {
 		serverName = (TextView) findViewById(R.id.serverNameET);
 		serverUrl = (TextView) findViewById(R.id.serverUrlET);
 
+		createServer.setOnClickListener(this);
 	}
 
+	
+	@Override
+	public void onClick(View v) {
+		Log.d("onClick" , "entrato");
+
+		switch (v.getId()) {
+
+		case R.id.createServerBtn:
+
+			Log.d("onClick createServerBtn:" , "entrato");
+
+			name = serverName.getText().toString();
+			//if (!isValidName(name)){ //TODO errore: nome non valido}
+			//	;
+			//}
+			url = serverUrl.getText().toString();
+			//if (!isValidUrl(url)){ //TODO errore: indirizzo non valido
+			//	;
+			//}
+
+			dbAdapter = new DbAdapter(this);
+			dbAdapter.open();
+			dbAdapter.createServer(name, url);
+			dbAdapter.close();
+			
+			break;
+		}
+	}
+
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -47,36 +79,11 @@ public class AddServer extends Activity implements OnClickListener {
 	}
 
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-
-		//Verifica validità di nome ed indirizzo e inserisce il nuovo server nel database
-		case R.id.createServerBtn:
-			name = (String) serverName.getText();
-			if (!isValidName(name)){ //TODO errore: nome non valido}
-				;
-			}
-			url = (String) serverUrl.getText();
-			if (!isValidUrl(url)){ //TODO errore: indirizzo non valido
-				;
-			}
-			
-			dbAdapter = new DbAdapter(this);
-			dbAdapter.open();
-			dbAdapter.createServer(name, url);
-			dbAdapter.close();
-			
-			setContentView(R.layout.activity_login);
-			break;
-
-		}
-	}
-
 	private boolean isValidUrl(String url) {
 		//TODO 
 		return true;
 	}
+
 
 	private boolean isValidName(String name) {
 		if (url == "") return false;
@@ -91,7 +98,7 @@ public class AddServer extends Activity implements OnClickListener {
 			cursor.close(); 
 			return false;
 		}
-		
+
 		cursor.close(); 
 		return true;
 	}

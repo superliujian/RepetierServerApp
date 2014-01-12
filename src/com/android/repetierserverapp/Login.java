@@ -1,28 +1,25 @@
 package com.android.repetierserverapp;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import com.android.repetierserverapp.db.DbAdapter;
-import com.android.repetierserverapp.db.DbHelper;
+import com.android.repetierserverapp.utils.ArrayAdapterItem;
 import com.android.repetierserverapp.utils.ServerInfo;
-import com.android.repetierserverapp.utils.ServerListAdapter;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-
+import android.app.LoaderManager; 
 
 public class Login extends Activity implements OnClickListener{
-
 	private String serverName;
 	private String serverUrl;
 
@@ -32,28 +29,27 @@ public class Login extends Activity implements OnClickListener{
 	private Button loadServer;
 	private Button newServer;
 
+	LoaderManager loadermanager;
 
 	SharedPreferences pref;
 
-	@SuppressWarnings("deprecation")
+
 	@Override
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+
+		Log.d("sto per aggiungere un server al db", "entrato");
+		dbAdapter = new DbAdapter(this);
+		dbAdapter.open();
+		dbAdapter.createServer("server", "wooo");
+		dbAdapter.close();
+
+
+
 
 		pref = PreferenceManager.getDefaultSharedPreferences(this);
 		serverName = pref.getString("serverName", "");
@@ -66,24 +62,45 @@ public class Login extends Activity implements OnClickListener{
 		loadServer.setOnClickListener(this);
 		newServer.setOnClickListener(this);
 
+
+
+		Log.d("sto per leggere un server al db", "entrato");
 		dbAdapter = new DbAdapter(this);
 		dbAdapter.open();
 		cursor = dbAdapter.fetchAllServer();
 		dbAdapter.close();
 
+		
+		
+		
+		
+		
+		
+		
+		
+		ServerInfo[] serverList = new ServerInfo[20];
 
-		startManagingCursor(cursor);
-		List<ServerInfo> list = new LinkedList<ServerInfo>();
-		while ( cursor.moveToNext() ) {
-			serverName = cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.DB_NAME));
-			serverUrl = cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.DB_URL));
-			list.add(new ServerInfo(serverName, serverUrl));
-		}    
-		cursor.close();
+		serverList[0] = new ServerInfo("NOME", "URL");
+		serverList[1] = new ServerInfo("NOME", "URL");
+		serverList[2] = new ServerInfo("NOME", "URL");
+		serverList[3] = new ServerInfo("NOME", "URL");
+		serverList[4] = new ServerInfo("NOME", "URL");
+		serverList[5] = new ServerInfo("NOME", "URL");
+		serverList[6] = new ServerInfo("NOME", "URL");
+       
 
-		ServerListAdapter adapter = new ServerListAdapter(this, R.layout.serverview, list);
-		listView.setAdapter(adapter);	
+        // our adapter instance
+        ArrayAdapterItem adapter = new ArrayAdapterItem(this, R.layout.serverlineview, serverList);
+
+        // create a new ListView, set the adapter and item click listener
+        ListView listViewItems = new ListView(this);
+        listViewItems.setAdapter(adapter);
+        // listViewItems.setOnItemClickListener(new OnItemClickListenerListViewItem());
+
+
 	}
+
+
 
 
 
@@ -111,7 +128,10 @@ public class Login extends Activity implements OnClickListener{
 			break;
 
 		case R.id.newServerBtn:
-			setContentView(R.layout.activity_add_server);
+			Intent myIntent = new Intent(v.getContext(), AddServer.class);
+			startActivityForResult(myIntent, 0);
+
+			//setContentView(R.layout.activity_add_server);
 			break;
 		}
 	}

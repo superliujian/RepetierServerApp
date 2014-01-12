@@ -12,5 +12,7 @@
     <string name="title_activity_add_server">AddServer</string>
     <string name="newServer">Alias server:</string>
     <string name="newUrl">Indirizzo server:</string>
+    <string name="title_activity_printer_control2">PrinterControl2</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

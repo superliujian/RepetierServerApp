@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/newServerTV"
-        android:layout_marginTop="20dp"
-        android:ems="10" >
+        android:layout_marginTop="10dp"
+        android:ems="5" >
 
         <requestFocus />
     </EditText>
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/serverNameET"
         android:layout_below="@+id/serverNameET"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:text="@string/newUrl" />
 
     <EditText
@@ -41,17 +41,17 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/newUrlTV"
         android:layout_below="@+id/newUrlTV"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:ems="10" />
 
     <Button
         android:id="@+id/createServerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_below="@+id/serverUrlET"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/newUrlTV"
         android:text="CREA NUOVO SERVER" />
 
 </RelativeLayout>
