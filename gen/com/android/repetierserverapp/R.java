@@ -30,12 +30,12 @@ public final class R {
         public static final int action_settings=0x7f080038;
         public static final int bedSwitch=0x7f080014;
         public static final int bedTempReadTextView=0x7f080017;
-        public static final int bedTempSetTextView=0x7f08001a;
+        public static final int bedTempSetTextView=0x7f080019;
         public static final int bedTextView=0x7f080015;
         public static final int bedtempTextView=0x7f080016;
         public static final int createServerBtn=0x7f080005;
         public static final int extrTempReadTextView=0x7f080012;
-        public static final int extrTempSetTextView=0x7f080019;
+        public static final int extrTempSetTextView=0x7f08001b;
         public static final int extrtempTextView=0x7f080013;
         public static final int extruderSwitch=0x7f080011;
         public static final int extruderTextView=0x7f080010;
@@ -55,7 +55,7 @@ public final class R {
         public static final int newBedTempBtn=0x7f08001e;
         public static final int newBedTempEt=0x7f08001d;
         public static final int newExtrTempBtn=0x7f08001c;
-        public static final int newExtrTempEt=0x7f08001b;
+        public static final int newExtrTempEt=0x7f08001a;
         public static final int newServerBtn=0x7f080007;
         public static final int newServerTV=0x7f080000;
         public static final int newUrlTV=0x7f080003;
