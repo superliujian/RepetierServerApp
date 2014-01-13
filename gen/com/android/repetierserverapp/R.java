@@ -61,10 +61,10 @@ public final class R {
         public static final int newServerBtn=0x7f090036;
         public static final int newServerTV=0x7f090002;
         public static final int newUrlTV=0x7f090005;
+        public static final int printerSelectionTV=0x7f090034;
         public static final int serverNameET=0x7f090003;
         public static final int serverSelectionTV=0x7f090035;
         public static final int serverUrlET=0x7f090006;
-        public static final int server_detail=0x7f090034;
         public static final int server_detail_container=0x7f090000;
         public static final int server_list=0x7f090001;
         public static final int statusTextView=0x7f09001e;
@@ -125,22 +125,23 @@ public final class R {
         public static final int printer_control2=0x7f080005;
     }
     public static final class string {
+        public static final int PrinterSelection=0x7f040003;
         public static final int ServerSelection=0x7f040002;
         public static final int action_settings=0x7f040001;
         public static final int app_name=0x7f040000;
-        public static final int createServer=0x7f040003;
-        public static final int hello_world=0x7f04000c;
-        public static final int loadServer=0x7f040004;
-        public static final int newServer=0x7f040009;
-        public static final int newUrl=0x7f04000a;
-        public static final int serverList=0x7f040005;
-        public static final int title_activity_activity_add_server=0x7f04000f;
-        public static final int title_activity_add_server=0x7f040008;
-        public static final int title_activity_login=0x7f040007;
-        public static final int title_activity_printer_control=0x7f040006;
-        public static final int title_activity_printer_control2=0x7f04000b;
-        public static final int title_server_detail=0x7f04000e;
-        public static final int title_server_list=0x7f04000d;
+        public static final int createServer=0x7f040004;
+        public static final int hello_world=0x7f04000d;
+        public static final int loadServer=0x7f040005;
+        public static final int newServer=0x7f04000a;
+        public static final int newUrl=0x7f04000b;
+        public static final int serverList=0x7f040006;
+        public static final int title_activity_activity_add_server=0x7f040010;
+        public static final int title_activity_add_server=0x7f040009;
+        public static final int title_activity_login=0x7f040008;
+        public static final int title_activity_printer_control=0x7f040007;
+        public static final int title_activity_printer_control2=0x7f04000c;
+        public static final int title_server_detail=0x7f04000f;
+        public static final int title_server_list=0x7f04000e;
     }
     public static final class style {
         /** 
