@@ -52,7 +52,7 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 			Bundle savedInstanceState) {
 
 		super.onCreateView(inflater, container, savedInstanceState);
-		return inflater.inflate(R.layout.fragment_login, container, false);
+		return inflater.inflate(R.layout.fragment_server_selection, container, false);
 	}
 
 	@Override

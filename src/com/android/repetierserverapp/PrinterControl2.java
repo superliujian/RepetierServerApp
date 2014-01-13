@@ -48,7 +48,7 @@ public class PrinterControl2 extends Activity implements OnClickListener, OnSeek
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.control2_ui);
+		setContentView(R.layout.fragment_control2);
 
 		feedrateValue = (TextView) findViewById(R.id.feedrateValueTextView);
 		flowrateValue = (TextView) findViewById(R.id.flowrateValueTextView);

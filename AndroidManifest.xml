@@ -19,7 +19,6 @@
             android:name="com.android.repetierserverapp.PrinterControl"
             android:label="@string/title_activity_printer_control" >
         </activity>
-        
         <activity
             android:name="com.android.repetierserverapp.FragAddServer"
             android:label="@string/title_activity_add_server" >
@@ -44,6 +43,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ServerListActivity" />
+        </activity>
+        <activity
+            android:name="com.android.repetierserverapp.ActivityAddServer"
+            android:label="@string/title_activity_activity_add_server" >
         </activity>
     </application>
 

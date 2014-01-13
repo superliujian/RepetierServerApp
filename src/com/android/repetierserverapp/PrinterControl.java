@@ -59,7 +59,7 @@ public class PrinterControl extends Activity implements PrinterStatusCallbacks, 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.control_ui);
+		setContentView(R.layout.fragment_control);
 
 		buttonXp10 = (Button) findViewById(R.id.xp10button);
 		buttonXp1 = (Button) findViewById(R.id.xp1button);
