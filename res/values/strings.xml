@@ -14,5 +14,7 @@
     <string name="newUrl">Indirizzo server:</string>
     <string name="title_activity_printer_control2">PrinterControl2</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_server_list">Servers</string>
+    <string name="title_server_detail">Server Detail</string>
 
 </resources>

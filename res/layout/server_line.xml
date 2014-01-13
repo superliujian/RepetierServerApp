@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp" >
+
+    <TextView
+        android:id="@+id/urlServer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/nameServer"
+        android:singleLine="true"
+        android:text="urlServer"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/nameServer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/nameServer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="nameServer"
+        android:textSize="16sp" />
+
+</RelativeLayout>

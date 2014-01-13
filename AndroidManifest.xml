@@ -19,9 +19,18 @@
             android:name="com.android.repetierserverapp.PrinterControl"
             android:label="@string/title_activity_printer_control" >
         </activity>
+        
         <activity
-            android:name="com.android.repetierserverapp.Login"
-            android:label="@string/title_activity_login" >
+            android:name="com.android.repetierserverapp.FragAddServer"
+            android:label="@string/title_activity_add_server" >
+        </activity>
+        <activity
+            android:name="com.android.repetierserverapp.PrinterControl2"
+            android:label="@string/title_activity_printer_control2" >
+        </activity>
+        <activity
+            android:name="com.android.repetierserverapp.ActivityServerList"
+            android:label="@string/title_server_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,12 +38,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.repetierserverapp.AddServer"
-            android:label="@string/title_activity_add_server" >
-        </activity>
-        <activity
-            android:name="com.android.repetierserverapp.PrinterControl2"
-            android:label="@string/title_activity_printer_control2" >
+            android:name="com.android.repetierserverapp.ActivityServerDetail"
+            android:label="@string/title_server_detail"
+            android:parentActivityName=".ActivityServerList" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ServerListActivity" />
         </activity>
     </application>
 

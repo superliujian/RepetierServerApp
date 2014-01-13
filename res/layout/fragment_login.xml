@@ -6,16 +6,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Login" >
+    tools:context=".FragServerList" >
 
     <TextView
         android:id="@+id/serverSelectionTV"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ServerSelection" />
 
     <Button
         android:id="@+id/newServerBtn"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -23,20 +25,11 @@
         android:layout_marginBottom="20dp"
         android:text="CREA NUOVO SERVER" />
 
-    <Button
-        android:id="@+id/loadServerBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/newServerBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:text="Carica Server" />
-
     <ListView
-        android:id="@+id/listView"
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/loadServerBtn"
+        android:layout_above="@+id/newServerBtn"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/serverSelectionTV"
         android:layout_marginTop="20dp" >

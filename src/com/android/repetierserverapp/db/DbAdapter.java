@@ -23,6 +23,12 @@ public class DbAdapter {
 		database = dbHelper.getWritableDatabase();
 		return this;
 	}
+	
+	public DbAdapter openReadOnly() throws SQLException {
+		dbHelper = new DbHelper(context);
+		database = dbHelper.getReadableDatabase();
+		return this;
+	}
 
 	public void close() {
 		dbHelper.close();
@@ -54,11 +60,11 @@ public class DbAdapter {
 
 	//fetch all Server
 	public Cursor fetchAllServer() {
-		return database.query(DbHelper.DB_TABLE, new String[] { DbHelper.DB_NAME, DbHelper.DB_URL}, null, null, null, null, null);
+		return database.query(DbHelper.DB_TABLE, new String[] { DbHelper.DB_NAME, DbHelper.DB_URL, DbHelper.DB_ID}, null, null, null, null, null);
 	}
 
 	
 	public Cursor fetchServerByName(String name) {
-		return database.query(DbHelper.DB_TABLE, new String[] { DbHelper.DB_NAME, DbHelper.DB_URL}, DbHelper.DB_NAME + "=" + name, null, null, null, null);
+		return database.query(DbHelper.DB_TABLE, new String[] { DbHelper.DB_NAME, DbHelper.DB_URL, DbHelper.DB_ID}, DbHelper.DB_NAME + "=" + name, null, null, null, null);
 	}
 }
