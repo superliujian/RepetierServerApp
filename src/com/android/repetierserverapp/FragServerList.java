@@ -1,7 +1,7 @@
 package com.android.repetierserverapp;
 
 import com.android.repetierserverapp.db.DbAdapter;
-import com.android.repetierserverapp.utils.ServerAdapter;
+import com.android.repetierserverapp.utils.ServerListAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -79,7 +79,7 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 		dbAdapter.openReadOnly();
 		cursor = dbAdapter.fetchAllServer();
 
-		ServerAdapter adapter = new ServerAdapter(getActivity(), cursor);
+		ServerListAdapter adapter = new ServerListAdapter(getActivity(), cursor);
 
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(this);

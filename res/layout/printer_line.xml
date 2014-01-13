@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:padding="8dp" >
+    
+ <TextView
+        android:id="@+id/printerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="nome stampante"
+        android:textSize="16sp" />
+    
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/printerName"
+        android:singleLine="true"
+        android:text="Stato stampante:"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/printerStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/status"
+        android:layout_alignBottom="@+id/status"
+        android:layout_marginLeft="40dp"
+        android:layout_toRightOf="@+id/status"
+        android:singleLine="true"
+        android:text="Offline"
+        android:textSize="13sp" />
+    
+</RelativeLayout>

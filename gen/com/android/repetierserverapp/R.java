@@ -31,7 +31,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090039;
+        public static final int action_settings=0x7f09003c;
         public static final int bedSwitch=0x7f090029;
         public static final int bedTempReadTextView=0x7f09002c;
         public static final int bedTempSetTextView=0x7f09002e;
@@ -53,7 +53,7 @@ public final class R {
         public static final int homexbutton=0x7f090011;
         public static final int homeybutton=0x7f090012;
         public static final int homezbutton=0x7f090014;
-        public static final int nameServer=0x7f090038;
+        public static final int nameServer=0x7f09003a;
         public static final int newBedTempBtn=0x7f090033;
         public static final int newBedTempEt=0x7f090032;
         public static final int newExtrTempBtn=0x7f090031;
@@ -61,19 +61,22 @@ public final class R {
         public static final int newServerBtn=0x7f090036;
         public static final int newServerTV=0x7f090002;
         public static final int newUrlTV=0x7f090005;
+        public static final int printerName=0x7f090037;
         public static final int printerSelectionTV=0x7f090034;
+        public static final int printerStatus=0x7f090039;
         public static final int serverNameET=0x7f090003;
         public static final int serverSelectionTV=0x7f090035;
         public static final int serverUrlET=0x7f090006;
         public static final int server_detail_container=0x7f090000;
         public static final int server_list=0x7f090001;
+        public static final int status=0x7f090038;
         public static final int statusTextView=0x7f09001e;
         public static final int textView1=0x7f090004;
         public static final int textView2=0x7f09002d;
         public static final int textViewX=0x7f090018;
         public static final int textViewY=0x7f090019;
         public static final int textViewZ=0x7f09001a;
-        public static final int urlServer=0x7f090037;
+        public static final int urlServer=0x7f09003b;
         public static final int xValueTextView=0x7f09001c;
         public static final int x_10button=0x7f09000c;
         public static final int x_1button=0x7f09000b;
@@ -114,7 +117,8 @@ public final class R {
         public static final int fragment_control2=0x7f030005;
         public static final int fragment_server_detail=0x7f030006;
         public static final int fragment_server_selection=0x7f030007;
-        public static final int server_line=0x7f030008;
+        public static final int printer_line=0x7f030008;
+        public static final int server_line=0x7f030009;
     }
     public static final class menu {
         public static final int activity_add_server=0x7f080000;
