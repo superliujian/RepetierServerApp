@@ -69,6 +69,6 @@ public class DbAdapter {
 	}
 	
 	public Cursor fetchServerById(String id) {
-		return database.query(DbHelper.DB_TABLE, new String[] { DbHelper.DB_NAME, DbHelper.DB_URL, DbHelper.DB_ID}, DbHelper.DB_ID + "=" + id, null, null, null, null);
+		return database.query(DbHelper.DB_TABLE, new String[] { DbHelper.DB_NAME, DbHelper.DB_URL, DbHelper.DB_ID}, DbHelper.DB_ID + "=?" , new String[] {id}, null, null, null);
 	}
 }

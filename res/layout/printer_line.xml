@@ -26,6 +26,7 @@
 
     <TextView
         android:id="@+id/printerStatus"
+        style="@style/online"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/status"
@@ -35,5 +36,53 @@
         android:singleLine="true"
         android:text="Offline"
         android:textSize="13sp" />
-    
+
+    <TextView
+        android:id="@+id/current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/status"
+        android:layout_below="@+id/status"
+        android:text="Lavoro in stampa:"
+        android:textSize="13sp" />
+
+     <TextView
+         android:id="@+id/currentJob"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/current"
+         android:layout_alignBottom="@+id/current"
+         android:layout_alignLeft="@+id/printerStatus"
+         android:text="Lavoro"
+         android:textSize="13sp" />
+     
+     <TextView
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/current"
+        android:layout_below="@+id/current"
+        android:text="Progresso:"
+        android:textSize="13sp" />
+
+     <TextView
+         android:id="@+id/progressJob"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/perc"
+         android:layout_alignBottom="@+id/perc"
+         android:layout_alignLeft="@+id/currentJob"
+         android:text="75"
+         android:textSize="13sp" />
+
+     <TextView
+         android:id="@+id/perc"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/progress"
+         android:layout_alignBottom="@+id/progress"
+         android:layout_toRightOf="@+id/progressJob"
+         android:text="  %"
+         android:textSize="13sp" />
+
 </RelativeLayout>

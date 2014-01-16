@@ -18,11 +18,11 @@ import android.widget.ListView;
 
 public class FragServerList extends ListFragment implements OnClickListener, OnItemClickListener{
 
-	public interface ServerCallbacks {
+	public interface ServerAppCallbacks {
 		public void onServerSelected(long id);
 	};
 
-	private static ServerCallbacks sDummyCallbacks = new ServerCallbacks() {
+	private static ServerAppCallbacks sDummyCallbacks = new ServerAppCallbacks() {
 		@Override
 		public void onServerSelected(long id) {
 		}
@@ -39,7 +39,7 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 
 	private ListView listView;
 
-	private ServerCallbacks mCallbacks;
+	private ServerAppCallbacks mCallbacks;
 
 
 	@Override
@@ -92,12 +92,12 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 		super.onAttach(activity);
 
 		// Activities containing this fragment must implement its callbacks.
-		if (!(activity instanceof ServerCallbacks)) {
+		if (!(activity instanceof ServerAppCallbacks)) {
 			throw new IllegalStateException(
 					"Activity must implement fragment's callbacks.");
 		}
 
-		mCallbacks = (ServerCallbacks) activity;
+		mCallbacks = (ServerAppCallbacks) activity;
 	}
 
 	@Override
@@ -112,10 +112,9 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.newServerBtn:
-			Intent myIntent = new Intent(v.getContext(), FragAddServer.class);
+			Intent myIntent = new Intent(v.getContext(), ActivityAddServer.class);
 			startActivityForResult(myIntent, 0);
 
-			//setContentView(R.layout.activity_add_server);
 			break;
 		}
 	}

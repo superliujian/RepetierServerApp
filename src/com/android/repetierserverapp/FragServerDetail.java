@@ -5,45 +5,82 @@ import java.util.ArrayList;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.android.repetierserverapp.FragServerList.ServerAppCallbacks;
 import com.android.repetierserverapp.db.DbAdapter;
 import com.android.repetierserverapp.db.DbHelper;
+import com.android.repetierserverapp.utils.PrinterListAdapter;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Server;
 import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 
-/**
- * A fragment representing a single Server detail screen. This fragment is
- * either contained in a {@link ActivityServerList} in two-pane mode (on
- * tablets) or a {@link ActivityServerDetail} on handsets.
- */
-public class FragServerDetail extends ListFragment implements ServerCallbacks {
+public class FragServerDetail extends ListFragment implements ServerAppCallbacks {
+
+	public interface PrinterAppCallbacks {
+		public void onPrinterSelected(long id);
+	};
+
+	private static PrinterAppCallbacks sDummyCallbacks = new PrinterAppCallbacks() {
+		@Override
+		public void onPrinterSelected(long id) {
+		}
+	};
+
+
 
 	private DbAdapter dbAdapter;
-	Server server;
+
+	private ListView listview;
 	public static final String ARG_SERVER_ID = "item_id";
+	private PrinterListAdapter adapter;
 
-	
+	private ServerCallbacks callbacks;
+	private Server server;
 
-	/**
-	 * Mandatory empty constructor for the fragment manager to instantiate the
-	 * fragment (e.g. upon screen orientation changes).
-	 */
 	public FragServerDetail() {
 	}
+
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		if (getArguments().containsKey(ARG_SERVER_ID)) {
-			//TODO ricerca tramite id dell'url del server (database)
-			
-			//Cursor c = dbAdapter.fetchServerById(ARG_SERVER_ID);
-			
-			//server = new Server (c.getString(c.getColumnIndex(DbHelper.DB_URL)), c.getString(c.getColumnIndex(DbHelper.DB_NAME)));
+
+
+			Log.d("onCreate1:", Long.toString(getArguments().getLong(ARG_SERVER_ID)));
+
+			dbAdapter = new DbAdapter(getActivity());
+			dbAdapter.openReadOnly();
+			Cursor c = dbAdapter.fetchServerById(Long.toString(getArguments().getLong(ARG_SERVER_ID)));
+			c.moveToFirst();
+			String url = c.getString(c.getColumnIndex(DbHelper.DB_URL));
+			String name = c.getString(c.getColumnIndex(DbHelper.DB_NAME));
+			c.close();
+			dbAdapter.close();
+
+			server = new Server (url, name);
+			server.setCallbacks(
+					callbacks = new ServerCallbacks() {
+
+						@Override
+						public void onPrinterListUpdated(ArrayList<Printer> printerList) {
+							Log.d("OnPrinterListUpdated", "entrato");
+							adapter = new PrinterListAdapter(getActivity(), R.layout.printer_line, printerList);
+							listview.setAdapter(adapter);
+
+						}
+
+						@Override
+						public void onError(String error) {
+						}
+					});
 		}
 	}
 
@@ -54,22 +91,30 @@ public class FragServerDetail extends ListFragment implements ServerCallbacks {
 				container, false);
 		return rootView;
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		//TODO usare url server per richiedere la lista delle stampanti
-		//server.getPrinterList();
-		
+
+		server.updatePrinterList(getActivity());
+		listview = getListView();
+
+		/*
+		ArrayList<MPrinter> list = new ArrayList<MPrinter>();
+		list.add(new MPrinter("uno", "uno"));
+		list.add(new MPrinter("due", "due"));
+		list.add(new MPrinter("tre", "tre"));
+		list.add(new MPrinter("uno", "uno"));
+		list.add(new MPrinter("due", "quattro"));
+		list.add(new MPrinter("sei", "sei"));
+		 */
 	}
 
-	@Override
-	public void onError(String error) {		
-	}
 
 	@Override
-	public void onPrinterListUpdated(ArrayList<Printer> printerList) {
+	public void onServerSelected(long id) {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

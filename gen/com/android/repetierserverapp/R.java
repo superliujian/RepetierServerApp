@@ -31,13 +31,15 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f09003c;
+        public static final int action_settings=0x7f090041;
         public static final int bedSwitch=0x7f090029;
         public static final int bedTempReadTextView=0x7f09002c;
         public static final int bedTempSetTextView=0x7f09002e;
         public static final int bedTextView=0x7f09002a;
         public static final int bedtempTextView=0x7f09002b;
-        public static final int createServerBtn=0x7f090007;
+        public static final int createServerBtn=0x7f090005;
+        public static final int current=0x7f09003a;
+        public static final int currentJob=0x7f09003b;
         public static final int extrTempReadTextView=0x7f090027;
         public static final int extrTempSetTextView=0x7f090030;
         public static final int extrtempTextView=0x7f090028;
@@ -53,30 +55,33 @@ public final class R {
         public static final int homexbutton=0x7f090011;
         public static final int homeybutton=0x7f090012;
         public static final int homezbutton=0x7f090014;
-        public static final int nameServer=0x7f09003a;
+        public static final int nameServer=0x7f09003f;
         public static final int newBedTempBtn=0x7f090033;
         public static final int newBedTempEt=0x7f090032;
         public static final int newExtrTempBtn=0x7f090031;
         public static final int newExtrTempEt=0x7f09002f;
         public static final int newServerBtn=0x7f090036;
-        public static final int newServerTV=0x7f090002;
-        public static final int newUrlTV=0x7f090005;
+        public static final int newServerTV=0x7f090000;
+        public static final int newUrlTV=0x7f090003;
+        public static final int perc=0x7f09003e;
         public static final int printerName=0x7f090037;
         public static final int printerSelectionTV=0x7f090034;
         public static final int printerStatus=0x7f090039;
-        public static final int serverNameET=0x7f090003;
+        public static final int progress=0x7f09003c;
+        public static final int progressJob=0x7f09003d;
+        public static final int serverNameET=0x7f090001;
         public static final int serverSelectionTV=0x7f090035;
-        public static final int serverUrlET=0x7f090006;
-        public static final int server_detail_container=0x7f090000;
-        public static final int server_list=0x7f090001;
+        public static final int serverUrlET=0x7f090004;
+        public static final int server_detail_container=0x7f090006;
+        public static final int server_list=0x7f090007;
         public static final int status=0x7f090038;
         public static final int statusTextView=0x7f09001e;
-        public static final int textView1=0x7f090004;
+        public static final int textView1=0x7f090002;
         public static final int textView2=0x7f09002d;
         public static final int textViewX=0x7f090018;
         public static final int textViewY=0x7f090019;
         public static final int textViewZ=0x7f09001a;
-        public static final int urlServer=0x7f09003b;
+        public static final int urlServer=0x7f090040;
         public static final int xValueTextView=0x7f09001c;
         public static final int x_10button=0x7f09000c;
         public static final int x_1button=0x7f09000b;
@@ -94,7 +99,8 @@ public final class R {
         public static final int zp1button=0x7f090016;
     }
     public static final class layout {
-        public static final int activity_server_detail=0x7f030000;
+        public static final int activity_add_server=0x7f030000;
+        public static final int activity_server_detail=0x7f030001;
         /** 
     Layout alias to replace the single-pane version of the layout with a
     two-pane version on Large screens.
@@ -110,9 +116,8 @@ public final class R {
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     
          */
-        public static final int activity_server_list=0x7f030001;
-        public static final int activity_server_twopane=0x7f030002;
-        public static final int fragment_add_server=0x7f030003;
+        public static final int activity_server_list=0x7f030002;
+        public static final int activity_server_twopane=0x7f030003;
         public static final int fragment_control=0x7f030004;
         public static final int fragment_control2=0x7f030005;
         public static final int fragment_server_detail=0x7f030006;
@@ -204,6 +209,8 @@ public final class R {
         public static final int controlTextView=0x7f050004;
         public static final int control_buttons=0x7f050002;
         public static final int home_buttons=0x7f050003;
+        public static final int offline=0x7f05000b;
+        public static final int online=0x7f05000c;
         public static final int xcontrol_buttons=0x7f050005;
         public static final int ycontrol_buttons=0x7f050006;
         public static final int zcontrol_buttons=0x7f050007;
