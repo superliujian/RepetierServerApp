@@ -2,8 +2,6 @@ package com.android.repetierserverapp.ServerList;
 
 import com.android.repetierserverapp.ActivityAddServer;
 import com.android.repetierserverapp.R;
-import com.android.repetierserverapp.R.id;
-import com.android.repetierserverapp.R.layout;
 import com.android.repetierserverapp.db.DbAdapter;
 import android.os.Bundle;
 import android.app.Activity;
@@ -21,6 +19,8 @@ import android.widget.ListView;
 
 public class FragServerList extends ListFragment implements OnClickListener, OnItemClickListener{
 
+	
+	//TODO RIMUOVERE
 	public interface ServerAppCallbacks {
 		public void onServerSelected(long id);
 	};
@@ -44,20 +44,24 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 
 	private ServerAppCallbacks mCallbacks;
 
+	
+	
+	 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
 	}
 
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
 		super.onCreateView(inflater, container, savedInstanceState);
 		return inflater.inflate(R.layout.fragment_server_selection, container, false);
 	}
 
+	
 	@Override
 	public void onViewCreated(View v, Bundle savedInstanceState) {
 

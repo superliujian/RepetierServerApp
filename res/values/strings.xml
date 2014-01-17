@@ -18,5 +18,6 @@
     <string name="title_server_list">Servers</string>
     <string name="title_server_detail">Server Detail</string>
     <string name="title_activity_activity_add_server">ActivityAddServer</string>
+    <string name="title_activity_activity_printer_controll">ActivityPrinterControll</string>
 
 </resources>

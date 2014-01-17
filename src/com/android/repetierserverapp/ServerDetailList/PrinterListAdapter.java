@@ -15,18 +15,20 @@ import com.android.repetierserverapp.R;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
 
-public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClickListener  {
+public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClickListener{
 
 	private Context context;
 	private ArrayList<Printer> printerList;
 	private Printer printer;
 	private PrinterCallbacks callbacks;
+	private PrinterListAdapterCallback listener;
 
 
-	public PrinterListAdapter(Context context, int textViewResourceId, ArrayList<Printer> list) {
+	public PrinterListAdapter(Context context, int textViewResourceId, ArrayList<Printer> list, PrinterListAdapterCallback listener) {
 		super(context, textViewResourceId, list);
 		this.context = context;
 		this.printerList = list;
+		this.listener = listener;
 	}
 
 	@Override
@@ -48,33 +50,33 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 		TextView printerProgress = (TextView) rowView.findViewById(R.id.progress);
 		TextView printerProgressJob = (TextView) rowView.findViewById(R.id.progressJob);
 		TextView perc = (TextView) rowView.findViewById(R.id.perc);
-		
+
 		TextView activePrinter = (TextView) rowView.findViewById(R.id.activePrinter);
 		activePrinter.setOnClickListener(this);
-		
+
 		printer = printerList.get(position);
 
 		printer.setPrinterCallbacks(callbacks = new PrinterCallbacks() {
-			
+
 			@Override
 			public void onError(String error) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onCommandExecuted() {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onChangeState() {
 				Toast.makeText(getContext(), "Lo stato è cambiato", Toast.LENGTH_LONG).show();
-				
+
 			}
 		});
-		
+
 		printerName.setText(printer.getName());
 
 		int online = printer.getOnline();
@@ -108,51 +110,68 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 			activePrinter.setText("Attiva Stampante");
 			activePrinter.setTextAppearance(getContext(), R.style.online);
 		}
-	
 
-	String currentJob = printer.getCurrentJob();
 
-	if (isWorking(currentJob)){
-		printerCurrent.setVisibility(View.VISIBLE);
-		printerCurrentJob.setVisibility(View.VISIBLE);
-		printerProgress.setVisibility(View.VISIBLE);
-		printerProgressJob.setVisibility(View.VISIBLE);
-		perc.setVisibility(View.VISIBLE);
+		String currentJob = printer.getCurrentJob();
 
-		printerCurrentJob.setText(currentJob);
+		if (isWorking(currentJob)){
+			printerCurrent.setVisibility(View.VISIBLE);
+			printerCurrentJob.setVisibility(View.VISIBLE);
+			printerProgress.setVisibility(View.VISIBLE);
+			printerProgressJob.setVisibility(View.VISIBLE);
+			perc.setVisibility(View.VISIBLE);
 
-		String progress = Double.toString(Math.round(printer.getProgress()*100)/100);
-		printerProgressJob.setText(progress);
+			printerCurrentJob.setText(currentJob);
+
+			String progress = Double.toString(Math.round(printer.getProgress()*100)/100);
+			printerProgressJob.setText(progress);
+		}
+		else {
+			printerCurrent.setVisibility(View.INVISIBLE);
+			printerCurrentJob.setVisibility(View.INVISIBLE);
+			printerProgress.setVisibility(View.INVISIBLE);
+			printerProgressJob.setVisibility(View.INVISIBLE);
+			perc.setVisibility(View.INVISIBLE);
+		}
+
+
+		return rowView;
 	}
-	else {
-		printerCurrent.setVisibility(View.INVISIBLE);
-		printerCurrentJob.setVisibility(View.INVISIBLE);
-		printerProgress.setVisibility(View.INVISIBLE);
-		printerProgressJob.setVisibility(View.INVISIBLE);
-		perc.setVisibility(View.INVISIBLE);
+
+	private Boolean isWorking (String currentJob){
+		if (currentJob == "none") return false;
+		else return true;		
 	}
 
-	return rowView;
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.activePrinter:
+			if (printer.getActive()){
+				printer.turnOff(getContext());
+				listener.updatePrinterList();
+			}
+			else {
+				printer.turnOn(getContext());
+				listener.updatePrinterList();			
+			}
+			break;
+		}
+	}
+
+
+	public interface PrinterListAdapterCallback {
+		public void updatePrinterList();
+	}
+
 }
 
-private Boolean isWorking (String currentJob){
-	if (currentJob == "none") return false;
-	else return true;		
-}
 
-@Override
-public void onClick(View v) {
-	switch (v.getId()) {
-	case R.id.activePrinter:
-		if (printer.getActive())
-			printer.turnOff(getContext());
-		else 
-			printer.turnOn(getContext());
-		break;
-	}
-}
 
-} 
+
+
+
+
 
 
 

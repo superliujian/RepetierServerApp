@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.android.repetierserverapp.PrinterControl"
+            android:name="com.android.repetierserverapp.PrinterControll.FragPrinterControl"
             android:label="@string/title_activity_printer_control" >
         </activity>
         <activity
@@ -24,7 +24,7 @@
             android:label="@string/title_activity_add_server" >
         </activity>
         <activity
-            android:name="com.android.repetierserverapp.PrinterControl2"
+            android:name="com.android.repetierserverapp.PrinterControll.FragPrinterControl2"
             android:label="@string/title_activity_printer_control2" >
         </activity>
         <activity
@@ -47,6 +47,10 @@
         <activity
             android:name="com.android.repetierserverapp.ActivityAddServer"
             android:label="@string/title_activity_activity_add_server" >
+        </activity>
+        <activity
+            android:name="com.android.repetierserverapp.PrinterControll.ActivityPrinterControll"
+            android:label="@string/title_activity_activity_printer_controll" >
         </activity>
     </application>
 

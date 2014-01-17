@@ -107,8 +107,9 @@ public final class R {
         public static final int zp1button=0x7f090016;
     }
     public static final class layout {
-        public static final int activity_add_server=0x7f030000;
-        public static final int activity_server_detail=0x7f030001;
+        public static final int activity_activity_printer_controll=0x7f030000;
+        public static final int activity_add_server=0x7f030001;
+        public static final int activity_server_detail=0x7f030002;
         /** 
     Layout alias to replace the single-pane version of the layout with a
     two-pane version on Large screens.
@@ -124,23 +125,24 @@ public final class R {
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     
          */
-        public static final int activity_server_list=0x7f030002;
-        public static final int activity_server_twopane=0x7f030003;
-        public static final int fragment_control=0x7f030004;
-        public static final int fragment_control2=0x7f030005;
-        public static final int fragment_server_detail=0x7f030006;
-        public static final int fragment_server_selection=0x7f030007;
-        public static final int model_line=0x7f030008;
-        public static final int printer_line=0x7f030009;
-        public static final int server_line=0x7f03000a;
+        public static final int activity_server_list=0x7f030003;
+        public static final int activity_server_twopane=0x7f030004;
+        public static final int fragment_control=0x7f030005;
+        public static final int fragment_control2=0x7f030006;
+        public static final int fragment_server_detail=0x7f030007;
+        public static final int fragment_server_selection=0x7f030008;
+        public static final int model_line=0x7f030009;
+        public static final int printer_line=0x7f03000a;
+        public static final int server_line=0x7f03000b;
     }
     public static final class menu {
         public static final int activity_add_server=0x7f080000;
-        public static final int add_server=0x7f080001;
-        public static final int login=0x7f080002;
-        public static final int main=0x7f080003;
-        public static final int printer_control=0x7f080004;
-        public static final int printer_control2=0x7f080005;
+        public static final int activity_printer_controll=0x7f080001;
+        public static final int add_server=0x7f080002;
+        public static final int login=0x7f080003;
+        public static final int main=0x7f080004;
+        public static final int printer_control=0x7f080005;
+        public static final int printer_control2=0x7f080006;
     }
     public static final class string {
         public static final int PrinterSelection=0x7f040003;
@@ -154,6 +156,7 @@ public final class R {
         public static final int newUrl=0x7f04000b;
         public static final int serverList=0x7f040006;
         public static final int title_activity_activity_add_server=0x7f040010;
+        public static final int title_activity_activity_printer_controll=0x7f040011;
         public static final int title_activity_add_server=0x7f040009;
         public static final int title_activity_login=0x7f040008;
         public static final int title_activity_printer_control=0x7f040007;

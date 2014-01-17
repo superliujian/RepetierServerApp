@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.R.layout;
+import com.android.repetierserverapp.ServerDetailList.PrinterListAdapter.PrinterListAdapterCallback;
 import com.android.repetierserverapp.ServerList.FragServerList.ServerAppCallbacks;
 import com.android.repetierserverapp.db.DbAdapter;
 import com.android.repetierserverapp.db.DbHelper;
@@ -40,8 +43,11 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 	public static final String ARG_SERVER_ID = "item_id";
 	private PrinterListAdapter adapter;
 
-	private ServerCallbacks callbacks;
+	private ServerCallbacks serverCallbacks;
 	private Server server;
+
+	private PrinterListAdapterCallback printerListAdapterCallback;
+	private OnItemClickListener itemClickListener;
 
 	public FragServerDetail() {
 	}
@@ -66,15 +72,35 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 			c.close();
 			dbAdapter.close();
 
+			printerListAdapterCallback = new PrinterListAdapterCallback() {
+				@Override
+				public void updatePrinterList() {
+					Log.d("refreshListView", " richiesta dell'adapter di aggiornare la lista delle stampanti");
+					server.updatePrinterList(getActivity());
+				}
+			};
+			
+			itemClickListener = new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> adapter, View view,
+						int position, long id) {
+					
+
+					
+				}
+			};
+			
 			server = new Server (url, name);
 			server.setCallbacks(
-					callbacks = new ServerCallbacks() {
+					serverCallbacks = new ServerCallbacks() {
 
 						@Override
 						public void onPrinterListUpdated(ArrayList<Printer> printerList) {
 							Log.d("OnPrinterListUpdated", "entrato");
-							adapter = new PrinterListAdapter(getActivity(), R.layout.printer_line, printerList);
+							adapter = new PrinterListAdapter(getActivity(), R.layout.printer_line, printerList, printerListAdapterCallback); 
 							listview.setAdapter(adapter);
+							listview.setOnItemClickListener(itemClickListener);
 
 						}
 
@@ -82,6 +108,7 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 						public void onError(String error) {
 						}
 					});
+
 		}
 	}
 
@@ -100,22 +127,14 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 		server.updatePrinterList(getActivity());
 		listview = getListView();
 
-		/*
-		ArrayList<MPrinter> list = new ArrayList<MPrinter>();
-		list.add(new MPrinter("uno", "uno"));
-		list.add(new MPrinter("due", "due"));
-		list.add(new MPrinter("tre", "tre"));
-		list.add(new MPrinter("uno", "uno"));
-		list.add(new MPrinter("due", "quattro"));
-		list.add(new MPrinter("sei", "sei"));
-		 */
 	}
 
 
 	@Override
 	public void onServerSelected(long id) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 
 }

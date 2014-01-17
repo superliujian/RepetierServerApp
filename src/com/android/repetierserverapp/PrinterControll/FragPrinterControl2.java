@@ -1,5 +1,9 @@
-package com.android.repetierserverapp;
+package com.android.repetierserverapp.PrinterControll;
 
+import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.R.id;
+import com.android.repetierserverapp.R.layout;
+import com.android.repetierserverapp.R.menu;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterStatusCallbacks;
 import com.grasselli.android.repetierserverapi.PrinterStatus;
@@ -7,6 +11,7 @@ import com.grasselli.android.repetierserverapi.Server;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +25,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PrinterControl2 extends Activity implements OnClickListener, OnSeekBarChangeListener, PrinterStatusCallbacks, OnCheckedChangeListener{
+public class FragPrinterControl2 extends Fragment implements OnClickListener, OnSeekBarChangeListener, PrinterStatusCallbacks, OnCheckedChangeListener{
 	private TextView feedrateValue;
 	private TextView flowrateValue;				
 
@@ -45,51 +50,55 @@ public class PrinterControl2 extends Activity implements OnClickListener, OnSeek
 	Printer printer;
 	Toast toast;
 
+	
+	public FragPrinterControl2(){
+	}
+	
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_control2);
+	}
+	
+	
+	@Override
+	public void onViewCreated(View v, Bundle savedInstanceState) {
+		getActivity().setContentView(R.layout.fragment_control2);
 
-		feedrateValue = (TextView) findViewById(R.id.feedrateValueTextView);
-		flowrateValue = (TextView) findViewById(R.id.flowrateValueTextView);
+		feedrateValue = (TextView) v.findViewById(R.id.feedrateValueTextView);
+		flowrateValue = (TextView) v.findViewById(R.id.flowrateValueTextView);
 
-		feedrateSeek = (SeekBar) findViewById(R.id.feedrateSeekBar);
+		feedrateSeek = (SeekBar) v.findViewById(R.id.feedrateSeekBar);
 		feedrateSeek.setOnSeekBarChangeListener(this);
 		feedrateSeek.setMax(200);
 		feedrateSeek.setOnSeekBarChangeListener(this);
 
-		flowrateSeek = (SeekBar) findViewById(R.id.flowrateSeekBar);
+		flowrateSeek = (SeekBar) v.findViewById(R.id.flowrateSeekBar);
 		flowrateSeek.setOnSeekBarChangeListener(this);
 		flowrateSeek.setMax(200);	
 		flowrateSeek.setOnSeekBarChangeListener(this);
 
-		extruderSwitch = (Switch) findViewById(R.id.extruderSwitch);
-		bedSwitch = (Switch) findViewById(R.id.bedSwitch);
+		extruderSwitch = (Switch) v.findViewById(R.id.extruderSwitch);
+		bedSwitch = (Switch) v.findViewById(R.id.bedSwitch);
 
 		bedSwitch.setOnCheckedChangeListener(this);
 		extruderSwitch.setOnCheckedChangeListener(this);
 
-		extrRead = (TextView) findViewById(R.id.extrTempReadTextView);
-		extrSet = (TextView) findViewById(R.id.extrTempSetTextView);
-		bedRead = (TextView) findViewById(R.id.bedTempReadTextView);
-		bedSet = (TextView) findViewById(R.id.bedTempSetTextView);
+		extrRead = (TextView) v.findViewById(R.id.extrTempReadTextView);
+		extrSet = (TextView) v.findViewById(R.id.extrTempSetTextView);
+		bedRead = (TextView) v.findViewById(R.id.bedTempReadTextView);
+		bedSet = (TextView) v.findViewById(R.id.bedTempSetTextView);
 
-		newBedTempBtn = (Button) findViewById(R.id.newBedTempBtn);
-		newExtrTempBtn = (Button) findViewById(R.id.newExtrTempBtn);
+		newBedTempBtn = (Button) v.findViewById(R.id.newBedTempBtn);
+		newExtrTempBtn = (Button) v.findViewById(R.id.newExtrTempBtn);
 
 		newExtrTempBtn.setOnClickListener(this);
 		newBedTempBtn.setOnClickListener(this);
 
-		newExtrTempEt = (EditText) findViewById(R.id.newExtrTempEt);
-		newBedTempEt = (EditText) findViewById(R.id.newBedTempEt);
+		newExtrTempEt = (EditText) v.findViewById(R.id.newExtrTempEt);
+		newBedTempEt = (EditText) v.findViewById(R.id.newBedTempEt);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.printer_control2, menu);
-		return true;
-	}
 
 	@Override
 	public void onClick(View v) {
@@ -98,14 +107,14 @@ public class PrinterControl2 extends Activity implements OnClickListener, OnSeek
 		case R.id.newBedTempBtn:
 			int bedtemp = Integer.parseInt(newBedTempEt.getText().toString());
 			if(checkTemp(bedtemp, 1)){
-				printer.setBedTemp(this, bedtemp);
+				printer.setBedTemp(getActivity(), bedtemp);
 			}
 			break;
 
 		case R.id.newExtrTempBtn:
 			int extrtemp = Integer.parseInt(newExtrTempEt.getText().toString());
 			if(checkTemp(extrtemp, 0)){
-				printer.setExtrTemp(this, extrtemp);
+				printer.setExtrTemp(getActivity(), extrtemp);
 			}
 			break;
 		}
@@ -115,22 +124,22 @@ public class PrinterControl2 extends Activity implements OnClickListener, OnSeek
 	//type == 1 temperatura letto riscaldato
 	private boolean checkTemp(int temp, int type){
 		if (temp < 0) {
-			toast= Toast.makeText(this,"La temperatura non può essere negativa", Toast.LENGTH_LONG);
+			toast= Toast.makeText(getActivity(),"La temperatura non può essere negativa", Toast.LENGTH_LONG);
 			toast.show();
 			return false;
 		}
 		if (temp > 250 && type ==0 ){
-			toast= Toast.makeText(this,"Temperatura estrusore eccessiva", Toast.LENGTH_LONG);
+			toast= Toast.makeText(getActivity(),"Temperatura estrusore eccessiva", Toast.LENGTH_LONG);
 			toast.show();
 			return false;
 		}
 		if (temp < 160 && type ==0 ){
-			toast= Toast.makeText(this,"Temperatura estrusore troppo bassa", Toast.LENGTH_LONG);
+			toast= Toast.makeText(getActivity(),"Temperatura estrusore troppo bassa", Toast.LENGTH_LONG);
 			toast.show();
 			return false;
 		}
 		if (temp > 100 && type ==0 ){
-			toast= Toast.makeText(this,"Temperatura letto riscaldato eccessiva", Toast.LENGTH_LONG);
+			toast= Toast.makeText(getActivity(),"Temperatura letto riscaldato eccessiva", Toast.LENGTH_LONG);
 			toast.show();
 			return false;
 		}
@@ -199,12 +208,12 @@ public class PrinterControl2 extends Activity implements OnClickListener, OnSeek
 		switch (buttonView.getId()) {
 		case R.id.extruderSwitch:
 			if (extruderSwitch.isActivated()){
-				printer.setExtrTemp(this, 0);
+				printer.setExtrTemp(getActivity(), 0);
 			}
 			else {
 				int extrtemp = Integer.parseInt(newExtrTempEt.getText().toString());
 				if(checkTemp(extrtemp, 0)){
-					printer.setExtrTemp(this, extrtemp);
+					printer.setExtrTemp(getActivity(), extrtemp);
 				}
 			}
 			break;
@@ -212,7 +221,7 @@ public class PrinterControl2 extends Activity implements OnClickListener, OnSeek
 		case R.id.bedSwitch:
 			int bedtemp = Integer.parseInt(newBedTempEt.getText().toString());
 			if(checkTemp(bedtemp, 1)){
-				printer.setBedTemp(this, bedtemp);
+				printer.setBedTemp(getActivity(), bedtemp);
 			}
 			break;
 		}
