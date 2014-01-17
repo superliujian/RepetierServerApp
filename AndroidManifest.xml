@@ -28,7 +28,7 @@
             android:label="@string/title_activity_printer_control2" >
         </activity>
         <activity
-            android:name="com.android.repetierserverapp.ActivityServerList"
+            android:name="com.android.repetierserverapp.ServerList.ActivityServerList"
             android:label="@string/title_server_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,9 +37,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.repetierserverapp.ActivityServerDetail"
+            android:name="com.android.repetierserverapp.ServerDetailList.ActivityServerDetail"
             android:label="@string/title_server_detail"
-            android:parentActivityName=".ActivityServerList" >
+            android:parentActivityName="com.android.repetierserverapp.ServerList.ActivityServerList" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ServerListActivity" />

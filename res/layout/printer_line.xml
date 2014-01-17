@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_height="match_parent"
     android:padding="8dp" >
-    
- <TextView
+
+    <TextView
         android:id="@+id/printerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="nome stampante"
-        android:textSize="16sp" />
-    
+        android:textSize="22sp" />
+
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
@@ -22,20 +21,7 @@
         android:layout_below="@+id/printerName"
         android:singleLine="true"
         android:text="Stato stampante:"
-        android:textSize="13sp" />
-
-    <TextView
-        android:id="@+id/printerStatus"
-        style="@style/online"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/status"
-        android:layout_alignBottom="@+id/status"
-        android:layout_marginLeft="40dp"
-        android:layout_toRightOf="@+id/status"
-        android:singleLine="true"
-        android:text="Offline"
-        android:textSize="13sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/current"
@@ -44,45 +30,70 @@
         android:layout_alignLeft="@+id/status"
         android:layout_below="@+id/status"
         android:text="Lavoro in stampa:"
-        android:textSize="13sp" />
+        android:textSize="16sp" />
 
-     <TextView
-         android:id="@+id/currentJob"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/current"
-         android:layout_alignBottom="@+id/current"
-         android:layout_alignLeft="@+id/printerStatus"
-         android:text="Lavoro"
-         android:textSize="13sp" />
-     
-     <TextView
+    <TextView
+        android:id="@+id/currentJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/current"
+        android:layout_alignBottom="@+id/current"
+        android:layout_alignLeft="@+id/printerStatus"
+        android:text="Lavoro"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/current"
         android:layout_below="@+id/current"
         android:text="Progresso:"
-        android:textSize="13sp" />
+        android:textSize="16sp" />
 
-     <TextView
-         android:id="@+id/progressJob"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/perc"
-         android:layout_alignBottom="@+id/perc"
-         android:layout_alignLeft="@+id/currentJob"
-         android:text="75"
-         android:textSize="13sp" />
+    <TextView
+        android:id="@+id/progressJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/perc"
+        android:layout_alignBottom="@+id/perc"
+        android:layout_alignLeft="@+id/currentJob"
+        android:text="75"
+        android:textSize="16sp" />
 
-     <TextView
-         android:id="@+id/perc"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/progress"
-         android:layout_alignBottom="@+id/progress"
-         android:layout_toRightOf="@+id/progressJob"
-         android:text="  %"
-         android:textSize="13sp" />
+    <TextView
+        android:id="@+id/perc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/progress"
+        android:layout_alignBottom="@+id/progress"
+        android:layout_toRightOf="@+id/progressJob"
+        android:text="  %"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/printerStatus"
+        style="@style/online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/currentJob"
+        android:layout_marginLeft="51dp"
+        android:layout_toRightOf="@+id/current"
+        android:singleLine="true"
+        android:text="Offline"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/activePrinter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressJob"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:clickable="true"
+        android:gravity="center_horizontal"
+        android:onClick="onClick"
+        android:text="Attiva Stampante"
+        android:textSize="16sp" />
 
 </RelativeLayout>

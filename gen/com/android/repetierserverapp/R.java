@@ -31,15 +31,20 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090041;
+        public static final int action_settings=0x7f090049;
+        public static final int activePrinter=0x7f090046;
         public static final int bedSwitch=0x7f090029;
         public static final int bedTempReadTextView=0x7f09002c;
         public static final int bedTempSetTextView=0x7f09002e;
         public static final int bedTextView=0x7f09002a;
         public static final int bedtempTextView=0x7f09002b;
+        public static final int copyBtt=0x7f09003d;
         public static final int createServerBtn=0x7f090005;
-        public static final int current=0x7f09003a;
-        public static final int currentJob=0x7f09003b;
+        public static final int current=0x7f090040;
+        public static final int currentJob=0x7f090041;
+        public static final int deleteBtt=0x7f09003e;
+        public static final int dimen=0x7f090039;
+        public static final int dimenModel=0x7f09003a;
         public static final int extrTempReadTextView=0x7f090027;
         public static final int extrTempSetTextView=0x7f090030;
         public static final int extrtempTextView=0x7f090028;
@@ -55,7 +60,10 @@ public final class R {
         public static final int homexbutton=0x7f090011;
         public static final int homeybutton=0x7f090012;
         public static final int homezbutton=0x7f090014;
-        public static final int nameServer=0x7f09003f;
+        public static final int mb=0x7f09003c;
+        public static final int modelName=0x7f090037;
+        public static final int modelStatus=0x7f09003b;
+        public static final int nameServer=0x7f090047;
         public static final int newBedTempBtn=0x7f090033;
         public static final int newBedTempEt=0x7f090032;
         public static final int newExtrTempBtn=0x7f090031;
@@ -63,12 +71,12 @@ public final class R {
         public static final int newServerBtn=0x7f090036;
         public static final int newServerTV=0x7f090000;
         public static final int newUrlTV=0x7f090003;
-        public static final int perc=0x7f09003e;
-        public static final int printerName=0x7f090037;
+        public static final int perc=0x7f090045;
+        public static final int printerName=0x7f09003f;
         public static final int printerSelectionTV=0x7f090034;
-        public static final int printerStatus=0x7f090039;
-        public static final int progress=0x7f09003c;
-        public static final int progressJob=0x7f09003d;
+        public static final int printerStatus=0x7f090042;
+        public static final int progress=0x7f090043;
+        public static final int progressJob=0x7f090044;
         public static final int serverNameET=0x7f090001;
         public static final int serverSelectionTV=0x7f090035;
         public static final int serverUrlET=0x7f090004;
@@ -81,7 +89,7 @@ public final class R {
         public static final int textViewX=0x7f090018;
         public static final int textViewY=0x7f090019;
         public static final int textViewZ=0x7f09001a;
-        public static final int urlServer=0x7f090040;
+        public static final int urlServer=0x7f090048;
         public static final int xValueTextView=0x7f09001c;
         public static final int x_10button=0x7f09000c;
         public static final int x_1button=0x7f09000b;
@@ -122,8 +130,9 @@ public final class R {
         public static final int fragment_control2=0x7f030005;
         public static final int fragment_server_detail=0x7f030006;
         public static final int fragment_server_selection=0x7f030007;
-        public static final int printer_line=0x7f030008;
-        public static final int server_line=0x7f030009;
+        public static final int model_line=0x7f030008;
+        public static final int printer_line=0x7f030009;
+        public static final int server_line=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_add_server=0x7f080000;

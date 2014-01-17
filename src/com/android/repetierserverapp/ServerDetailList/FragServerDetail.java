@@ -1,4 +1,4 @@
-package com.android.repetierserverapp;
+package com.android.repetierserverapp.ServerDetailList;
 
 import java.util.ArrayList;
 
@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.android.repetierserverapp.FragServerList.ServerAppCallbacks;
+import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.R.layout;
+import com.android.repetierserverapp.ServerList.FragServerList.ServerAppCallbacks;
 import com.android.repetierserverapp.db.DbAdapter;
 import com.android.repetierserverapp.db.DbHelper;
-import com.android.repetierserverapp.utils.PrinterListAdapter;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Server;
 import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;

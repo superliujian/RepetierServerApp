@@ -1,5 +1,6 @@
 package com.android.repetierserverapp;
 
+import com.android.repetierserverapp.ServerList.ActivityServerList;
 import com.android.repetierserverapp.db.DbAdapter;
 
 import android.app.Activity;

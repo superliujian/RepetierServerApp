@@ -1,4 +1,4 @@
-package com.android.repetierserverapp.utils;
+package com.android.repetierserverapp.ServerList;
 
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.db.DbHelper;

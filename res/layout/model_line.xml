@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp" >
+
+    <TextView
+        android:id="@+id/modelName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="nome modello"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/modelName"
+        android:singleLine="true"
+        android:text="Stato:"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/dimen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/status"
+        android:layout_below="@+id/status"
+        android:text="Dimensione:"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/dimenModel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dimen"
+        android:layout_alignBottom="@+id/dimen"
+        android:layout_alignLeft="@+id/modelStatus"
+        android:text="0,0"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/mb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dimenModel"
+        android:layout_alignBottom="@+id/dimenModel"
+        android:layout_toRightOf="@+id/dimenModel"
+        android:text="  MB"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/modelStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/modelName"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:text="Salvato"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/copyBtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dimen"
+        android:layout_below="@+id/dimen"
+        android:layout_marginTop="14dp"
+        android:text="COPIA" />
+
+    <Button
+        android:id="@+id/deleteBtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/copyBtt"
+        android:layout_alignBottom="@+id/copyBtt"
+        android:layout_alignRight="@+id/modelName"
+        android:text="ELIMINA" />
+
+</RelativeLayout>

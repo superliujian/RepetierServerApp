@@ -1,7 +1,10 @@
-package com.android.repetierserverapp;
+package com.android.repetierserverapp.ServerList;
 
+import com.android.repetierserverapp.ActivityAddServer;
+import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.R.id;
+import com.android.repetierserverapp.R.layout;
 import com.android.repetierserverapp.db.DbAdapter;
-import com.android.repetierserverapp.utils.ServerListAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

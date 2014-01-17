@@ -1,4 +1,9 @@
-package com.android.repetierserverapp;
+package com.android.repetierserverapp.ServerDetailList;
+
+import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.R.id;
+import com.android.repetierserverapp.R.layout;
+import com.android.repetierserverapp.ServerList.ActivityServerList;
 
 import android.content.Intent;
 import android.os.Bundle;

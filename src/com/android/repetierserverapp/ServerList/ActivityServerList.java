@@ -1,4 +1,10 @@
-package com.android.repetierserverapp;
+package com.android.repetierserverapp.ServerList;
+
+import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.R.id;
+import com.android.repetierserverapp.R.layout;
+import com.android.repetierserverapp.ServerDetailList.ActivityServerDetail;
+import com.android.repetierserverapp.ServerDetailList.FragServerDetail;
 
 import android.content.Intent;
 import android.os.Bundle;
