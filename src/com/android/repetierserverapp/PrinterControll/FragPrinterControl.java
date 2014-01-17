@@ -61,6 +61,8 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	public FragPrinterControl(){
 	}
 	
+	
+		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

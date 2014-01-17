@@ -2,11 +2,14 @@ package com.android.repetierserverapp.ServerDetailList;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +17,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.PrinterControll.ActivityPrinterControll;
+import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList;
 import com.android.repetierserverapp.R.layout;
 import com.android.repetierserverapp.ServerDetailList.PrinterListAdapter.PrinterListAdapterCallback;
 import com.android.repetierserverapp.ServerList.FragServerList.ServerAppCallbacks;
@@ -45,6 +50,8 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 
 	private ServerCallbacks serverCallbacks;
 	private Server server;
+
+	private ArrayList<Printer> printerList;
 
 	private PrinterListAdapterCallback printerListAdapterCallback;
 	private OnItemClickListener itemClickListener;
@@ -79,26 +86,36 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 					server.updatePrinterList(getActivity());
 				}
 			};
-			
+
 			itemClickListener = new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> adapter, View view,
 						int position, long id) {
-					
+					Printer p = printerList.get(position);
 
-					
+					Intent detailIntent = new Intent(getActivity(), ActivityPrinterControll.class);
+					detailIntent.putExtra("url", p.getServer().getUrl());
+					detailIntent.putExtra("alias", p.getServer().getAlias());
+					detailIntent.putExtra("name", p.getName());
+					detailIntent.putExtra("slug", p.getSlug());
+					detailIntent.putExtra("online", p.getOnline());
+					detailIntent.putExtra("currentJob", p.getCurrentJob());
+					detailIntent.putExtra("active", p.getActive());
+					detailIntent.putExtra("progress", p.getProgress());
+					startActivity(detailIntent);
 				}
 			};
-			
+
 			server = new Server (url, name);
 			server.setCallbacks(
 					serverCallbacks = new ServerCallbacks() {
 
 						@Override
-						public void onPrinterListUpdated(ArrayList<Printer> printerList) {
+						public void onPrinterListUpdated(ArrayList<Printer> list) {
 							Log.d("OnPrinterListUpdated", "entrato");
-							adapter = new PrinterListAdapter(getActivity(), R.layout.printer_line, printerList, printerListAdapterCallback); 
+							printerList = list;
+							adapter = new PrinterListAdapter(getActivity(), R.layout.printer_line, list, printerListAdapterCallback); 
 							listview.setAdapter(adapter);
 							listview.setOnItemClickListener(itemClickListener);
 
@@ -135,6 +152,5 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 		// TODO Auto-generated method stub
 
 	}
-
 
 }

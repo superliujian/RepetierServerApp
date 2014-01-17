@@ -73,7 +73,6 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 			@Override
 			public void onChangeState() {
 				Toast.makeText(getContext(), "Lo stato è cambiato", Toast.LENGTH_LONG).show();
-
 			}
 		});
 
@@ -165,15 +164,3 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
