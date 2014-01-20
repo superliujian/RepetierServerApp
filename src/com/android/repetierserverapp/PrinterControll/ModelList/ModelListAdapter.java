@@ -10,13 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.android.repetierserverapp.R;
 import com.grasselli.android.repetierserverapi.Model;
-import com.grasselli.android.repetierserverapi.Model;
 import com.grasselli.android.repetierserverapi.Printer;
-import com.grasselli.android.repetierserverapi.Printer.ModelCallbacks;
 
 public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickListener{
 
@@ -24,15 +20,19 @@ public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickList
 	private ArrayList<Model> modelList;
 	private Model model;
 	private ModelListAdapterCallback listener;
+	private Printer printer;
+	
 
-
-	public ModelListAdapter(Context context, int textViewResourceId, ArrayList<Model> list, ModelListAdapterCallback listener) {
+	public ModelListAdapter(Context context, int textViewResourceId, ArrayList<Model> list, ModelListAdapterCallback listener, Printer printer) {
 		super(context, textViewResourceId, list);
 		this.context = context;
 		this.modelList = list;
 		this.listener = listener;
+		this.printer = printer;
 	}
 
+	
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -43,7 +43,6 @@ public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickList
 			rowView = inflater.inflate(R.layout.model_line, null);
 			//parent, false
 		}
-
 
 		TextView modelName = (TextView) rowView.findViewById(R.id.modelName);
 		TextView modelStatus = (TextView) rowView.findViewById(R.id.modelStatus);
@@ -69,23 +68,24 @@ public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickList
 	}
 
 
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.copyBtt:
-			listener.copyModel(model.getId());
+			listener.copyModel(printer, model.getId());
 			break;
 		case R.id.deleteBtt:
-			listener.deleteModel(model.getId());
+			listener.deleteModel(printer, model.getId());
 			break;
 		}
 	}
 
 
+	
 	public interface ModelListAdapterCallback {
-		public void updateModelList();
-		public void copyModel(int id);
-		public void deleteModel(int id);
+		public void updateModelList(Printer p);
+		public void copyModel(Printer p, int id);
+		public void deleteModel(Printer p, int id);
 	}
-
 }

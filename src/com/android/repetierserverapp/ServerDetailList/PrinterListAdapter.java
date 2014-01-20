@@ -20,10 +20,10 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 	private Context context;
 	private ArrayList<Printer> printerList;
 	private Printer printer;
-	private PrinterCallbacks callbacks;
 	private PrinterListAdapterCallback listener;
 
 
+	
 	public PrinterListAdapter(Context context, int textViewResourceId, ArrayList<Printer> list, PrinterListAdapterCallback listener) {
 		super(context, textViewResourceId, list);
 		this.context = context;
@@ -31,6 +31,8 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 		this.listener = listener;
 	}
 
+	
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -56,7 +58,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 
 		printer = printerList.get(position);
 
-		printer.setPrinterCallbacks(callbacks = new PrinterCallbacks() {
+		printer.setPrinterCallbacks(new PrinterCallbacks() {
 
 			@Override
 			public void onError(String error) {
@@ -110,7 +112,6 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 			activePrinter.setTextAppearance(getContext(), R.style.online);
 		}
 
-
 		String currentJob = printer.getCurrentJob();
 
 		if (isWorking(currentJob)){
@@ -133,15 +134,18 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 			perc.setVisibility(View.INVISIBLE);
 		}
 
-
 		return rowView;
 	}
 
+	
+	
 	private Boolean isWorking (String currentJob){
 		if (currentJob == "none") return false;
 		else return true;		
 	}
 
+	
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -159,8 +163,8 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 	}
 
 
+	
 	public interface PrinterListAdapterCallback {
 		public void updatePrinterList();
 	}
-
 }

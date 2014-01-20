@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,8 +16,6 @@ import android.widget.ListView;
 
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.PrinterControll.ActivityPrinterControll;
-import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList;
-import com.android.repetierserverapp.R.layout;
 import com.android.repetierserverapp.ServerDetailList.PrinterListAdapter.PrinterListAdapterCallback;
 import com.android.repetierserverapp.ServerList.FragServerList.ServerAppCallbacks;
 import com.android.repetierserverapp.db.DbAdapter;
@@ -30,6 +26,8 @@ import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 
 public class FragServerDetail extends ListFragment implements ServerAppCallbacks {
 
+	
+	
 	public interface PrinterAppCallbacks {
 		public void onPrinterSelected(long id);
 	};
@@ -48,7 +46,6 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 	public static final String ARG_SERVER_ID = "item_id";
 	private PrinterListAdapter adapter;
 
-	private ServerCallbacks serverCallbacks;
 	private Server server;
 
 	private ArrayList<Printer> printerList;
@@ -92,6 +89,8 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 				@Override
 				public void onItemClick(AdapterView<?> adapter, View view,
 						int position, long id) {
+					Log.d("onItemClick", "entrato");
+					
 					Printer p = printerList.get(position);
 
 					Intent detailIntent = new Intent(getActivity(), ActivityPrinterControll.class);
@@ -108,8 +107,7 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 			};
 
 			server = new Server (url, name);
-			server.setCallbacks(
-					serverCallbacks = new ServerCallbacks() {
+			server.setCallbacks(new ServerCallbacks() {
 
 						@Override
 						public void onPrinterListUpdated(ArrayList<Printer> list) {
@@ -118,17 +116,17 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 							adapter = new PrinterListAdapter(getActivity(), R.layout.printer_line, list, printerListAdapterCallback); 
 							listview.setAdapter(adapter);
 							listview.setOnItemClickListener(itemClickListener);
-
 						}
 
 						@Override
 						public void onError(String error) {
 						}
 					});
-
 		}
 	}
 
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -137,20 +135,20 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 		return rootView;
 	}
 
+	
+	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		server.updatePrinterList(getActivity());
 		listview = getListView();
-
 	}
 
 
+	
 	@Override
 	public void onServerSelected(long id) {
 		// TODO Auto-generated method stub
-
 	}
-
 }

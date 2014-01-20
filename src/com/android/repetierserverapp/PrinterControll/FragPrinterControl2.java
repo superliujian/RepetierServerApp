@@ -1,19 +1,16 @@
 package com.android.repetierserverapp.PrinterControll;
 
 import com.android.repetierserverapp.R;
-import com.android.repetierserverapp.R.id;
-import com.android.repetierserverapp.R.layout;
-import com.android.repetierserverapp.R.menu;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterStatusCallbacks;
 import com.grasselli.android.repetierserverapi.PrinterStatus;
 import com.grasselli.android.repetierserverapi.Server;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.Fragment;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -25,7 +22,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragPrinterControl2 extends Fragment implements OnClickListener, OnSeekBarChangeListener, PrinterStatusCallbacks, OnCheckedChangeListener{
+public class FragPrinterControl2 extends Fragment implements OnClickListener, PrinterStatusCallbacks, OnCheckedChangeListener{
 	private TextView feedrateValue;
 	private TextView flowrateValue;				
 
@@ -46,37 +43,89 @@ public class FragPrinterControl2 extends Fragment implements OnClickListener, On
 	private EditText newExtrTempEt;
 	private EditText newBedTempEt;
 
-	Server s;
-	Printer printer;
-	Toast toast;
+	private Printer printer;
+	private Toast toast;
 
+	private OnSeekBarChangeListener onSeekBarlistener;
+
+	
 	
 	public FragPrinterControl2(){
 	}
-	
+
+
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		String url = getArguments().getString("url");
+		String alias = getArguments().getString("alias");
+		String name = getArguments().getString("name");
+		String slug = getArguments().getString("slug");
+		int online = getArguments().getInt("online");
+		String currentJob = getArguments().getString("currentJob");
+		Boolean active = getArguments().getBoolean("active");
+		double progress = getArguments().getDouble("progress");
+
+		printer = new Printer(new Server(url, alias),name, slug, online, currentJob, active, progress);
 	}
+
+
 	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		View rootView = inflater.inflate(R.layout.fragment_control2,
+				container, false);
+		return rootView;
+	}
+
+
 	
 	@Override
 	public void onViewCreated(View v, Bundle savedInstanceState) {
-		getActivity().setContentView(R.layout.fragment_control2);
 
+		onSeekBarlistener = new OnSeekBarChangeListener() {
+
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO inserire valore cambiamento
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				switch (seekBar.getId()) {
+
+				case R.id.feedrateSeekBar:
+					feedrateSeek.setSecondaryProgress(feedrateSeek.getProgress());
+					//TODO printer.setFeedRate(seekBar.getProgress());
+					break;
+
+				case R.id.flowrateSeekBar:
+					flowrateSeek.setSecondaryProgress(flowrateSeek.getProgress());
+					//TODO printer.setFlowRate(seekBar.getProgress());
+					break;
+				}
+			}
+		};
+		
 		feedrateValue = (TextView) v.findViewById(R.id.feedrateValueTextView);
 		flowrateValue = (TextView) v.findViewById(R.id.flowrateValueTextView);
 
 		feedrateSeek = (SeekBar) v.findViewById(R.id.feedrateSeekBar);
-		feedrateSeek.setOnSeekBarChangeListener(this);
+		feedrateSeek.setOnSeekBarChangeListener(onSeekBarlistener);
 		feedrateSeek.setMax(200);
-		feedrateSeek.setOnSeekBarChangeListener(this);
 
 		flowrateSeek = (SeekBar) v.findViewById(R.id.flowrateSeekBar);
-		flowrateSeek.setOnSeekBarChangeListener(this);
+		flowrateSeek.setOnSeekBarChangeListener(onSeekBarlistener);
 		flowrateSeek.setMax(200);	
-		flowrateSeek.setOnSeekBarChangeListener(this);
 
 		extruderSwitch = (Switch) v.findViewById(R.id.extruderSwitch);
 		bedSwitch = (Switch) v.findViewById(R.id.bedSwitch);
@@ -100,6 +149,7 @@ public class FragPrinterControl2 extends Fragment implements OnClickListener, On
 	}
 
 
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -120,6 +170,8 @@ public class FragPrinterControl2 extends Fragment implements OnClickListener, On
 		}
 	}
 
+	
+	
 	//type == 0 temperatura estrusore
 	//type == 1 temperatura letto riscaldato
 	private boolean checkTemp(int temp, int type){
@@ -146,31 +198,7 @@ public class FragPrinterControl2 extends Fragment implements OnClickListener, On
 		return true;
 	}
 
-	@Override
-	public void onProgressChanged(SeekBar seekBar, int progress,
-			boolean fromUser) {
-	}
 
-	@Override
-	public void onStartTrackingTouch(SeekBar seekBar) {
-		// TODO inserire valore cambiamento
-	}
-
-	@Override
-	public void onStopTrackingTouch(SeekBar seekBar) {
-		switch (seekBar.getId()) {
-
-		case R.id.feedrateSeekBar:
-			feedrateSeek.setSecondaryProgress(feedrateSeek.getProgress());
-			//TODO printer.setFeedRate(seekBar.getProgress());
-			break;
-
-		case R.id.flowrateSeekBar:
-			flowrateSeek.setSecondaryProgress(flowrateSeek.getProgress());
-			//TODO printer.setFlowRate(seekBar.getProgress());
-			break;
-		}
-	}
 
 	@Override
 	public void onError(String error) {
@@ -178,6 +206,8 @@ public class FragPrinterControl2 extends Fragment implements OnClickListener, On
 
 	}
 
+	
+	
 	//aggiorna valori interfaccia
 	@Override
 	public void onPrinterStatusUpdated() {
@@ -194,6 +224,8 @@ public class FragPrinterControl2 extends Fragment implements OnClickListener, On
 		else turnOn(bedSwitch);
 	}
 
+	
+	
 	public void turnOn (Switch s){
 		s.setActivated(true);
 	}
@@ -202,6 +234,8 @@ public class FragPrinterControl2 extends Fragment implements OnClickListener, On
 		s.setActivated(false);
 	}
 
+	
+	
 	//Accendi/spegni estrusore/letto
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

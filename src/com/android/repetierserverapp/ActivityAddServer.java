@@ -26,6 +26,7 @@ public class ActivityAddServer extends Activity implements OnClickListener {
 	private Cursor cursor;
 
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,6 +38,8 @@ public class ActivityAddServer extends Activity implements OnClickListener {
 		createServer.setOnClickListener(this);
 	}
 
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -44,6 +47,8 @@ public class ActivityAddServer extends Activity implements OnClickListener {
 		return true;
 	}
 
+	
+	
 	@Override
 	public void onClick(View v) {
 		Log.d("onClick" , "entrato");
@@ -72,11 +77,13 @@ public class ActivityAddServer extends Activity implements OnClickListener {
 	}
 	
 	
+	
 	private boolean isValidUrl(String url) {
 		//TODO 
 		return true;
 	}
 
+	
 
 	private boolean isValidName(String name) {
 		if (url == "") return false;

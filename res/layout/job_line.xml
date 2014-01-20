@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp" >
+
+    <TextView
+        android:id="@+id/jobName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="nome lavoro"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/dimen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/jobName"
+        android:layout_below="@+id/jobName"
+        android:text="Dimensione:"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/dimenJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dimen"
+        android:layout_alignBottom="@+id/dimen"
+        android:layout_alignLeft="@+id/jobStatus"
+        android:text="0,0"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/mb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dimenJob"
+        android:layout_alignBottom="@+id/dimenJob"
+        android:layout_toRightOf="@+id/dimenJob"
+        android:text="  MB"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/jobStatus"
+        android:layout_alignBottom="@+id/jobStatus"
+        android:layout_alignLeft="@+id/dimen"
+        android:singleLine="true"
+        android:text="Stato:"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/jobStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dimenJob"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:text="Salvato"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/jobStatus"
+        android:layout_alignBottom="@+id/jobStatus"
+        android:layout_toRightOf="@+id/jobStatus"
+        android:layout_marginLeft="45dp"
+        android:text="0.0"
+        android:textSize="13sp" />
+
+     <TextView
+        android:id="@+id/perc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/progress"
+        android:layout_alignBottom="@+id/progress"
+        android:layout_toRightOf="@+id/progress"
+        android:text="  %"
+        android:textSize="13sp" />
+     
+    <Button
+        android:id="@+id/startBtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dimen"
+        android:layout_below="@+id/status"
+        android:layout_marginTop="14dp"
+        android:text="AVVIA" />
+
+    <Button
+        android:id="@+id/removeBtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/startBtt"
+        android:layout_alignBottom="@+id/startBtt"
+        android:layout_alignRight="@+id/jobName"
+        android:text="ELIMINA" />
+
+    <Button
+        android:id="@+id/stopBtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/removeBtt"
+        android:layout_alignBottom="@+id/removeBtt"
+        android:layout_centerHorizontal="true"
+        android:text="FERMA" />
+
+</RelativeLayout>

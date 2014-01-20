@@ -56,6 +56,10 @@
             android:name="com.android.repetierserverapp.PrinterControll.ModelList.FragModelList"
             android:label="@string/title_activity_frag_model_list" >
         </activity>
+        <activity
+            android:name="com.android.repetierserverapp.FragPrinterController"
+            android:label="@string/title_activity_frag_printer_controller" >
+        </activity>
     </application>
 
 </manifest>

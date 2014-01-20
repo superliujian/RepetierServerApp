@@ -11,7 +11,13 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int black=0x7f060002;
         public static final int blu_medio=0x7f060000;
+        public static final int blue=0x7f060005;
+        public static final int green=0x7f060004;
+        public static final int orange=0x7f060006;
+        public static final int red=0x7f060003;
+        public static final int white=0x7f060001;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -26,92 +32,100 @@ public final class R {
         public static final int controlButtonText=0x7f070002;
         public static final int controlTextView=0x7f070004;
         public static final int homeButtonText=0x7f070003;
+        public static final int smallText=0x7f070006;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f09004a;
-        public static final int activePrinter=0x7f090047;
-        public static final int bedSwitch=0x7f090029;
-        public static final int bedTempReadTextView=0x7f09002c;
-        public static final int bedTempSetTextView=0x7f09002e;
-        public static final int bedTextView=0x7f09002a;
-        public static final int bedtempTextView=0x7f09002b;
-        public static final int copyBtt=0x7f09003e;
+        public static final int action_settings=0x7f090052;
+        public static final int activePrinter=0x7f09004f;
+        public static final int bedSwitch=0x7f09002b;
+        public static final int bedTempReadTextView=0x7f09002e;
+        public static final int bedTempSetTextView=0x7f090030;
+        public static final int bedTextView=0x7f09002c;
+        public static final int bedtempTextView=0x7f09002d;
+        public static final int copyBtt=0x7f090048;
         public static final int createServerBtn=0x7f090005;
-        public static final int current=0x7f090041;
-        public static final int currentJob=0x7f090042;
-        public static final int deleteBtt=0x7f09003f;
-        public static final int dimen=0x7f09003a;
-        public static final int dimenModel=0x7f09003b;
-        public static final int extrTempReadTextView=0x7f090027;
-        public static final int extrTempSetTextView=0x7f090030;
-        public static final int extrtempTextView=0x7f090028;
-        public static final int extruderSwitch=0x7f090026;
-        public static final int extruderTextView=0x7f090025;
-        public static final int feedrateSeekBar=0x7f090020;
-        public static final int feedrateTextView=0x7f09001f;
-        public static final int feedrateValueTextView=0x7f090023;
-        public static final int flowrateSeekBar=0x7f090022;
-        public static final int flowrateTextView=0x7f090021;
-        public static final int flowrateValueTextView=0x7f090024;
-        public static final int homeButton=0x7f09000a;
-        public static final int homexbutton=0x7f090011;
-        public static final int homeybutton=0x7f090012;
-        public static final int homezbutton=0x7f090014;
-        public static final int mb=0x7f09003d;
-        public static final int modelName=0x7f090038;
-        public static final int modelStatus=0x7f09003c;
-        public static final int modelTV=0x7f090034;
-        public static final int nameServer=0x7f090048;
-        public static final int newBedTempBtn=0x7f090033;
-        public static final int newBedTempEt=0x7f090032;
-        public static final int newExtrTempBtn=0x7f090031;
-        public static final int newExtrTempEt=0x7f09002f;
-        public static final int newServerBtn=0x7f090037;
+        public static final int current=0x7f09004b;
+        public static final int currentJob=0x7f09004c;
+        public static final int deleteBtt=0x7f090049;
+        public static final int dimen=0x7f09003b;
+        public static final int dimenJob=0x7f09003c;
+        public static final int dimenModel=0x7f090046;
+        public static final int extrTempReadTextView=0x7f090029;
+        public static final int extrTempSetTextView=0x7f090032;
+        public static final int extrtempTextView=0x7f09002a;
+        public static final int extruderSwitch=0x7f090028;
+        public static final int extruderTextView=0x7f090027;
+        public static final int feedrateSeekBar=0x7f090022;
+        public static final int feedrateTextView=0x7f090021;
+        public static final int feedrateValueTextView=0x7f090025;
+        public static final int flowrateSeekBar=0x7f090024;
+        public static final int flowrateTextView=0x7f090023;
+        public static final int flowrateValueTextView=0x7f090026;
+        public static final int homeButton=0x7f09000c;
+        public static final int homexbutton=0x7f090013;
+        public static final int homeybutton=0x7f090014;
+        public static final int homezbutton=0x7f090016;
+        public static final int jobName=0x7f09003a;
+        public static final int jobStatus=0x7f09003d;
+        public static final int mb=0x7f09003e;
+        public static final int modelName=0x7f090045;
+        public static final int modelStatus=0x7f090047;
+        public static final int modelTV=0x7f090036;
+        public static final int nameServer=0x7f090050;
+        public static final int newBedTempBtn=0x7f090035;
+        public static final int newBedTempEt=0x7f090034;
+        public static final int newExtrTempBtn=0x7f090033;
+        public static final int newExtrTempEt=0x7f090031;
+        public static final int newServerBtn=0x7f090039;
         public static final int newServerTV=0x7f090000;
         public static final int newUrlTV=0x7f090003;
-        public static final int perc=0x7f090046;
-        public static final int printerName=0x7f090040;
-        public static final int printerSelectionTV=0x7f090035;
-        public static final int printerStatus=0x7f090043;
-        public static final int progress=0x7f090044;
-        public static final int progressJob=0x7f090045;
+        public static final int pager=0x7f090006;
+        public static final int pager_title_strip=0x7f090007;
+        public static final int perc=0x7f090041;
+        public static final int printerName=0x7f09004a;
+        public static final int printerSelectionTV=0x7f090037;
+        public static final int printerStatus=0x7f09004d;
+        public static final int progress=0x7f090040;
+        public static final int progressJob=0x7f09004e;
+        public static final int removeBtt=0x7f090043;
         public static final int serverNameET=0x7f090001;
-        public static final int serverSelectionTV=0x7f090036;
+        public static final int serverSelectionTV=0x7f090038;
         public static final int serverUrlET=0x7f090004;
-        public static final int server_detail_container=0x7f090006;
-        public static final int server_list=0x7f090007;
-        public static final int status=0x7f090039;
-        public static final int statusTextView=0x7f09001e;
+        public static final int server_detail_container=0x7f090008;
+        public static final int server_list=0x7f090009;
+        public static final int startBtt=0x7f090042;
+        public static final int status=0x7f09003f;
+        public static final int statusTextView=0x7f090020;
+        public static final int stopBtt=0x7f090044;
         public static final int textView1=0x7f090002;
-        public static final int textView2=0x7f09002d;
-        public static final int textViewX=0x7f090018;
-        public static final int textViewY=0x7f090019;
-        public static final int textViewZ=0x7f09001a;
-        public static final int urlServer=0x7f090049;
-        public static final int xValueTextView=0x7f09001c;
-        public static final int x_10button=0x7f09000c;
-        public static final int x_1button=0x7f09000b;
-        public static final int xp10button=0x7f090008;
-        public static final int xp1button=0x7f090009;
-        public static final int yValueTextView=0x7f09001b;
-        public static final int y_10button=0x7f090010;
-        public static final int y_1button=0x7f09000f;
-        public static final int yp10button=0x7f09000e;
-        public static final int yp1button=0x7f09000d;
-        public static final int zValueTextView=0x7f09001d;
-        public static final int z_10button=0x7f090013;
-        public static final int z_1button=0x7f090015;
-        public static final int zp10button=0x7f090017;
-        public static final int zp1button=0x7f090016;
+        public static final int textView2=0x7f09002f;
+        public static final int textViewX=0x7f09001a;
+        public static final int textViewY=0x7f09001b;
+        public static final int textViewZ=0x7f09001c;
+        public static final int urlServer=0x7f090051;
+        public static final int xValueTextView=0x7f09001e;
+        public static final int x_10button=0x7f09000e;
+        public static final int x_1button=0x7f09000d;
+        public static final int xp10button=0x7f09000a;
+        public static final int xp1button=0x7f09000b;
+        public static final int yValueTextView=0x7f09001d;
+        public static final int y_10button=0x7f090012;
+        public static final int y_1button=0x7f090011;
+        public static final int yp10button=0x7f090010;
+        public static final int yp1button=0x7f09000f;
+        public static final int zValueTextView=0x7f09001f;
+        public static final int z_10button=0x7f090015;
+        public static final int z_1button=0x7f090017;
+        public static final int zp10button=0x7f090019;
+        public static final int zp1button=0x7f090018;
     }
     public static final class layout {
         public static final int activity_add_server=0x7f030000;
-        public static final int activity_frag_model_list=0x7f030001;
-        public static final int activity_printer_controll=0x7f030002;
-        public static final int activity_server_detail=0x7f030003;
+        public static final int activity_printer_controll=0x7f030001;
+        public static final int activity_server_detail=0x7f030002;
         /** 
     Layout alias to replace the single-pane version of the layout with a
     two-pane version on Large screens.
@@ -127,26 +141,29 @@ public final class R {
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     
          */
-        public static final int activity_server_list=0x7f030004;
-        public static final int activity_server_twopane=0x7f030005;
-        public static final int fragment_control=0x7f030006;
-        public static final int fragment_control2=0x7f030007;
+        public static final int activity_server_list=0x7f030003;
+        public static final int activity_server_twopane=0x7f030004;
+        public static final int fragment_control=0x7f030005;
+        public static final int fragment_control2=0x7f030006;
+        public static final int fragment_job_list=0x7f030007;
         public static final int fragment_model_list=0x7f030008;
         public static final int fragment_server_detail=0x7f030009;
         public static final int fragment_server_selection=0x7f03000a;
-        public static final int model_line=0x7f03000b;
-        public static final int printer_line=0x7f03000c;
-        public static final int server_line=0x7f03000d;
+        public static final int job_line=0x7f03000b;
+        public static final int model_line=0x7f03000c;
+        public static final int printer_line=0x7f03000d;
+        public static final int server_line=0x7f03000e;
     }
     public static final class menu {
         public static final int activity_add_server=0x7f080000;
         public static final int activity_printer_controll=0x7f080001;
         public static final int add_server=0x7f080002;
         public static final int frag_model_list=0x7f080003;
-        public static final int login=0x7f080004;
-        public static final int main=0x7f080005;
-        public static final int printer_control=0x7f080006;
-        public static final int printer_control2=0x7f080007;
+        public static final int frag_printer_controller=0x7f080004;
+        public static final int login=0x7f080005;
+        public static final int main=0x7f080006;
+        public static final int printer_control=0x7f080007;
+        public static final int printer_control2=0x7f080008;
     }
     public static final class string {
         public static final int PrinterSelection=0x7f040003;
@@ -158,11 +175,19 @@ public final class R {
         public static final int loadServer=0x7f040005;
         public static final int newServer=0x7f04000a;
         public static final int newUrl=0x7f04000b;
+        public static final int onModelCopied=0x7f040019;
+        public static final int onModelDeleted=0x7f040018;
+        public static final int onModelUploaded=0x7f040017;
         public static final int serverList=0x7f040006;
+        public static final int tab_control=0x7f040016;
+        public static final int tab_control2=0x7f04001a;
+        public static final int tab_job=0x7f040015;
+        public static final int tab_model=0x7f040014;
         public static final int title_activity_activity_add_server=0x7f040010;
         public static final int title_activity_activity_printer_controll=0x7f040011;
         public static final int title_activity_add_server=0x7f040009;
         public static final int title_activity_frag_model_list=0x7f040012;
+        public static final int title_activity_frag_printer_controller=0x7f040013;
         public static final int title_activity_login=0x7f040008;
         public static final int title_activity_printer_control=0x7f040007;
         public static final int title_activity_printer_control2=0x7f04000c;
@@ -220,14 +245,15 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f050001;
-        public static final int Text=0x7f050009;
-        public static final int blueText=0x7f05000a;
+        public static final int Text=0x7f05000a;
+        public static final int blueText=0x7f05000b;
         public static final int boldText=0x7f050008;
         public static final int controlTextView=0x7f050004;
         public static final int control_buttons=0x7f050002;
         public static final int home_buttons=0x7f050003;
-        public static final int offline=0x7f05000b;
-        public static final int online=0x7f05000c;
+        public static final int offline=0x7f05000c;
+        public static final int online=0x7f05000d;
+        public static final int smallBoldText=0x7f050009;
         public static final int xcontrol_buttons=0x7f050005;
         public static final int ycontrol_buttons=0x7f050006;
         public static final int zcontrol_buttons=0x7f050007;

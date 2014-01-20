@@ -4,9 +4,6 @@ package com.android.repetierserverapp.PrinterControll;
 import java.util.ArrayList;
 
 import com.android.repetierserverapp.R;
-import com.android.repetierserverapp.R.id;
-import com.android.repetierserverapp.R.layout;
-import com.android.repetierserverapp.R.menu;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
 import com.grasselli.android.repetierserverapi.Printer.PrinterStatusCallbacks;
@@ -14,13 +11,10 @@ import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 import com.grasselli.android.repetierserverapi.Server;
 
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
@@ -52,27 +46,53 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 
 	private TextView textViewStatus;
 
-	SharedPreferences pref;
-	private String serverName;
-	private String serverUrl;
-	Server s;
 	Printer printer;
 
+	
+	
 	public FragPrinterControl(){
 	}
 	
-	
 		
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		String url = getArguments().getString("url");
+		String alias = getArguments().getString("alias");
+		String name = getArguments().getString("name");
+		String slug = getArguments().getString("slug");
+		int online = getArguments().getInt("online");
+		String currentJob = getArguments().getString("currentJob");
+		Boolean active = getArguments().getBoolean("active");
+		double progress = getArguments().getDouble("progress");
+
+		printer = new Printer(new Server(url, alias),name, slug, online, currentJob, active, progress);
+
+		printer.setPrinterCallbacks(this);
+		printer.setPrinterStatusCallbacks(this);	
 	}
+	
+	
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		
+		View rootView = inflater.inflate(R.layout.fragment_control,
+				container, false);
+		return rootView;
+	}
+	
 	
 	
 	@Override
 	public void onViewCreated(View v, Bundle savedInstanceState) {
-		getActivity().setContentView(R.layout.fragment_control);
+		super.onViewCreated(v, savedInstanceState);
 
+		printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
+		
 		buttonXp10 = (Button) v.findViewById(R.id.xp10button);
 		buttonXp1 = (Button) v.findViewById(R.id.xp1button);
 		buttonX_1 = (Button) v.findViewById(R.id.x_1button);
@@ -117,14 +137,10 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		buttonZ_10.setOnClickListener(this);
 		buttonZhome.setOnClickListener(this);
 		buttonHome.setOnClickListener(this);
-
-		
-		s = new Server("http://192.168.1.241:8080");
-		s.setCallbacks(this);
-
-		s.updatePrinterList(getActivity());
 	}
 
+	
+	
 	public void onClick(View v) {
 		switch (v.getId()) {
 
@@ -208,9 +224,9 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		default:
 			break;
 		}
-
 	}
 
+	
 	
 	@Override
 	public void onPrinterStatusUpdated() {
@@ -224,31 +240,35 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		textViewZvalue.setText(z);
 	}
 
+	
+	
 	@Override
 	public void onError(String error) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void onChangeState() {
-		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void onCommandExecuted() {
-		Log.d("onCommandExecuted", "entrato");
-		return;    		
-	}
 
 	@Override
 	public void onPrinterListUpdated(ArrayList<Printer> printerList) {
-		printer = s.getPrinter(0);
-		printer.setPrinterCallbacks(this);
-		printer.setPrinterStatusCallbacks(this);
-		return;
+		// TODO Auto-generated method stub
+		
 	}
 
-	
+
+
+	@Override
+	public void onChangeState() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onCommandExecuted() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -2,5 +2,11 @@
 <resources>
     
         <color name="blu_medio">#33B5E5</color>
+        <color name="white">#FFFFFF</color>
+        <color name="black">#000000</color>
+        <color name="red">#CD2222</color>
+        <color name="green">#22CD22</color>
+        <color name="blue">#2222CD</color>
+        <color name="orange">#FF8C02</color>
         
 </resources>

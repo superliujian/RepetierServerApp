@@ -20,5 +20,19 @@
     <string name="title_activity_activity_add_server">ActivityAddServer</string>
     <string name="title_activity_activity_printer_controll">ActivityPrinterControll</string>
     <string name="title_activity_frag_model_list">FragModelList</string>
-
+    <string name="title_activity_frag_printer_controller">FragPrinterController</string>
+	<string name="tab_model">MODELLI</string>
+	<string name="tab_job">LAVORI</string>
+	<string name="tab_control">CONTROLLO</string>
+	<string name="onModelUploaded">Il modello è stato caricato</string>
+	<string name="onModelDeleted">Il modello è stato eliminato</string>
+	<string name="onModelCopied">Il modello è stato copiato</string>
+	<string name="tab_control2">CONTROLLO</string>
+	<string name="tab_control2">CONTROLLO</string>
+	<string name="tab_control2">CONTROLLO</string>
+	<string name="tab_control2">CONTROLLO</string>
+	<string name="tab_control2">CONTROLLO</string>
+	<string name="tab_control2">CONTROLLO</string>
+	
+    
 </resources>

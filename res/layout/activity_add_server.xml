@@ -44,7 +44,8 @@
         android:layout_alignLeft="@+id/newUrlTV"
         android:layout_below="@+id/newUrlTV"
         android:layout_marginTop="5dp"
-        android:ems="10" />
+        android:ems="10" 
+        android:text="http://"/>
 
     <Button
         android:id="@+id/createServerBtn"

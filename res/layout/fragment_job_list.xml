@@ -14,7 +14,7 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Modelli disponibili:" />
+        android:text="Lavori disponibili:" />
 
     <ListView
         android:id="@android:id/list"
