@@ -21,7 +21,7 @@ public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickList
 	private Model model;
 	private ModelListAdapterCallback listener;
 	private Printer printer;
-	
+
 
 	public ModelListAdapter(Context context, int textViewResourceId, ArrayList<Model> list, ModelListAdapterCallback listener, Printer printer) {
 		super(context, textViewResourceId, list);
@@ -31,8 +31,8 @@ public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickList
 		this.printer = printer;
 	}
 
-	
-	
+
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -55,20 +55,20 @@ public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickList
 		deleteBtt.setOnClickListener(this);
 
 		model = modelList.get(position);
-		
+
 		modelName.setText(model.getName());
-		
+
 		modelStatus.setText(model.getState());
-		
+
 		double size = model.getLength();
 		String dimen = Double.toString(Math.round(size/1048576*100)/100);
 		dimenModel.setText(dimen);
-		
+
 		return rowView;
 	}
 
 
-	
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -82,10 +82,14 @@ public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickList
 	}
 
 
-	
+
 	public interface ModelListAdapterCallback {
 		public void updateModelList(Printer p);
 		public void copyModel(Printer p, int id);
 		public void deleteModel(Printer p, int id);
+	}
+
+	public interface ModelAdapterCallback {
+		public void updateJobList(Printer p);
 	}
 }

@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.PrinterControll.JobList.JobListAdapter.JobListAdapterCallback;
+import com.android.repetierserverapp.PrinterControll.ModelList.ModelListAdapter.ModelAdapterCallback;
 import com.grasselli.android.repetierserverapi.Job;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.JobCallbacks;
@@ -28,6 +29,7 @@ public class FragJobList extends ListFragment {
 	private JobListAdapterCallback jobListAdapterCallback;
 	//private OnItemClickListener itemClickListener;
 
+	private ModelAdapterCallback modelAdapterCallback;
 
 	
 	public FragJobList() {
@@ -48,8 +50,15 @@ public class FragJobList extends ListFragment {
 		Boolean active = getArguments().getBoolean("active");
 		double progress = getArguments().getDouble("progress");
 
-		printer = new Printer(new Server(url, alias),name, slug, online, currentJob, active, progress);
+		printer = new Printer(new Server(url, alias), name, slug, online, currentJob, active, progress);
 
+		modelAdapterCallback = new ModelAdapterCallback() {
+			
+			@Override
+			public void updateJobList(Printer p) {
+				printer.updateJobList(getActivity());
+			}
+		};
 		jobListAdapterCallback = new JobListAdapterCallback() {
 
 			@Override
@@ -64,12 +73,12 @@ public class FragJobList extends ListFragment {
 
 			@Override
 			public void stopJob(Printer printer, int id) {
-				printer.removeJob(getActivity(), id);
+				printer.stopJob(getActivity(), id);
 			}
 
 			@Override
 			public void removeJob(Printer printer, int id) {
-				printer.stopJob(getActivity(), id);			
+				printer.removeJob(getActivity(), id);			
 			}
 		};
 
@@ -98,6 +107,7 @@ public class FragJobList extends ListFragment {
 				adapter = new JobListAdapter(getActivity(), R.layout.job_line, newJobList, jobListAdapterCallback, printer); 
 				listview = getListView();
 				listview.setAdapter(adapter);	
+				Toast.makeText(getActivity(), "ATTENZIONE: stampante disattivata o scollegata", Toast.LENGTH_LONG).show();
 			}
 
 			@Override
@@ -108,11 +118,13 @@ public class FragJobList extends ListFragment {
 
 			@Override
 			public void onJobStarted() {
+				printer.updateJobList(getActivity());
 				Toast.makeText(getActivity(), "Il lavoro è stato avviato", Toast.LENGTH_LONG).show();				
 			}
 
 			@Override
 			public void onJobStopped() {
+				printer.updateJobList(getActivity());
 				Toast.makeText(getActivity(), "Il lavoro è stato fermato", Toast.LENGTH_LONG).show();				
 			}
 

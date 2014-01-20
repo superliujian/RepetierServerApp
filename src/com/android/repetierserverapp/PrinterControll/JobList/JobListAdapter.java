@@ -21,7 +21,7 @@ public class JobListAdapter extends ArrayAdapter<Job> implements OnClickListener
 	private JobListAdapterCallback listener;
 	private Printer printer;
 
-	
+
 
 	public JobListAdapter(Context context, int textViewResourceId, ArrayList<Job> list, JobListAdapterCallback listener, Printer printer) {
 		super(context, textViewResourceId, list);
@@ -31,8 +31,8 @@ public class JobListAdapter extends ArrayAdapter<Job> implements OnClickListener
 		this.printer = printer;
 	}
 
-	
-	
+
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -47,10 +47,10 @@ public class JobListAdapter extends ArrayAdapter<Job> implements OnClickListener
 		TextView jobName = (TextView) rowView.findViewById(R.id.jobName);
 		TextView dimenJob = (TextView) rowView.findViewById(R.id.dimenJob);
 		TextView JobStatus = (TextView) rowView.findViewById(R.id.jobStatus);
-		
+
 		TextView progress = (TextView) rowView.findViewById(R.id.progress);
 		TextView perc = (TextView) rowView.findViewById(R.id.perc);
-		
+
 		Button startBtt = (Button) rowView.findViewById(R.id.startBtt);
 		Button removeBtt = (Button) rowView.findViewById(R.id.removeBtt);
 		Button stopBtt = (Button) rowView.findViewById(R.id.stopBtt);
@@ -69,23 +69,34 @@ public class JobListAdapter extends ArrayAdapter<Job> implements OnClickListener
 		String dimen = Double.toString(Math.round(size/1048576*100)/100);
 		dimenJob.setText(dimen);
 
-		if (job.getState()=="stored"){
+		if (job.getState().equals("stored")){
 			progress.setVisibility(View.INVISIBLE);
 			perc.setVisibility(View.INVISIBLE);
+			stopBtt.setEnabled(false);
+			removeBtt.setEnabled(true);
 		}
 		else {
 			progress.setVisibility(View.VISIBLE);
 			perc.setVisibility(View.VISIBLE);
-			
+			stopBtt.setEnabled(true);
+			removeBtt.setEnabled(false);
+
 			double d = job.getDone();
 			String done = Double.toString(Math.round(d*100)/100);
 			progress.setText(done);
 		}
+
+		if (printer.getOnline() == 1){
+			startBtt.setEnabled(true);
+		} else		{
+			startBtt.setEnabled(false);
+		}
+		
 		return rowView;
 	}
 
 
-	
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -101,7 +112,7 @@ public class JobListAdapter extends ArrayAdapter<Job> implements OnClickListener
 		}
 	}
 
-	
+
 
 	public interface JobListAdapterCallback {
 		public void updateJobList(Printer printer);

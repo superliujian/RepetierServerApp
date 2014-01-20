@@ -140,7 +140,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 	
 	
 	private Boolean isWorking (String currentJob){
-		if (currentJob == "none") return false;
+		if (currentJob.equals("none")) return false;
 		else return true;		
 	}
 
