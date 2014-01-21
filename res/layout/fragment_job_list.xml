@@ -11,10 +11,11 @@
 
     <TextView
         android:id="@+id/modelTV"
-        style="@style/Text"
+        style="@style/boldText"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lavori disponibili:" />
+        android:text="@string/avaibleJob" />
 
     <ListView
         android:id="@android:id/list"
@@ -22,7 +23,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/modelTV"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="25dp" >
     </ListView>
+
+    <TextView
+        android:id="@+id/warningTv"
+        style="@style/offline"
+        android:textSize="@dimen/mediumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/modelTV"
+        android:layout_below="@+id/modelTV"
+        android:text="warning" />
 
 </RelativeLayout>

@@ -3,6 +3,9 @@ package com.android.repetierserverapp;
 public class ToDo {
 
 	/*
+	 * switch attivazione stampante
+	 * rimuovi toast
+	 * 
 	 * Gestione eccezzioni su connessioni
 	 * 
 	 * Caricare modello
@@ -18,6 +21,10 @@ public class ToDo {
 	 * grafica
 	 * 
 	 * printercontroll2
+	 * 
+	 * 
+	 * timer chiamate
+	 * 
 	 * 
 	 */
 }

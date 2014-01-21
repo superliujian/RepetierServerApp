@@ -6,44 +6,54 @@
 
     <TextView
         android:id="@+id/jobName"
+        style="@style/boldText"
+        android:textSize="@dimen/bigText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="nome lavoro"
-        android:textSize="16sp" />
+        />
 
     <TextView
         android:id="@+id/dimen"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/jobName"
         android:layout_below="@+id/jobName"
         android:text="Dimensione:"
-        android:textSize="13sp" />
+         />
 
     <TextView
         android:id="@+id/dimenJob"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/dimen"
         android:layout_alignBottom="@+id/dimen"
         android:layout_alignLeft="@+id/jobStatus"
         android:text="0,0"
-        android:textSize="13sp" />
+         />
 
     <TextView
         android:id="@+id/mb"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/dimenJob"
         android:layout_alignBottom="@+id/dimenJob"
         android:layout_toRightOf="@+id/dimenJob"
         android:text="  MB"
-        android:textSize="13sp" />
+         />
 
     <TextView
         android:id="@+id/status"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/jobStatus"
@@ -51,20 +61,24 @@
         android:layout_alignLeft="@+id/dimen"
         android:singleLine="true"
         android:text="Stato:"
-        android:textSize="13sp" />
+         />
 
     <TextView
         android:id="@+id/jobStatus"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dimenJob"
         android:layout_centerHorizontal="true"
         android:singleLine="true"
         android:text="Salvato"
-        android:textSize="13sp" />
+         />
 
     <TextView
         android:id="@+id/progress"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/jobStatus"
@@ -72,20 +86,24 @@
         android:layout_toRightOf="@+id/jobStatus"
         android:layout_marginLeft="45dp"
         android:text="0.0"
-        android:textSize="13sp" />
+         />
 
      <TextView
         android:id="@+id/perc"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/progress"
         android:layout_alignBottom="@+id/progress"
         android:layout_toRightOf="@+id/progress"
         android:text="  %"
-        android:textSize="13sp" />
+         />
      
     <Button
         android:id="@+id/startBtt"
+        style="@style/Text"
+        android:textSize="@dimen/smallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/dimen"
@@ -95,6 +113,8 @@
 
     <Button
         android:id="@+id/removeBtt"
+        style="@style/Text"
+        android:textSize="@dimen/smallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/startBtt"
@@ -104,6 +124,8 @@
 
     <Button
         android:id="@+id/stopBtt"
+        style="@style/Text"
+        android:textSize="@dimen/smallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/removeBtt"

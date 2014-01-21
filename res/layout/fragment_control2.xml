@@ -7,13 +7,14 @@
     <TextView
         android:id="@+id/feedrateTextView"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="14dp"
         android:text="Feedrate:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <SeekBar
         android:id="@+id/feedrateSeekBar"
@@ -25,13 +26,14 @@
     <TextView
         android:id="@+id/flowrateTextView"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/feedrateSeekBar"
         android:layout_marginTop="20dp"
         android:text="Flowrate:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <SeekBar
         android:id="@+id/flowrateSeekBar"
@@ -43,22 +45,24 @@
     <TextView
         android:id="@+id/feedrateValueTextView"
         style="@style/boldText"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/feedrateTextView"
         android:layout_centerHorizontal="true"
         android:text="100"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <TextView
         android:id="@+id/flowrateValueTextView"
         style="@style/boldText"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/flowrateTextView"
         android:layout_centerHorizontal="true"
         android:text="100"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <TextView
         android:id="@+id/extruderTextView"
@@ -74,16 +78,18 @@
     <TextView
         android:id="@+id/extrTempReadTextView"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/extrtempTextView"
         android:layout_alignBottom="@+id/extrtempTextView"
         android:layout_alignLeft="@+id/extruderSwitch"
         android:text="999"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <Switch
         android:id="@+id/bedSwitch"
+        
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/bedTextView"
@@ -92,56 +98,61 @@
     <TextView
         android:id="@+id/extrtempTextView"
         style="@style/boldText"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/extruderTextView"
         android:layout_marginTop="17dp"
         android:text="Temperatura:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <TextView
         android:id="@+id/bedtempTextView"
         style="@style/boldText"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/bedTextView"
         android:layout_marginTop="17dp"
         android:text="Temperatura:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <TextView
         android:id="@+id/bedTempReadTextView"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/bedtempTextView"
         android:layout_alignBottom="@+id/bedtempTextView"
         android:layout_alignLeft="@+id/bedSwitch"
         android:text="999"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <TextView
         android:id="@+id/textView2"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/bedTempReadTextView"
         android:layout_toRightOf="@+id/bedTempReadTextView"
         android:text="  /  "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <TextView
         android:id="@+id/bedTempSetTextView"
         style="@style/boldText"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
         android:layout_alignBottom="@+id/textView2"
         android:layout_toRightOf="@+id/textView2"
         android:text="999"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <EditText
         android:id="@+id/newExtrTempEt"
@@ -198,22 +209,24 @@
     <TextView
         android:id="@+id/extrTempSetTextView"
         style="@style/boldText"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/newExtrTempEt"
         android:layout_toRightOf="@+id/textView1"
         android:text="999"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <TextView
         android:id="@+id/textView1"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/newExtrTempEt"
         android:layout_toRightOf="@+id/extrTempReadTextView"
         android:text="  /  "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         />
 
     <TextView
         android:id="@+id/bedTextView"

@@ -1,7 +1,9 @@
 package com.android.repetierserverapp.ServerDetailList;
 
 import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.ServerDetailList.FragServerDetail.PrinterAppCallbacks;
 import com.android.repetierserverapp.ServerList.ActivityServerList;
+import com.android.repetierserverapp.ServerList.FragServerList.ServerAppCallbacks;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +12,7 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
 
-public class ActivityServerDetail extends FragmentActivity {
+public class ActivityServerDetail extends FragmentActivity implements PrinterAppCallbacks {
 
 	
 	
@@ -53,4 +55,14 @@ public class ActivityServerDetail extends FragmentActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
+
+	@Override
+	public void onPrinterSelected(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

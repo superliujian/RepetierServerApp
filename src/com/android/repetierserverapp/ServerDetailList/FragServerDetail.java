@@ -2,6 +2,7 @@ package com.android.repetierserverapp.ServerDetailList;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -26,8 +27,8 @@ import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 
 public class FragServerDetail extends ListFragment implements ServerAppCallbacks {
 
-	
-	
+
+
 	public interface PrinterAppCallbacks {
 		public void onPrinterSelected(long id);
 	};
@@ -39,6 +40,7 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 	};
 
 
+	private PrinterAppCallbacks callback;
 
 	private DbAdapter dbAdapter;
 
@@ -61,9 +63,35 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	}
+
+
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_server_detail,
+				container, false);
+		return rootView;
+	}
+
+
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		
+		listview = getListView();
+		
+	}
+
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 
 		if (getArguments().containsKey(ARG_SERVER_ID)) {
-
 
 			//Log.d("onCreate1:", Long.toString(getArguments().getLong(ARG_SERVER_ID)));
 
@@ -75,6 +103,7 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 			String name = c.getString(c.getColumnIndex(DbHelper.DB_NAME));
 			c.close();
 			dbAdapter.close();
+
 
 			printerListAdapterCallback = new PrinterListAdapterCallback() {
 				@Override
@@ -89,8 +118,9 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 				@Override
 				public void onItemClick(AdapterView<?> adapter, View view,
 						int position, long id) {
-					//Log.d("onItemClick", "entrato");
 					
+					Log.d("onItemClick", "entrato");
+
 					Printer p = printerList.get(position);
 
 					Intent detailIntent = new Intent(getActivity(), ActivityPrinterControll.class);
@@ -106,47 +136,50 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 				}
 			};
 
+			listview.setOnItemClickListener(itemClickListener);
+			
 			server = new Server (url, name);
 			server.setCallbacks(new ServerCallbacks() {
 
-						@Override
-						public void onPrinterListUpdated(ArrayList<Printer> list) {
-							//Log.d("OnPrinterListUpdated", "entrato");
-							printerList = list;
-							adapter = new PrinterListAdapter(getActivity(), R.layout.printer_line, list, printerListAdapterCallback); 
-							listview.setAdapter(adapter);
-							listview.setOnItemClickListener(itemClickListener);
-						}
+				@Override
+				public void onPrinterListUpdated(ArrayList<Printer> list) {
+					//Log.d("OnPrinterListUpdated", "entrato");
+					printerList = list;
+					adapter = new PrinterListAdapter(getActivity(), R.layout.printer_line, list, printerListAdapterCallback); 
+					listview.setAdapter(adapter);
 
-						@Override
-						public void onError(String error) {
-						}
-					});
+				}
+
+				@Override
+				public void onError(String error) {
+				}
+			});
+			
+			server.updatePrinterList(getActivity());
 		}
 	}
 
 	
-	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_server_detail,
-				container, false);
-		return rootView;
-	}
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
 
-	
-	
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-
-		server.updatePrinterList(getActivity());
-		listview = getListView();
+		if (!(activity instanceof PrinterAppCallbacks)) {
+			throw new IllegalStateException(
+					"Activity must implement fragment's callbacks.");
+		}
+		callback = (PrinterAppCallbacks) activity;
 	}
 
 
-	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		callback = sDummyCallbacks;
+	}
+
+
+
 	@Override
 	public void onServerSelected(long id) {
 		// TODO Auto-generated method stub

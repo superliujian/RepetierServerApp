@@ -149,68 +149,88 @@
         android:text="- 10" />
 
     <Button
-        android:id="@+id/yp1button"
+        android:id="@+id/homezbutton"
         style="@style/control_buttons"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/homeButton"
-        android:layout_alignBottom="@+id/homeButton"
-        android:layout_toRightOf="@+id/homeButton"
-        android:background="@drawable/corner"
-        android:text="+ 1" />
+        android:layout_below="@+id/x_10button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/view_green"
+        android:text=" Home z " />
 
-    <Button
-        android:id="@+id/yp10button"
-        style="@style/control_buttons"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/statusTextView"
+        style="@style/Text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/homeButton"
-        android:layout_alignBottom="@+id/homeButton"
-        android:layout_toRightOf="@+id/yp1button"
-        android:background="@drawable/corner"
-        android:text="+ 10" />
+        android:layout_above="@+id/xValueTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="Stato stampante"
+        android:textSize="@dimen/bigText" />
 
-    <Button
-        android:id="@+id/y_1button"
-        style="@style/control_buttons"
+    <TextView
+        android:id="@+id/xValueTextView"
+        style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/homeButton"
-        android:layout_alignBottom="@+id/homeButton"
-        android:layout_toLeftOf="@+id/homeButton"
-        android:background="@drawable/corner"
-        android:text="- 1" />
+        android:layout_alignBaseline="@+id/textViewX"
+        android:layout_alignBottom="@+id/textViewX"
+        android:layout_toRightOf="@+id/textViewX"
+        android:gravity="right"
+        android:text="222,2"
+        />
 
-    <Button
-        android:id="@+id/y_10button"
-        style="@style/control_buttons"
+    <TextView
+        android:id="@+id/zValueTextView"
+        style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/homeButton"
-        android:layout_alignBottom="@+id/homeButton"
-        android:layout_toLeftOf="@+id/y_1button"
-        android:background="@drawable/corner"
-        android:text="- 10" />
+        android:layout_alignBaseline="@+id/textViewZ"
+        android:layout_alignBottom="@+id/textViewZ"
+        android:layout_alignRight="@+id/blueView2"
+        android:gravity="right"
+        android:text="222,2"
+        />
 
-    <Button
-        android:id="@+id/homexbutton"
-        style="@style/control_buttons"
+    <TextView
+        android:id="@+id/textViewX"
+        style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/xp10button"
-        android:layout_alignBottom="@+id/xp10button"
-        android:layout_alignLeft="@+id/y_10button"
-        android:background="@drawable/view_red"
-        android:text=" Home X " />
+        android:layout_above="@+id/homexbutton"
+        android:layout_alignLeft="@+id/blueView"
+        android:layout_marginBottom="15dp"
+        android:text="X ="
+        />
+
+    <TextView
+        android:id="@+id/textViewZ"
+        style="@style/Text"
+        android:textSize="@dimen/bigText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/yValueTextView"
+        android:layout_alignBottom="@+id/yValueTextView"
+        android:layout_toLeftOf="@+id/zValueTextView"
+        android:text="Z ="
+        />
 
     <Button
         android:id="@+id/homeybutton"
         style="@style/control_buttons"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/xp10button"
-        android:layout_alignBottom="@+id/xp10button"
-        android:layout_alignRight="@+id/yp10button"
+        android:layout_above="@+id/xp1button"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
         android:background="@drawable/view_blue"
         android:text=" Home Y " />
 
@@ -219,9 +239,9 @@
         style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/homezbutton"
-        android:layout_alignBottom="@+id/homezbutton"
-        android:layout_toLeftOf="@+id/z_1button"
+        android:layout_alignBaseline="@+id/z_1button"
+        android:layout_alignBottom="@+id/z_1button"
+        android:layout_alignLeft="@+id/homexbutton"
         android:background="@drawable/corner"
         android:text="- 10" />
 
@@ -232,21 +252,20 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homezbutton"
         android:layout_alignBottom="@+id/homezbutton"
-        android:layout_toLeftOf="@+id/homezbutton"
-        android:layout_marginRight="7dp"
+        android:layout_toRightOf="@+id/z_10button"
         android:background="@drawable/corner"
         android:text="- 1" />
 
     <Button
-        android:id="@+id/homezbutton"
+        android:id="@+id/zp10button"
         style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/x_10button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/view_green"
-        android:text="Home z" />
+        android:layout_alignBaseline="@+id/zp1button"
+        android:layout_alignBottom="@+id/zp1button"
+        android:layout_alignRight="@+id/homeybutton"
+        android:background="@drawable/corner"
+        android:text="+ 10" />
 
     <Button
         android:id="@+id/zp1button"
@@ -255,100 +274,89 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homezbutton"
         android:layout_alignBottom="@+id/homezbutton"
-        android:layout_toRightOf="@+id/homezbutton"
+        android:layout_toLeftOf="@+id/zp10button"
         android:background="@drawable/corner"
-        android:layout_marginLeft="7dp"
         android:text="+ 1" />
 
     <Button
-        android:id="@+id/zp10button"
+        android:id="@+id/homexbutton"
+        style="@style/control_buttons"
+        android:textSize="@dimen/bigText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/xp1button"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/view_red"
+        android:text=" Home X " />
+
+    <Button
+        android:id="@+id/y_1button"
         style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/homezbutton"
-        android:layout_alignBottom="@+id/homezbutton"
-        android:layout_toRightOf="@+id/zp1button"
+        android:layout_alignBaseline="@+id/homeButton"
+        android:layout_alignBottom="@+id/homeButton"
+        android:layout_alignRight="@+id/greenView"
+        android:background="@drawable/corner"
+        android:text="- 1" />
+
+    <Button
+        android:id="@+id/y_10button"
+        style="@style/control_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/y_1button"
+        android:layout_alignBottom="@+id/y_1button"
+        android:layout_alignLeft="@+id/homexbutton"
+        android:background="@drawable/corner"
+        android:text="- 10" />
+
+    <Button
+        android:id="@+id/yp10button"
+        style="@style/control_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/yp1button"
+        android:layout_alignBottom="@+id/yp1button"
+        android:layout_alignRight="@+id/homeybutton"
         android:background="@drawable/corner"
         android:text="+ 10" />
 
-    <TextView
-        android:id="@+id/textViewX"
-        style="@style/controlTextView"
+    <Button
+        android:id="@+id/yp1button"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/homexbutton"
-        android:layout_alignLeft="@+id/homexbutton"
-        android:layout_marginBottom="15dp"
-        android:text="X = "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignBaseline="@+id/homeButton"
+        android:layout_alignBottom="@+id/homeButton"
+        android:layout_toLeftOf="@+id/yp10button"
+        android:background="@drawable/corner"
+        android:text="+ 1" />
 
     <TextView
         android:id="@+id/textViewY"
-        style="@style/controlTextView"
+        style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewX"
-        android:layout_alignBottom="@+id/textViewX"
-        android:layout_alignLeft="@+id/xp10button"
+        android:layout_alignBaseline="@+id/xValueTextView"
+        android:layout_alignBottom="@+id/xValueTextView"
+        android:layout_alignLeft="@+id/redView"
         android:text="Y ="
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textViewZ"
-        style="@style/controlTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewY"
-        android:layout_alignBottom="@+id/textViewY"
-        android:layout_alignLeft="@+id/homeybutton"
-        android:text="Z ="
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        />
 
     <TextView
         android:id="@+id/yValueTextView"
-        style="@style/controlTextView"
+        style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textViewY"
         android:layout_alignBottom="@+id/textViewY"
-        android:layout_alignRight="@+id/xp10button"
+        android:layout_alignRight="@+id/redView"
         android:gravity="right"
-        android:text="0"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/xValueTextView"
-        style="@style/controlTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewX"
-        android:layout_alignBottom="@+id/textViewX"
-        android:layout_alignRight="@+id/homexbutton"
-        android:gravity="right"
-        android:text="0"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/zValueTextView"
-        style="@style/controlTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewZ"
-        android:layout_alignBottom="@+id/textViewZ"
-        android:layout_alignRight="@+id/homeybutton"
-        android:gravity="right"
-        android:text="0"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/statusTextView"
-        style="@style/controlTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:text="Stato stampante"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="222,2"
+        />
 
 </RelativeLayout>

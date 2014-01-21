@@ -6,64 +6,78 @@
 
     <TextView
         android:id="@+id/modelName"
+        style="@style/boldText"
+        android:textSize="@dimen/bigText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="nome modello"
-        android:textSize="16sp" />
+         />
 
     <TextView
         android:id="@+id/status"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/modelName"
         android:singleLine="true"
         android:text="Stato:"
-        android:textSize="13sp" />
+         />
 
     <TextView
         android:id="@+id/dimen"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/status"
         android:layout_below="@+id/status"
         android:text="Dimensione:"
-        android:textSize="13sp" />
+         />
 
     <TextView
         android:id="@+id/dimenModel"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/dimen"
         android:layout_alignBottom="@+id/dimen"
         android:layout_alignLeft="@+id/modelStatus"
         android:text="0,0"
-        android:textSize="13sp" />
+         />
 
     <TextView
         android:id="@+id/mb"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/dimenModel"
         android:layout_alignBottom="@+id/dimenModel"
         android:layout_toRightOf="@+id/dimenModel"
         android:text="  MB"
-        android:textSize="13sp" />
+         />
 
     <TextView
         android:id="@+id/modelStatus"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/modelName"
         android:layout_centerHorizontal="true"
         android:singleLine="true"
         android:text="Salvato"
-        android:textSize="13sp" />
+         />
 
     <Button
         android:id="@+id/copyBtt"
+        style="@style/Text"
+        android:textSize="@dimen/smallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/dimen"
@@ -73,6 +87,8 @@
 
     <Button
         android:id="@+id/deleteBtt"
+        style="@style/Text"
+        android:textSize="@dimen/smallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/copyBtt"

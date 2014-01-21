@@ -28,6 +28,7 @@
 	<string name="tab_model">MODELLI</string>
 	<string name="tab_job">LAVORI</string>
 	<string name="tab_control">CONTROLLO</string>
+	<string name="tab_control2">CONTROLLO</string>
 	
 	<string name="onModelUploaded">Il modello è stato caricato</string>
 	<string name="onModelDeleted">Il modello è stato eliminato</string>
@@ -41,8 +42,14 @@
 	<string name="insertServerName">Inserire un nome per il server</string>
 	<string name="invalidServerName">Il nome per il server non è valido</string>
 	
-	<string name="tab_control2">CONTROLLO</string>
-	<string name="tab_control2">CONTROLLO</string>
+	<string name="avaibleJob">Lavori disponibili:</string>
+	<string name="warningOffline">ATTENZIONE: stampante disattivata o scollegata</string>
+	
+	<string name="avaibleModel">Modelli disponibili:</string>
+	
+	<string name="popModelDelete">Elimina modello</string>
+	<string name="popModelToQueue">Aggiungi ai lavori</string>
+	
 	
     
 </resources>

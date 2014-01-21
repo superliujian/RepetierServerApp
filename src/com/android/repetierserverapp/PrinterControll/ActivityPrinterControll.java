@@ -3,6 +3,7 @@ package com.android.repetierserverapp.PrinterControll;
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.PrinterControll.JobList.FragJobList;
 import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList;
+import com.android.repetierserverapp.ServerList.FragServerList.ServerAppCallbacks;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Server;
 

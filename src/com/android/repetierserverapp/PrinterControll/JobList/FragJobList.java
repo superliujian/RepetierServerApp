@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ListView;
 
@@ -23,6 +24,7 @@ public class FragJobList extends ListFragment{
 
 	private ListView listview;
 	private JobListAdapter adapter;
+	private TextView warning;
 
 	private Printer printer;
 
@@ -102,7 +104,14 @@ public class FragJobList extends ListFragment{
 				adapter = new JobListAdapter(getActivity(), R.layout.job_line, newJobList, jobListAdapterCallback, printer); 
 				listview = getListView();
 				listview.setAdapter(adapter);	
-				Toast.makeText(getActivity(), "ATTENZIONE: stampante disattivata o scollegata", Toast.LENGTH_LONG).show();
+				
+				
+				warning.setText(getString(R.string.warningOffline));
+				if (printer.getOnline() == 0){
+					warning.setVisibility(View.VISIBLE);
+				}else{
+					warning.setVisibility(View.INVISIBLE);
+				}
 			}
 
 			@Override
@@ -148,6 +157,7 @@ public class FragJobList extends ListFragment{
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
+		warning = (TextView) view.findViewById(R.id.warningTv);
 		printer.updateJobList(getActivity());
 	}
 }

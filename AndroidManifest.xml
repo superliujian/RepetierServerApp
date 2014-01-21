@@ -5,65 +5,58 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.android.repetierserverapp.PrinterControll.FragPrinterControl"
-            android:label="@string/title_activity_printer_control" >
-        </activity>
-        <activity
-            android:name="com.android.repetierserverapp.FragAddServer"
-            android:label="@string/title_activity_add_server" >
-        </activity>
-        <activity
-            android:name="com.android.repetierserverapp.PrinterControll.FragPrinterControl2"
-            android:label="@string/title_activity_printer_control2" >
-        </activity>
+        
         <activity
             android:name="com.android.repetierserverapp.ServerList.ActivityServerList"
-            android:label="@string/title_server_list" >
+            android:label="@string/title_server_list"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name="com.android.repetierserverapp.ServerDetailList.ActivityServerDetail"
             android:label="@string/title_server_detail"
-            android:parentActivityName="com.android.repetierserverapp.ServerList.ActivityServerList" >
+            android:parentActivityName="com.android.repetierserverapp.ServerList.ActivityServerList"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ServerListActivity" />
         </activity>
-        <activity
+        
+         <activity
             android:name="com.android.repetierserverapp.ActivityAddServer"
-            android:label="@string/title_activity_activity_add_server" >
+            android:label="@string/title_activity_activity_add_server"
+            android:screenOrientation="portrait" >
         </activity>
+        
         <activity
             android:name="com.android.repetierserverapp.ActivityModifyServer"
-            android:label="@string/title_activity_modify_server" >
+            android:label="@string/title_activity_modify_server"
+            android:screenOrientation="portrait" >
         </activity>
+        
         <activity
             android:name="com.android.repetierserverapp.PrinterControll.ActivityPrinterControll"
-            android:label="@string/title_activity_activity_printer_controll" >
+            android:label="@string/title_activity_activity_printer_controll"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="com.android.repetierserverapp.PrinterControll.ModelList.FragModelList"
-            android:label="@string/title_activity_frag_model_list" >
-        </activity>
-        <activity
-            android:name="com.android.repetierserverapp.FragPrinterController"
-            android:label="@string/title_activity_frag_printer_controller" >
-        </activity>
+       
+ 
     </application>
 
 </manifest>

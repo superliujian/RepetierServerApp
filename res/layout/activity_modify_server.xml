@@ -11,12 +11,15 @@
     <TextView
         android:id="@+id/newServerTV"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newServer" />
 
     <EditText
         android:id="@+id/serverName"
+        style="@style/italicText"
+        android:textSize="@dimen/mediumText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
@@ -30,6 +33,7 @@
     <TextView
         android:id="@+id/newUrlTV"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/serverName"
@@ -39,6 +43,8 @@
 
     <EditText
         android:id="@+id/serverUrl"
+        style="@style/italicText"
+        android:textSize="@dimen/mediumText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/newUrlTV"
@@ -50,6 +56,7 @@
     <Button
         android:id="@+id/deleteServerBtn"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/serverUrl"
@@ -60,6 +67,7 @@
     <Button
         android:id="@+id/saveServerBtn"
         style="@style/Text"
+        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/deleteServerBtn"

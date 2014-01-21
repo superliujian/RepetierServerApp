@@ -5,21 +5,23 @@
 
     <TextView
         android:id="@+id/nameServer"
+        style="@style/boldText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="nameServer"
-        android:textSize="16sp" />
-    
+        android:textSize="@dimen/bigText" />
+
     <TextView
         android:id="@+id/urlServer"
+        style="@style/Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/nameServer"
         android:singleLine="true"
         android:text="urlServer"
-        android:textSize="12sp" />
+        android:textSize="@dimen/bigText" />
 
 </RelativeLayout>
