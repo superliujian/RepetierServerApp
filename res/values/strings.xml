@@ -1,36 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">RepetierServerApp</string>
+    <string name="app_name">3D Printer Control </string>
+    
     <string name="action_settings">Settings</string>
     <string name="ServerSelection">Seleziona Server:</string>
-    <string name="PrinterSelection">Seleziona stampante:</string>
+    <string name="PrinterSelection">Seleziona 3d Printer:</string>
     <string name="createServer">CREA SERVER</string>
     <string name="loadServer">CARICA SERVER</string>
     <string name="serverList">LISTA SERVER DISPONIBILI</string>
-    <string name="title_activity_printer_control">PrinterControl</string>
+    
+    <string name="title_activity_printer_control">USA STAMPANTE</string>
     <string name="title_activity_login">Login</string>
-    <string name="title_activity_add_server">AddServer</string>
-    <string name="newServer">Alias server:</string>
-    <string name="newUrl">Indirizzo server:</string>
+    <string name="title_activity_add_server">AGGIUNGI SERVER</string>
     <string name="title_activity_printer_control2">PrinterControl2</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_server_list">Servers</string>
-    <string name="title_server_detail">Server Detail</string>
-    <string name="title_activity_activity_add_server">ActivityAddServer</string>
-    <string name="title_activity_activity_printer_controll">ActivityPrinterControll</string>
+    <string name="title_server_list">SERVER</string>
+    <string name="title_server_detail">STAMPANTI</string>
+    <string name="title_activity_activity_add_server">AGGIUNGI SERVER</string>
+    <string name="title_activity_activity_printer_controll">USA STAMPANTE</string>
     <string name="title_activity_frag_model_list">FragModelList</string>
     <string name="title_activity_frag_printer_controller">FragPrinterController</string>
+    <string name="title_activity_modify_server">MODIFICA SERVER</string>
+    
+    <string name="newServer">Nome server:</string>
+    <string name="newUrl">Indirizzo server:</string>
+    
 	<string name="tab_model">MODELLI</string>
 	<string name="tab_job">LAVORI</string>
 	<string name="tab_control">CONTROLLO</string>
+	
 	<string name="onModelUploaded">Il modello è stato caricato</string>
 	<string name="onModelDeleted">Il modello è stato eliminato</string>
 	<string name="onModelCopied">Il modello è stato copiato</string>
-	<string name="tab_control2">CONTROLLO</string>
-	<string name="tab_control2">CONTROLLO</string>
-	<string name="tab_control2">CONTROLLO</string>
-	<string name="tab_control2">CONTROLLO</string>
+	
+	<string name="yes">SI</string>
+	<string name="no">NO</string>
+	
+	<string name="removeServer">Vuoi rimuovere questo Server?</string>
+	
+	<string name="insertServerName">Inserire un nome per il server</string>
+	<string name="invalidServerName">Il nome per il server non è valido</string>
+	
 	<string name="tab_control2">CONTROLLO</string>
 	<string name="tab_control2">CONTROLLO</string>
 	

@@ -7,19 +7,19 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 import android.widget.ListView;
 
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.PrinterControll.JobList.JobListAdapter.JobListAdapterCallback;
-import com.android.repetierserverapp.PrinterControll.ModelList.ModelListAdapter.ModelAdapterCallback;
 import com.grasselli.android.repetierserverapi.Job;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.JobCallbacks;
 import com.grasselli.android.repetierserverapi.ReplyMessage;
 import com.grasselli.android.repetierserverapi.Server;
 
-public class FragJobList extends ListFragment {
+public class FragJobList extends ListFragment{
 
 	private ListView listview;
 	private JobListAdapter adapter;
@@ -29,7 +29,6 @@ public class FragJobList extends ListFragment {
 	private JobListAdapterCallback jobListAdapterCallback;
 	//private OnItemClickListener itemClickListener;
 
-	private ModelAdapterCallback modelAdapterCallback;
 
 	
 	public FragJobList() {
@@ -41,6 +40,9 @@ public class FragJobList extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		getActivity().getWindow().setSoftInputMode(
+	              WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
 		String name = getArguments().getString("name");
@@ -51,14 +53,7 @@ public class FragJobList extends ListFragment {
 		double progress = getArguments().getDouble("progress");
 
 		printer = new Printer(new Server(url, alias), name, slug, online, currentJob, active, progress);
-
-		modelAdapterCallback = new ModelAdapterCallback() {
-			
-			@Override
-			public void updateJobList(Printer p) {
-				printer.updateJobList(getActivity());
-			}
-		};
+		
 		jobListAdapterCallback = new JobListAdapterCallback() {
 
 			@Override

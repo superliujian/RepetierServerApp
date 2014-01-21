@@ -4,15 +4,16 @@ import com.android.repetierserverapp.ServerList.ActivityServerList;
 import com.android.repetierserverapp.db.DbAdapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ActivityAddServer extends Activity implements OnClickListener {
 	private Button createServer;
@@ -23,7 +24,7 @@ public class ActivityAddServer extends Activity implements OnClickListener {
 	private String url;
 
 	private DbAdapter dbAdapter;
-	private Cursor cursor;
+	private Context context;
 
 
 	
@@ -32,9 +33,11 @@ public class ActivityAddServer extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_server);
 
+		context = this; 
+		
 		createServer = (Button) findViewById(R.id.createServerBtn);
-		serverName = (TextView) findViewById(R.id.serverNameET);
-		serverUrl = (TextView) findViewById(R.id.serverUrlET);
+		serverName = (EditText) findViewById(R.id.serverNameET);
+		serverUrl = (EditText) findViewById(R.id.serverUrlET);
 		createServer.setOnClickListener(this);
 	}
 
@@ -51,20 +54,24 @@ public class ActivityAddServer extends Activity implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		Log.d("onClick" , "entrato");
 
 		switch (v.getId()) {
 		case R.id.createServerBtn:
 
-			Log.d("onClick createServerBtn:" , "entrato");
 			name = serverName.getText().toString();
-			//if (!isValidName(name)){ //TODO errore: nome non valido}
-			//	;
-			//}
+			if (name.isEmpty()){
+				Toast.makeText(context, getString(R.string.insertServerName), Toast.LENGTH_LONG).show();
+				break;
+			}
+			if (!isValidName(name)){
+				Toast.makeText(context, getString(R.string.invalidServerName), Toast.LENGTH_LONG).show();
+				break;
+			}
 			url = serverUrl.getText().toString();
-			//if (!isValidUrl(url)){ //TODO errore: indirizzo non valido
-			//	;
-			//}
+			if (!isValidUrl(url)){ 
+				break;
+			}
+			
 			dbAdapter = new DbAdapter(this);
 			dbAdapter.open();
 			dbAdapter.createServer(name, url);
@@ -83,22 +90,10 @@ public class ActivityAddServer extends Activity implements OnClickListener {
 		return true;
 	}
 
-	
+
 
 	private boolean isValidName(String name) {
-		if (url == "") return false;
-		else
-			dbAdapter = new DbAdapter(this);
-		dbAdapter.open();
-		cursor = dbAdapter.fetchServerByName(name);
-		dbAdapter.close();
-
-		startManagingCursor(cursor);
-		if (cursor.getCount()== 1) {
-			cursor.close(); 
-			return false;
-		}
-		cursor.close(); 
+		//TODO 
 		return true;
 	}
 

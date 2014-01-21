@@ -1,8 +1,12 @@
 package com.android.repetierserverapp.ServerList;
 
 import com.android.repetierserverapp.ActivityAddServer;
+import com.android.repetierserverapp.ActivityModifyServer;
 import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.PrinterControll.ActivityPrinterControll;
 import com.android.repetierserverapp.db.DbAdapter;
+import com.grasselli.android.repetierserverapi.Printer;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -12,12 +16,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView; 
+import android.widget.Toast;
 
-public class FragServerList extends ListFragment implements OnClickListener, OnItemClickListener{
+public class FragServerList extends ListFragment implements OnClickListener, OnItemClickListener, OnItemLongClickListener{
 
 	
 	//TODO RIMUOVERE
@@ -90,7 +97,7 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(this);
-
+		listView.setOnItemLongClickListener(this);
 		super.onActivityCreated(savedInstanceState);
 	}
 
@@ -159,6 +166,15 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 		mActivatedPosition = position;
 	}
 
+	@Override
+	public boolean onItemLongClick(AdapterView<?> listView, View view, int position,
+			long id) {
 
+		Intent detailIntent = new Intent(getActivity(), ActivityModifyServer.class);
+		int idServer = (int) id;
+		detailIntent.putExtra("id", idServer);
+		startActivity(detailIntent);
+		return true;
+	}
 
 }

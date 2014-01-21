@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class ServerListAdapter extends CursorAdapter{
-
+	public String serverName;
+	public String serverUrl;
+	
 	public ServerListAdapter(Context context, Cursor c) {
 		super(context, c);
 	}
@@ -20,8 +22,10 @@ public class ServerListAdapter extends CursorAdapter{
 	@Override
 	public void bindView(View v, Context arg1, Cursor c) {
 		// TODO Auto-generated method stub
-		((TextView) v.findViewById(R.id.nameServer)).setText(c.getString(c.getColumnIndex(DbHelper.DB_NAME)));
-		((TextView) v.findViewById(R.id.urlServer)).setText(c.getString(c.getColumnIndex(DbHelper.DB_URL)));
+		serverName = c.getString(c.getColumnIndex(DbHelper.DB_NAME));
+		serverUrl = c.getString(c.getColumnIndex(DbHelper.DB_URL));
+		((TextView) v.findViewById(R.id.nameServer)).setText(serverName);
+		((TextView) v.findViewById(R.id.urlServer)).setText(serverUrl);
 	}
 
 	@Override
@@ -34,7 +38,4 @@ public class ServerListAdapter extends CursorAdapter{
 	           return v;
 	}
 	
-	
-	
-
 }

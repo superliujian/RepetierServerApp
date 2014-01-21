@@ -16,19 +16,29 @@
         android:text="@string/newServer" />
 
     <EditText
-        android:id="@+id/serverNameET"
+        android:id="@+id/serverName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/newServerTV"
         android:layout_marginTop="10dp"
-        android:ems="10" >
+        android:ems="5" >
 
         <requestFocus />
     </EditText>
 
+    <TextView
+        android:id="@+id/newUrlTV"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/serverName"
+        android:layout_below="@+id/serverName"
+        android:layout_marginTop="10dp"
+        android:text="@string/newUrl" />
+
     <EditText
-        android:id="@+id/serverUrlET"
+        android:id="@+id/serverUrl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/newUrlTV"
@@ -38,23 +48,23 @@
         android:text="http://"/>
 
     <Button
-        android:id="@+id/createServerBtn"
+        android:id="@+id/deleteServerBtn"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/serverUrlET"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="CREA NUOVO SERVER" />
+        android:layout_alignLeft="@+id/serverUrl"
+        android:layout_below="@+id/serverUrl"
+        android:layout_marginTop="20dp"
+        android:text="ELIMINA" />
 
-    <TextView
-        android:id="@+id/newUrlTV"
+    <Button
+        android:id="@+id/saveServerBtn"
         style="@style/Text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/serverNameET"
-        android:layout_below="@+id/serverNameET"
-        android:layout_marginTop="18dp"
-        android:text="@string/newUrl" />
+        android:layout_alignBaseline="@+id/deleteServerBtn"
+        android:layout_alignBottom="@+id/deleteServerBtn"
+        android:layout_alignRight="@+id/serverUrl"
+        android:text="SALVA" />
 
 </RelativeLayout>

@@ -1,30 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
+    android:layout_height="match_parent" >
+
+    <View
+        android:id="@+id/greenView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/z_10button"
+        android:layout_alignLeft="@+id/z_10button"
+        android:layout_alignRight="@+id/z_1button"
+        android:layout_alignTop="@+id/z_10button"
+        android:background="@drawable/view_green"
+        android:layout_marginTop="-5dp" 
+        android:layout_marginBottom="-5dp" 
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp"
+        />
+
+    <View
+        android:id="@+id/greenView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/zp10button"
+        android:layout_alignLeft="@+id/zp1button"
+        android:layout_alignRight="@+id/zp10button"
+        android:layout_alignTop="@+id/zp10button"
+        android:background="@drawable/view_green"
+        android:layout_marginTop="-5dp" 
+        android:layout_marginBottom="-5dp" 
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp" />
+
+    <View
+        android:id="@+id/redView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/xp1button"
+        android:layout_alignLeft="@+id/xp10button"
+        android:layout_alignRight="@+id/xp10button"
+        android:layout_alignTop="@+id/xp10button"
+        android:background="@drawable/view_red"
+        android:layout_marginTop="-5dp" 
+        android:layout_marginBottom="-5dp" 
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp" />
+
+    <View
+        android:id="@+id/redView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/x_10button"
+        android:layout_alignLeft="@+id/x_10button"
+        android:layout_alignRight="@+id/x_10button"
+        android:layout_alignTop="@+id/x_1button"
+        android:background="@drawable/view_red"
+        android:layout_marginTop="-5dp" 
+        android:layout_marginBottom="-5dp" 
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp" />
+
+    <View
+        android:id="@+id/blueView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/y_1button"
+        android:layout_alignLeft="@+id/y_10button"
+        android:layout_alignRight="@+id/y_1button"
+        android:layout_alignTop="@+id/y_1button"
+        android:background="@drawable/view_blue"
+        android:layout_marginTop="-5dp" 
+        android:layout_marginBottom="-5dp" 
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp" />
+
+    <View
+        android:id="@+id/blueView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/yp1button"
+        android:layout_alignLeft="@+id/yp1button"
+        android:layout_alignRight="@+id/yp10button"
+        android:layout_alignTop="@+id/yp1button"
+        android:background="@drawable/view_blue"
+        android:layout_marginTop="-5dp" 
+        android:layout_marginBottom="-5dp" 
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp" />
 
     <Button
         android:id="@+id/xp10button"
-        style="@style/xcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/xp1button"
-        android:layout_alignLeft="@+id/homeButton"
+        android:layout_alignLeft="@+id/xp1button"
         android:layout_alignRight="@+id/homeButton"
-        android:text="X + 10" />
+        android:background="@drawable/corner"
+        android:text="+ 10" />
 
     <Button
         android:id="@+id/xp1button"
-        style="@style/xcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/homeButton"
         android:layout_alignLeft="@+id/homeButton"
         android:layout_alignRight="@+id/homeButton"
-        android:text="X + 1" />
+        android:background="@drawable/corner"
+        android:text="+ 1" />
 
     <Button
         android:id="@+id/homeButton"
@@ -33,137 +118,158 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Home" />
+        android:paddingTop="10dp"
+        android:text="Home"
+        android:layout_marginTop="10dp" 
+        android:layout_marginBottom="10dp" 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+         />
 
     <Button
         android:id="@+id/x_1button"
-        style="@style/xcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/homeButton"
         android:layout_alignRight="@+id/homeButton"
         android:layout_below="@+id/homeButton"
-        android:text="X - 1" />
+        android:background="@drawable/corner"
+        android:text="- 1" />
 
     <Button
         android:id="@+id/x_10button"
-        style="@style/xcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/homeButton"
         android:layout_alignRight="@+id/homeButton"
         android:layout_below="@+id/x_1button"
-        android:text="X - 10" />
+        android:background="@drawable/corner"
+        android:text="- 10" />
 
     <Button
         android:id="@+id/yp1button"
-        style="@style/ycontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homeButton"
         android:layout_alignBottom="@+id/homeButton"
-        android:layout_toRightOf="@+id/xp10button"
-        android:text="Y + 1" />
+        android:layout_toRightOf="@+id/homeButton"
+        android:background="@drawable/corner"
+        android:text="+ 1" />
 
     <Button
         android:id="@+id/yp10button"
-        style="@style/ycontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homeButton"
         android:layout_alignBottom="@+id/homeButton"
         android:layout_toRightOf="@+id/yp1button"
-        android:text="Y + 10" />
+        android:background="@drawable/corner"
+        android:text="+ 10" />
 
     <Button
         android:id="@+id/y_1button"
-        style="@style/ycontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homeButton"
         android:layout_alignBottom="@+id/homeButton"
         android:layout_toLeftOf="@+id/homeButton"
-        android:text="Y - 1" />
+        android:background="@drawable/corner"
+        android:text="- 1" />
 
     <Button
         android:id="@+id/y_10button"
-        style="@style/ycontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homeButton"
         android:layout_alignBottom="@+id/homeButton"
         android:layout_toLeftOf="@+id/y_1button"
-        android:text="Y - 10" />
+        android:background="@drawable/corner"
+        android:text="- 10" />
 
     <Button
         android:id="@+id/homexbutton"
-        style="@style/xcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/xp10button"
         android:layout_alignBottom="@+id/xp10button"
         android:layout_alignLeft="@+id/y_10button"
-        android:text="Home X" />
+        android:background="@drawable/view_red"
+        android:text=" Home X " />
 
     <Button
         android:id="@+id/homeybutton"
-        style="@style/ycontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/xp10button"
         android:layout_alignBottom="@+id/xp10button"
         android:layout_alignRight="@+id/yp10button"
-        android:text="Home Y" />
+        android:background="@drawable/view_blue"
+        android:text=" Home Y " />
 
     <Button
         android:id="@+id/z_10button"
-        style="@style/zcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homezbutton"
         android:layout_alignBottom="@+id/homezbutton"
         android:layout_toLeftOf="@+id/z_1button"
-        android:text="Z - 10" />
+        android:background="@drawable/corner"
+        android:text="- 10" />
 
     <Button
         android:id="@+id/z_1button"
-        style="@style/zcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homezbutton"
         android:layout_alignBottom="@+id/homezbutton"
         android:layout_toLeftOf="@+id/homezbutton"
-        android:text="Z - 1" />
+        android:layout_marginRight="7dp"
+        android:background="@drawable/corner"
+        android:text="- 1" />
 
     <Button
         android:id="@+id/homezbutton"
-        style="@style/zcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/x_10button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
+        android:background="@drawable/view_green"
         android:text="Home z" />
 
     <Button
         android:id="@+id/zp1button"
-        style="@style/zcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homezbutton"
         android:layout_alignBottom="@+id/homezbutton"
         android:layout_toRightOf="@+id/homezbutton"
-        android:text="Z + 1" />
+        android:background="@drawable/corner"
+        android:layout_marginLeft="7dp"
+        android:text="+ 1" />
 
     <Button
         android:id="@+id/zp10button"
-        style="@style/zcontrol_buttons"
+        style="@style/control_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/homezbutton"
         android:layout_alignBottom="@+id/homezbutton"
         android:layout_toRightOf="@+id/zp1button"
-        android:text="Z + 10" />
+        android:background="@drawable/corner"
+        android:text="+ 10" />
 
     <TextView
         android:id="@+id/textViewX"
@@ -195,7 +301,7 @@
         android:layout_alignBaseline="@+id/textViewY"
         android:layout_alignBottom="@+id/textViewY"
         android:layout_alignLeft="@+id/homeybutton"
-        android:text="Z="
+        android:text="Z ="
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -206,8 +312,8 @@
         android:layout_alignBaseline="@+id/textViewY"
         android:layout_alignBottom="@+id/textViewY"
         android:layout_alignRight="@+id/xp10button"
-        android:text="0"        
         android:gravity="right"
+        android:text="0"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -218,8 +324,8 @@
         android:layout_alignBaseline="@+id/textViewX"
         android:layout_alignBottom="@+id/textViewX"
         android:layout_alignRight="@+id/homexbutton"
-        android:text="0"
         android:gravity="right"
+        android:text="0"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -230,8 +336,8 @@
         android:layout_alignBaseline="@+id/textViewZ"
         android:layout_alignBottom="@+id/textViewZ"
         android:layout_alignRight="@+id/homeybutton"
-        android:text="0"
         android:gravity="right"
+        android:text="0"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView

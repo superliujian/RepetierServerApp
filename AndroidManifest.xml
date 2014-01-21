@@ -49,6 +49,10 @@
             android:label="@string/title_activity_activity_add_server" >
         </activity>
         <activity
+            android:name="com.android.repetierserverapp.ActivityModifyServer"
+            android:label="@string/title_activity_modify_server" >
+        </activity>
+        <activity
             android:name="com.android.repetierserverapp.PrinterControll.ActivityPrinterControll"
             android:label="@string/title_activity_activity_printer_controll" >
         </activity>

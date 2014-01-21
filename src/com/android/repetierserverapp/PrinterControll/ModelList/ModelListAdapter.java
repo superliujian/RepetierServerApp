@@ -21,7 +21,8 @@ public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickList
 	private Model model;
 	private ModelListAdapterCallback listener;
 	private Printer printer;
-
+	
+	
 
 	public ModelListAdapter(Context context, int textViewResourceId, ArrayList<Model> list, ModelListAdapterCallback listener, Printer printer) {
 		super(context, textViewResourceId, list);
@@ -89,7 +90,4 @@ public class ModelListAdapter extends ArrayAdapter<Model> implements OnClickList
 		public void deleteModel(Printer p, int id);
 	}
 
-	public interface ModelAdapterCallback {
-		public void updateJobList(Printer p);
-	}
 }

@@ -146,6 +146,16 @@ public class FragPrinterControl2 extends Fragment implements OnClickListener, Pr
 
 		newExtrTempEt = (EditText) v.findViewById(R.id.newExtrTempEt);
 		newBedTempEt = (EditText) v.findViewById(R.id.newBedTempEt);
+		
+		boolean isOnLine;
+
+		if (printer.getOnline() == 0)
+			isOnLine = false;
+		else 
+			isOnLine = true;
+		
+		feedrateValue.setActivated(isOnLine);
+		flowrateValue.setActivated(isOnLine);
 	}
 
 
@@ -210,17 +220,16 @@ public class FragPrinterControl2 extends Fragment implements OnClickListener, Pr
 	
 	//aggiorna valori interfaccia
 	@Override
-	public void onPrinterStatusUpdated() {
-		PrinterStatus status = printer.getStatus();
-		flowrateValue.setText(status.getFlow_multiply());
-		feedrateValue.setText(status.getSpeed_multiply());
-		extrRead.setText((int) status.getTemp_read());
-		extrSet.setText((int) status.getTemp_set());
-		bedRead.setText((int) status.getBed_temp_read());
-		bedSet.setText((int) status.getBed_temp_set());
-		if (status.getTemp_set()==0)	turnOff(extruderSwitch);
+	public void onPrinterStatusUpdated(PrinterStatus printerStatus) {
+		flowrateValue.setText(printerStatus.getFlow_multiply());
+		feedrateValue.setText(printerStatus.getSpeed_multiply());
+		extrRead.setText((int) printerStatus.getTemp_read());
+		extrSet.setText((int) printerStatus.getTemp_set());
+		bedRead.setText((int) printerStatus.getBed_temp_read());
+		bedSet.setText((int) printerStatus.getBed_temp_set());
+		if (printerStatus.getTemp_set()==0)	turnOff(extruderSwitch);
 		else turnOn(extruderSwitch);
-		if (status.getBed_temp_set()==0)	turnOff(bedSwitch);
+		if (printerStatus.getBed_temp_set()==0)	turnOff(bedSwitch);
 		else turnOn(bedSwitch);
 	}
 

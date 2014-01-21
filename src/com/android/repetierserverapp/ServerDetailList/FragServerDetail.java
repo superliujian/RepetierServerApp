@@ -65,7 +65,7 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 		if (getArguments().containsKey(ARG_SERVER_ID)) {
 
 
-			Log.d("onCreate1:", Long.toString(getArguments().getLong(ARG_SERVER_ID)));
+			//Log.d("onCreate1:", Long.toString(getArguments().getLong(ARG_SERVER_ID)));
 
 			dbAdapter = new DbAdapter(getActivity());
 			dbAdapter.openReadOnly();
@@ -79,7 +79,7 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 			printerListAdapterCallback = new PrinterListAdapterCallback() {
 				@Override
 				public void updatePrinterList() {
-					Log.d("refreshListView", " richiesta dell'adapter di aggiornare la lista delle stampanti");
+					//Log.d("refreshListView", " richiesta dell'adapter di aggiornare la lista delle stampanti");
 					server.updatePrinterList(getActivity());
 				}
 			};
@@ -89,7 +89,7 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 				@Override
 				public void onItemClick(AdapterView<?> adapter, View view,
 						int position, long id) {
-					Log.d("onItemClick", "entrato");
+					//Log.d("onItemClick", "entrato");
 					
 					Printer p = printerList.get(position);
 
@@ -111,7 +111,7 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 
 						@Override
 						public void onPrinterListUpdated(ArrayList<Printer> list) {
-							Log.d("OnPrinterListUpdated", "entrato");
+							//Log.d("OnPrinterListUpdated", "entrato");
 							printerList = list;
 							adapter = new PrinterListAdapter(getActivity(), R.layout.printer_line, list, printerListAdapterCallback); 
 							listview.setAdapter(adapter);

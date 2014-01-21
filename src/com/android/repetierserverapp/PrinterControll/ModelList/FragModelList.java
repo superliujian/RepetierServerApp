@@ -3,12 +3,12 @@ package com.android.repetierserverapp.PrinterControll.ModelList;
 
 import java.util.ArrayList;
 
-import android.R.string;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 import android.widget.ListView;
 
@@ -40,6 +40,9 @@ public class FragModelList extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		getActivity().getWindow().setSoftInputMode(
+	              WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
 		String name = getArguments().getString("name");
@@ -59,7 +62,8 @@ public class FragModelList extends ListFragment {
 
 			@Override
 			public void copyModel(Printer printer, int id) {
-				printer.copyModel(getActivity(), id);				
+				printer.copyModel(getActivity(), id);
+				
 			}
 
 			@Override
@@ -102,7 +106,7 @@ public class FragModelList extends ListFragment {
 
 			@Override
 			public void onModelCopied() {
-				Toast.makeText(getActivity(), getString(R.string.onModelCopied), Toast.LENGTH_LONG).show();			
+				Toast.makeText(getActivity(), getString(R.string.onModelCopied), Toast.LENGTH_LONG).show();	
 				}
 
 			@Override
@@ -131,4 +135,6 @@ public class FragModelList extends ListFragment {
 		
 		printer.updateModelList(getActivity());
 	}
+	
+	
 }

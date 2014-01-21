@@ -7,6 +7,7 @@ import com.android.repetierserverapp.R;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
 import com.grasselli.android.repetierserverapi.Printer.PrinterStatusCallbacks;
+import com.grasselli.android.repetierserverapi.PrinterStatus;
 import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 import com.grasselli.android.repetierserverapi.Server;
 
@@ -48,17 +49,17 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 
 	Printer printer;
 
-	
-	
+
+
 	public FragPrinterControl(){
 	}
-	
-		
-	
+
+
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
 		String name = getArguments().getString("name");
@@ -73,26 +74,26 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		printer.setPrinterCallbacks(this);
 		printer.setPrinterStatusCallbacks(this);	
 	}
-	
-	
-	
+
+
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
+
 		View rootView = inflater.inflate(R.layout.fragment_control,
 				container, false);
 		return rootView;
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void onViewCreated(View v, Bundle savedInstanceState) {
 		super.onViewCreated(v, savedInstanceState);
 
 		printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
-		
+
 		buttonXp10 = (Button) v.findViewById(R.id.xp10button);
 		buttonXp1 = (Button) v.findViewById(R.id.xp1button);
 		buttonX_1 = (Button) v.findViewById(R.id.x_1button);
@@ -137,10 +138,38 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		buttonZ_10.setOnClickListener(this);
 		buttonZhome.setOnClickListener(this);
 		buttonHome.setOnClickListener(this);
+
+		boolean isOnLine;
+
+		if (printer.getOnline() == 0)
+			isOnLine = false;
+		else 
+			isOnLine = true;
+
+		buttonXp10.setEnabled(isOnLine);
+		buttonXp1.setEnabled(isOnLine);
+		buttonX_1.setEnabled(isOnLine);
+		buttonX_10.setEnabled(isOnLine);
+		buttonXhome.setEnabled(isOnLine);
+
+		buttonYp10.setEnabled(isOnLine);
+		buttonYp1.setEnabled(isOnLine);
+		buttonY_1.setEnabled(isOnLine);
+		buttonY_10.setEnabled(isOnLine);
+		buttonYhome.setEnabled(isOnLine);
+
+		buttonZp10.setEnabled(isOnLine);
+		buttonZp1.setEnabled(isOnLine);
+		buttonZ_1.setEnabled(isOnLine);
+		buttonZ_10.setEnabled(isOnLine);
+		buttonZhome.setEnabled(isOnLine);
+
+		buttonHome.setEnabled(isOnLine);	
+
 	}
 
-	
-	
+
+
 	public void onClick(View v) {
 		switch (v.getId()) {
 
@@ -226,22 +255,24 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		}
 	}
 
-	
-	
+
+
 	@Override
-	public void onPrinterStatusUpdated() {
-		
-		String x = Double.toString(printer.getStatus().getX());		
-		String y = Double.toString(printer.getStatus().getY());		
-		String z = Double.toString(printer.getStatus().getZ());
-		
+	public void onPrinterStatusUpdated(PrinterStatus printerStatus) {
+		String x = Double.toString(printerStatus.getX());		
+		String y = Double.toString(printerStatus.getY());		
+		String z = Double.toString(printerStatus.getZ());
+
+		//TODO String current = 
+
 		textViewXvalue.setText(x);	
 		textViewYvalue.setText(y);	
 		textViewZvalue.setText(z);
+
 	}
 
-	
-	
+
+
 	@Override
 	public void onError(String error) {
 		// TODO Auto-generated method stub
@@ -253,7 +284,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	@Override
 	public void onPrinterListUpdated(ArrayList<Printer> printerList) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -261,7 +292,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	@Override
 	public void onChangeState() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -269,6 +300,12 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	@Override
 	public void onCommandExecuted() {
 		// TODO Auto-generated method stub
-		
+
 	}
+
+
+
+
+
+
 }
