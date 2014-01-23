@@ -39,14 +39,16 @@ public final class R {
     }
     public static final class drawable {
         public static final int corner=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int view_blue=0x7f020002;
-        public static final int view_green=0x7f020003;
-        public static final int view_red=0x7f020004;
+        public static final int green_power_button=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int red_power_button=0x7f020003;
+        public static final int view_blue=0x7f020004;
+        public static final int view_green=0x7f020005;
+        public static final int view_red=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f09005d;
-        public static final int activePrinter=0x7f09005a;
+        public static final int action_settings=0x7f090058;
+        public static final int activePrinter=0x7f090055;
         public static final int bedSwitch=0x7f090035;
         public static final int bedTempReadTextView=0x7f090038;
         public static final int bedTempSetTextView=0x7f09003a;
@@ -54,15 +56,13 @@ public final class R {
         public static final int bedtempTextView=0x7f090037;
         public static final int blueView=0x7f09001a;
         public static final int blueView2=0x7f09001d;
-        public static final int copyBtt=0x7f090053;
         public static final int createServerBtn=0x7f090005;
-        public static final int current=0x7f090056;
-        public static final int currentJob=0x7f090057;
-        public static final int deleteBtt=0x7f090054;
+        public static final int current=0x7f090051;
+        public static final int currentJob=0x7f090052;
         public static final int deleteServerBtn=0x7f090008;
         public static final int dimen=0x7f090046;
         public static final int dimenJob=0x7f090047;
-        public static final int dimenModel=0x7f090051;
+        public static final int dimenModel=0x7f09004e;
         public static final int extrTempReadTextView=0x7f090033;
         public static final int extrTempSetTextView=0x7f09003c;
         public static final int extrtempTextView=0x7f090034;
@@ -83,10 +83,10 @@ public final class R {
         public static final int jobName=0x7f090045;
         public static final int jobStatus=0x7f090048;
         public static final int mb=0x7f090049;
-        public static final int modelName=0x7f090050;
-        public static final int modelStatus=0x7f090052;
+        public static final int modelName=0x7f09004d;
+        public static final int modelStatus=0x7f09004f;
         public static final int modelTV=0x7f090040;
-        public static final int nameServer=0x7f09005b;
+        public static final int nameServer=0x7f090056;
         public static final int newBedTempBtn=0x7f09003f;
         public static final int newBedTempEt=0x7f09003e;
         public static final int newExtrTempBtn=0x7f09003d;
@@ -96,15 +96,14 @@ public final class R {
         public static final int newUrlTV=0x7f090004;
         public static final int pager=0x7f09000a;
         public static final int pager_title_strip=0x7f09000b;
-        public static final int perc=0x7f09004c;
-        public static final int printerName=0x7f090055;
+        public static final int perc=0x7f09004b;
+        public static final int printerName=0x7f090050;
         public static final int printerSelectionTV=0x7f090042;
-        public static final int printerStatus=0x7f090058;
-        public static final int progress=0x7f09004b;
-        public static final int progressJob=0x7f090059;
+        public static final int printerStatus=0x7f090053;
+        public static final int progress=0x7f09004c;
+        public static final int progressJob=0x7f090054;
         public static final int redView=0x7f090014;
         public static final int redView2=0x7f090017;
-        public static final int removeBtt=0x7f09004e;
         public static final int saveServerBtn=0x7f090009;
         public static final int serverName=0x7f090006;
         public static final int serverNameET=0x7f090001;
@@ -113,16 +112,14 @@ public final class R {
         public static final int serverUrlET=0x7f090003;
         public static final int server_detail_container=0x7f09000c;
         public static final int server_list=0x7f09000d;
-        public static final int startBtt=0x7f09004d;
         public static final int status=0x7f09004a;
         public static final int statusTextView=0x7f090022;
-        public static final int stopBtt=0x7f09004f;
         public static final int textView1=0x7f090002;
         public static final int textView2=0x7f090039;
         public static final int textViewX=0x7f090024;
         public static final int textViewY=0x7f09002a;
         public static final int textViewZ=0x7f090026;
-        public static final int urlServer=0x7f09005c;
+        public static final int urlServer=0x7f090057;
         public static final int warningTv=0x7f090041;
         public static final int xValueTextView=0x7f090023;
         public static final int x_10button=0x7f090018;
@@ -189,21 +186,27 @@ public final class R {
         public static final int ServerSelection=0x7f040002;
         public static final int action_settings=0x7f040001;
         public static final int app_name=0x7f040000;
-        public static final int avaibleJob=0x7f040020;
-        public static final int avaibleModel=0x7f040022;
+        public static final int avaibleJob=0x7f040028;
+        public static final int avaibleModel=0x7f04002a;
         public static final int createServer=0x7f040004;
-        public static final int insertServerName=0x7f04001e;
-        public static final int invalidServerName=0x7f04001f;
+        public static final int insertServerName=0x7f040026;
+        public static final int invalidServerName=0x7f040027;
         public static final int loadServer=0x7f040005;
         public static final int newServer=0x7f040012;
         public static final int newUrl=0x7f040013;
-        public static final int no=0x7f04001c;
-        public static final int onModelCopied=0x7f04001a;
-        public static final int onModelDeleted=0x7f040019;
-        public static final int onModelUploaded=0x7f040018;
-        public static final int popModelDelete=0x7f040023;
-        public static final int popModelToQueue=0x7f040024;
-        public static final int removeServer=0x7f04001d;
+        public static final int no=0x7f040024;
+        public static final int onJobRemoved=0x7f040022;
+        public static final int onJobStarted=0x7f040020;
+        public static final int onJobStopped=0x7f040021;
+        public static final int onModelCopied=0x7f04001c;
+        public static final int onModelDeleted=0x7f04001b;
+        public static final int onModelUploaded=0x7f04001a;
+        public static final int popJobDelete=0x7f04001f;
+        public static final int popJobStart=0x7f04001d;
+        public static final int popJobStop=0x7f04001e;
+        public static final int popModelDelete=0x7f040018;
+        public static final int popModelToQueue=0x7f040019;
+        public static final int removeServer=0x7f040025;
         public static final int serverList=0x7f040006;
         public static final int tab_control=0x7f040016;
         public static final int tab_control2=0x7f040017;
@@ -220,8 +223,8 @@ public final class R {
         public static final int title_activity_printer_control2=0x7f04000a;
         public static final int title_server_detail=0x7f04000c;
         public static final int title_server_list=0x7f04000b;
-        public static final int warningOffline=0x7f040021;
-        public static final int yes=0x7f04001b;
+        public static final int warningOffline=0x7f040029;
+        public static final int yes=0x7f040023;
     }
     public static final class style {
         /** 

@@ -3,6 +3,7 @@ package com.android.repetierserverapp.PrinterControll;
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.PrinterControll.JobList.FragJobList;
 import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList;
+import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList.PrinterControlCallbacks;
 import com.android.repetierserverapp.ServerList.FragServerList.ServerAppCallbacks;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Server;
@@ -17,12 +18,16 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.Menu;
 
-public class ActivityPrinterControll extends FragmentActivity {
+public class ActivityPrinterControll extends FragmentActivity implements PrinterControlCallbacks {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
 	private OnPageChangeListener pageChangeListener;
 
+	private FragJobList fragJobList;
+	private FragModelList fragModelList;
+	private FragPrinterControl fragPrinterControl;
+	private FragPrinterControl2 fragPrinterControl2;
 
 
 	@Override
@@ -41,7 +46,7 @@ public class ActivityPrinterControll extends FragmentActivity {
 		boolean active = bundle.getBoolean("active");
 		double progress = bundle.getDouble("progress");
 
-		Printer printer = new Printer(new Server(url, alias), name, slug, online, currentJob, active, progress);
+		final Printer printer = new Printer(new Server(url, alias), name, slug, online, currentJob, active, progress);
 
 		Bundle arguments = newInstance(printer);
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -62,7 +67,14 @@ public class ActivityPrinterControll extends FragmentActivity {
 			@Override
 			public void onPageSelected(int position) {
 				Log.d("onPageSelected", Integer.toString(position));
+				
+				if (position == 1){
+					//fragJobList.startTimer();
+				} 
+					
+				
 				mSectionsPagerAdapter.getItem(position);
+
 
 			}
 		};
@@ -112,24 +124,24 @@ public class ActivityPrinterControll extends FragmentActivity {
 
 			switch (position) {
 			case 0:
-				FragModelList frag1 = new FragModelList();
-				frag1.setArguments(args);
-				return frag1;
+				fragModelList = new FragModelList();
+				fragModelList.setArguments(args);
+				return fragModelList;
 
 			case 1:
-				FragJobList frag2 = new FragJobList();
-				frag2.setArguments(args);
-				return frag2;
+				fragJobList = new FragJobList();
+				fragJobList.setArguments(args);
+				return fragJobList;
 
 			case 2:
-				FragPrinterControl frag3 = new FragPrinterControl();
-				frag3.setArguments(args);
-				return frag3;
+				fragPrinterControl = new FragPrinterControl();
+				fragPrinterControl.setArguments(args);
+				return fragPrinterControl;
 
 			case 3:
-				FragPrinterControl2 frag4 = new FragPrinterControl2();
-				frag4.setArguments(args);
-				return frag4;
+				fragPrinterControl2 = new FragPrinterControl2();
+				fragPrinterControl2.setArguments(args);
+				return fragPrinterControl2;
 			}
 			Fragment frag = new Fragment();
 			return frag;
@@ -159,5 +171,13 @@ public class ActivityPrinterControll extends FragmentActivity {
 			}
 			return null;
 		}
+	}
+
+
+
+	@Override
+	public void updateJobList(Printer printer) {
+		Log.d("updateJobList Callback", "entrato");
+		fragJobList.updateListView(printer);	
 	}
 }

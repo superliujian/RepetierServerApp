@@ -3,19 +3,26 @@ package com.android.repetierserverapp.ServerDetailList;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.android.repetierserverapp.R;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
 
-public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClickListener{
+public class PrinterListAdapter extends ArrayAdapter<Printer>{
 
 	private Context context;
 	private ArrayList<Printer> printerList;
@@ -23,7 +30,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 	private PrinterListAdapterCallback listener;
 
 
-	
+
 	public PrinterListAdapter(Context context, int textViewResourceId, ArrayList<Printer> list, PrinterListAdapterCallback listener) {
 		super(context, textViewResourceId, list);
 		this.context = context;
@@ -31,8 +38,8 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 		this.listener = listener;
 	}
 
-	
-	
+
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -52,9 +59,41 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 		TextView printerProgress = (TextView) rowView.findViewById(R.id.progress);
 		TextView printerProgressJob = (TextView) rowView.findViewById(R.id.progressJob);
 		TextView perc = (TextView) rowView.findViewById(R.id.perc);
-
+/*
+		Switch sw = (Switch) rowView.findViewById(R.id.switch1);
+		sw.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked){
+					Log.d("on", "on");
+					printer.turnOn(getContext());
+					
+				}else{
+					Log.d ("off","off");
+					printer.turnOff(getContext());
+				}
+				
+			}
+		});
+*/
 		TextView activePrinter = (TextView) rowView.findViewById(R.id.activePrinter);
-		activePrinter.setOnClickListener(this);
+		activePrinter.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()) {
+				case R.id.activePrinter:
+					if (printer.getActive()){
+						printer.turnOff(getContext());
+					}
+					else {
+						printer.turnOn(getContext());		
+					}
+					break;
+				}
+			}
+		});
 
 		printer = printerList.get(position);
 
@@ -74,7 +113,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 
 			@Override
 			public void onChangeState() {
-				Toast.makeText(getContext(), "Lo stato è cambiato", Toast.LENGTH_LONG).show();
+				listener.updatePrinterList();
 			}
 		});
 
@@ -83,38 +122,35 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 		int online = printer.getOnline();
 		boolean active = printer.getActive();
 
+//		sw.setChecked(active);
+		
 		if(active) {
+			activePrinter.setText(" SPEGNI ");
+			activePrinter.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.view_red));
 			switch (online){
-
 			case 0:
 				printerStatus.setText("Scollegata");
 				printerStatus.setTextAppearance(getContext(), R.style.offline);
-				activePrinter.setText("Disattiva Stampante");
-				activePrinter.setTextAppearance(getContext(), R.style.offline);
 				break;
 			case 1:
 				printerStatus.setText("Connessa");
 				printerStatus.setTextAppearance(getContext(), R.style.online);
-				activePrinter.setText("Disattiva Stampante");
-				activePrinter.setTextAppearance(getContext(), R.style.offline);
 				break;
 			default:
 				printerStatus.setText("Error");
 				printerStatus.setTextAppearance(getContext(), R.style.offline);
-				activePrinter.setText("Disattiva Stampante");
-				activePrinter.setTextAppearance(getContext(), R.style.offline);
 				break;
 			}
 		}else {
 			printerStatus.setText("Disattivata");
 			printerStatus.setTextAppearance(getContext(), R.style.offline);
-			activePrinter.setText("Attiva Stampante");
-			activePrinter.setTextAppearance(getContext(), R.style.online);
+			activePrinter.setText(" ACCENDI ");
+			activePrinter.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.view_green));
 		}
 
 		String currentJob = printer.getCurrentJob();
 
-		if (isWorking(currentJob)){
+	//	if (isWorking(currentJob)){
 			printerCurrent.setVisibility(View.VISIBLE);
 			printerCurrentJob.setVisibility(View.VISIBLE);
 			printerProgress.setVisibility(View.VISIBLE);
@@ -125,45 +161,25 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 
 			String progress = Double.toString(Math.round(printer.getProgress()*100)/100);
 			printerProgressJob.setText(progress);
-		}
+	/*	}
 		else {
 			printerCurrent.setVisibility(View.INVISIBLE);
 			printerCurrentJob.setVisibility(View.INVISIBLE);
 			printerProgress.setVisibility(View.INVISIBLE);
 			printerProgressJob.setVisibility(View.INVISIBLE);
 			perc.setVisibility(View.INVISIBLE);
-		}
+		}*/
 
 		return rowView;
 	}
 
-	
-	
+
 	private Boolean isWorking (String currentJob){
 		if (currentJob.equals("none")) return false;
 		else return true;		
 	}
 
-	
-	
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.activePrinter:
-			if (printer.getActive()){
-				printer.turnOff(getContext());
-				listener.updatePrinterList();
-			}
-			else {
-				printer.turnOn(getContext());
-				listener.updatePrinterList();			
-			}
-			break;
-		}
-	}
 
-
-	
 	public interface PrinterListAdapterCallback {
 		public void updatePrinterList();
 	}

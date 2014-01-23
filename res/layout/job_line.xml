@@ -63,74 +63,38 @@
         android:text="Stato:"
          />
 
-    <TextView
-        android:id="@+id/jobStatus"
-        style="@style/Text"
-        android:textSize="@dimen/mediumText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dimenJob"
-        android:layout_centerHorizontal="true"
-        android:singleLine="true"
-        android:text="Salvato"
-         />
-
-    <TextView
-        android:id="@+id/progress"
-        style="@style/Text"
-        android:textSize="@dimen/mediumText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/jobStatus"
-        android:layout_alignBottom="@+id/jobStatus"
-        android:layout_toRightOf="@+id/jobStatus"
-        android:layout_marginLeft="45dp"
-        android:text="0.0"
-         />
+     <TextView
+         android:id="@+id/perc"
+         style="@style/Text"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignRight="@+id/jobName"
+         android:layout_below="@+id/mb"
+         android:text="  %"
+         android:textSize="@dimen/mediumText" />
 
      <TextView
-        android:id="@+id/perc"
-        style="@style/Text"
-        android:textSize="@dimen/mediumText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/progress"
-        android:layout_alignBottom="@+id/progress"
-        android:layout_toRightOf="@+id/progress"
-        android:text="  %"
-         />
-     
-    <Button
-        android:id="@+id/startBtt"
-        style="@style/Text"
-        android:textSize="@dimen/smallText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dimen"
-        android:layout_below="@+id/status"
-        android:layout_marginTop="14dp"
-        android:text="AVVIA" />
+         android:id="@+id/progress"
+         style="@style/Text"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/perc"
+         android:layout_alignBottom="@+id/perc"
+         android:layout_toLeftOf="@+id/perc"
+         android:text="100.0"
+         android:textSize="@dimen/mediumText" />
 
-    <Button
-        android:id="@+id/removeBtt"
-        style="@style/Text"
-        android:textSize="@dimen/smallText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/startBtt"
-        android:layout_alignBottom="@+id/startBtt"
-        android:layout_alignRight="@+id/jobName"
-        android:text="ELIMINA" />
-
-    <Button
-        android:id="@+id/stopBtt"
-        style="@style/Text"
-        android:textSize="@dimen/smallText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/removeBtt"
-        android:layout_alignBottom="@+id/removeBtt"
-        android:layout_centerHorizontal="true"
-        android:text="FERMA" />
+     <TextView
+         android:id="@+id/jobStatus"
+         style="@style/Text"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/progress"
+         android:layout_alignBottom="@+id/progress"
+         android:layout_marginRight="40dp"
+         android:layout_toLeftOf="@+id/progress"
+         android:singleLine="true"
+         android:text="Salvato"
+         android:textSize="@dimen/mediumText" />
 
 </RelativeLayout>

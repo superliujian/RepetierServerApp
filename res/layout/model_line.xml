@@ -65,35 +65,13 @@
     <TextView
         android:id="@+id/modelStatus"
         style="@style/Text"
-        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/modelName"
-        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/dimenModel"
+        android:layout_alignRight="@+id/modelName"
+        android:layout_marginRight="16dp"
         android:singleLine="true"
         android:text="Salvato"
-         />
-
-    <Button
-        android:id="@+id/copyBtt"
-        style="@style/Text"
-        android:textSize="@dimen/smallText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dimen"
-        android:layout_below="@+id/dimen"
-        android:layout_marginTop="14dp"
-        android:text="COPIA" />
-
-    <Button
-        android:id="@+id/deleteBtt"
-        style="@style/Text"
-        android:textSize="@dimen/smallText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/copyBtt"
-        android:layout_alignBottom="@+id/copyBtt"
-        android:layout_alignRight="@+id/modelName"
-        android:text="ELIMINA" />
+        android:textSize="@dimen/mediumText" />
 
 </RelativeLayout>

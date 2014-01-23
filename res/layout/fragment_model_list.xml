@@ -23,9 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/modelTV"
-        android:layout_marginTop="20dp" 
-        android:longClickable="true"
-        android:focusable="false">
+        android:layout_marginTop="20dp" >
     </ListView>
 
 </RelativeLayout>

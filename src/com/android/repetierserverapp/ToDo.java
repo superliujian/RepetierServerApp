@@ -4,6 +4,7 @@ public class ToDo {
 
 	/*
 	 * switch attivazione stampante
+	 * 
 	 * rimuovi toast
 	 * 
 	 * Gestione eccezzioni su connessioni
@@ -12,11 +13,16 @@ public class ToDo {
 	 * 
 	 * titolo/icona
 	 * 
+	 * 
 	 * callback fra fragment
+	 * printerControllCallback
+	 * implementato ma non funziona bene
+	 * 
+	 * "AGGIORNA LISTA"
+	 * 
 	 * 
 	 * menu
 	 * 
-	 * Crouton
 	 * 
 	 * grafica
 	 * 
@@ -24,6 +30,19 @@ public class ToDo {
 	 * 
 	 * 
 	 * timer chiamate
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * onAttach
+	 * onCreate
+	 * onCreatView
+	 * onViewCrated
+	 * onActivityCreated
+	 * 
+	 * 
 	 * 
 	 * 
 	 */

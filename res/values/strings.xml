@@ -30,9 +30,18 @@
 	<string name="tab_control">CONTROLLO</string>
 	<string name="tab_control2">CONTROLLO</string>
 	
+	<string name="popModelDelete">Elimina modello</string>
+	<string name="popModelToQueue">Aggiungi ai lavori</string>
 	<string name="onModelUploaded">Il modello è stato caricato</string>
 	<string name="onModelDeleted">Il modello è stato eliminato</string>
 	<string name="onModelCopied">Il modello è stato copiato</string>
+	
+	<string name="popJobStart">Avvia lavoro</string>
+	<string name="popJobStop">Ferma lavoro</string>
+	<string name="popJobDelete">Elimina lavoro</string>
+	<string name="onJobStarted">Il lavoro è stato avviato</string>
+	<string name="onJobStopped">Il lavoro è stato fermato</string>
+	<string name="onJobRemoved">Il lavoro è stato rimosso</string>
 	
 	<string name="yes">SI</string>
 	<string name="no">NO</string>
@@ -47,8 +56,7 @@
 	
 	<string name="avaibleModel">Modelli disponibili:</string>
 	
-	<string name="popModelDelete">Elimina modello</string>
-	<string name="popModelToQueue">Aggiungi ai lavori</string>
+
 	
 	
     

@@ -7,25 +7,12 @@
     <TextView
         android:id="@+id/printerName"
         style="@style/boldText"
-        android:textSize="@dimen/bigText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="nome stampante"
-        />
-
-    <TextView
-        android:id="@+id/status"
-        style="@style/Text"
-        android:textSize="@dimen/mediumText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/printerName"
-        android:singleLine="true"
-        android:text="Stato stampante:"
-         />
+        android:textSize="@dimen/bigText" />
 
     <TextView
         android:id="@+id/current"
@@ -86,30 +73,41 @@
          />
 
     <TextView
+        android:id="@+id/status"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/printerName"
+        android:layout_below="@+id/printerName"
+        android:layout_marginTop="16dp"
+        android:singleLine="true"
+        android:text="Stato stampante:"
+        android:textSize="@dimen/mediumText" />
+
+    <TextView
         android:id="@+id/activePrinter"
         style="@style/boldText"
-        android:textSize="@dimen/mediumText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/progressJob"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
+        android:layout_above="@+id/status"
+        android:layout_alignLeft="@+id/printerStatus"
+        android:background="@drawable/view_green"
         android:clickable="true"
         android:gravity="center_horizontal"
         android:onClick="onClick"
-        android:text="Attiva Stampante"
-         />
+        android:text=" ACCENDI "
+        android:textSize="@dimen/bigText" />
 
     <TextView
         android:id="@+id/printerStatus"
         style="@style/online"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/status"
-        android:layout_alignBottom="@+id/status"
+        android:layout_above="@+id/currentJob"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="35dp"
         android:singleLine="true"
-        android:text="Offline"
+        android:text="Disattivata"
         android:textSize="@dimen/mediumText" />
 
 </RelativeLayout>

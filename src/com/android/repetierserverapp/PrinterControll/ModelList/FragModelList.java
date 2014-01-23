@@ -2,13 +2,13 @@ package com.android.repetierserverapp.PrinterControll.ModelList;
 
 
 import java.util.ArrayList;
+import java.util.Timer;
 
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +19,6 @@ import android.widget.Toast;
 import android.widget.ListView;
 
 import com.android.repetierserverapp.R;
-import com.android.repetierserverapp.PrinterControll.ModelList.ModelListAdapter.ModelListAdapterCallback;
 import com.grasselli.android.repetierserverapi.Model;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.ModelCallbacks;
@@ -27,15 +26,27 @@ import com.grasselli.android.repetierserverapi.Server;
 
 public class FragModelList extends ListFragment {
 
+	
+	public interface PrinterControlCallbacks {
+		public void updateJobList(Printer printer);
+	};
+	
+	private static PrinterControlCallbacks sDummyCallbacks = new PrinterControlCallbacks() {
+		@Override
+		public void updateJobList(Printer printer) {
+		}
+	};
+	
+	
+	private PrinterControlCallbacks callback;
+	
 	private ListView listview;
 	private ModelListAdapter adapter;
 
 	private Printer printer;
 
-	private ModelListAdapterCallback modelListAdapterCallback;
 
-
-
+	
 
 	public FragModelList() {
 	}
@@ -43,10 +54,79 @@ public class FragModelList extends ListFragment {
 
 
 	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		
+		if (!(activity instanceof PrinterControlCallbacks)) {
+			throw new IllegalStateException(
+					"Activity must implement fragment's callbacks.");
+		}
+		callback = (PrinterControlCallbacks) activity;
+	}
+
+
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 	}
+
+
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		View rootView = inflater.inflate(R.layout.fragment_model_list,
+				container, false);
+		return rootView;
+	}
+
+
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		listview = getListView();
+		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int position, long id) {
+
+				final int idMod = ((Model) listview.getAdapter().getItem(position)).getId();
+
+				String[] array = new String[2];
+				array[1] = getString(R.string.popModelDelete);
+				array[0] = getString(R.string.popModelToQueue);
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setTitle(((Model) listview.getAdapter().getItem(position)).getName())
+				.setItems(array, 
+						new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						switch (which) {
+						case 1:
+							printer.deleteModel(getActivity(), idMod);
+							printer.updateJobList(getActivity());
+							break;
+
+						case 0:
+							printer.copyModel(getActivity(), idMod);
+							callback.updateJobList(printer);
+							break;
+						}
+					}
+				});
+				builder.create().show();
+
+				return true;
+			}
+		});
+	}
+
 
 
 	@Override
@@ -76,7 +156,7 @@ public class FragModelList extends ListFragment {
 			@Override
 			public void onModelListUpdated(ArrayList<Model> newModelList) {
 
-				adapter = new ModelListAdapter(getActivity(), R.layout.model_line, newModelList, modelListAdapterCallback, printer); 
+				adapter = new ModelListAdapter(getActivity(), R.layout.model_line, newModelList); 
 				listview.setAdapter(adapter);
 			}
 
@@ -98,71 +178,14 @@ public class FragModelList extends ListFragment {
 		});
 
 		printer.updateModelList(getActivity());
-
-		modelListAdapterCallback = new ModelListAdapterCallback() {
-			@Override
-			public void updateModelList(Printer printer) {
-				printer.updateModelList(getActivity());
-			}
-
-			@Override
-			public void copyModel(Printer printer, int id) {
-			}
-
-			@Override
-			public void deleteModel(Printer printer, int id) {
-				printer.deleteModel(getActivity(), id);				
-			}
-		};
 	}
 
+	
+	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-
-		View rootView = inflater.inflate(R.layout.fragment_model_list,
-				container, false);
-		return rootView;
-	}
-
-
-
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-
-		listview = getListView();
-		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					int position, final long id) {
-				String[] array = new String[2];
-				array[1] = getString(R.string.popModelDelete);
-				array[0] = getString(R.string.popModelToQueue);
-
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				builder.setTitle(((Model) listview.getAdapter().getItem(position)).getName())
-				.setItems(array, 
-						new DialogInterface.OnClickListener() {
-					
-					public void onClick(DialogInterface dialog, int which) {
-						switch (which) {
-						case 1:
-							printer.deleteModel(getActivity(), (int) id);
-							break;
-
-						case 0:
-							printer.copyModel(getActivity(), (int) id);
-							break;
-						}
-					}
-				});
-				builder.create().show();
-
-				return true;
-			}
-		});
+	public void onDetach() {
+		super.onDetach();
+		callback = sDummyCallbacks;
 	}
 
 }

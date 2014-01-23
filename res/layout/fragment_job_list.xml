@@ -15,25 +15,26 @@
         android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/warningTv"
         android:text="@string/avaibleJob" />
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/modelTV"
-        android:layout_marginTop="25dp" >
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/warningTv"
+        android:layout_below="@+id/modelTV" >
+
     </ListView>
 
     <TextView
         android:id="@+id/warningTv"
         style="@style/offline"
-        android:textSize="@dimen/mediumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/modelTV"
-        android:layout_below="@+id/modelTV"
-        android:text="warning" />
+        android:layout_alignParentTop="true"
+        android:text="warning"
+        android:textSize="@dimen/mediumText" />
 
 </RelativeLayout>

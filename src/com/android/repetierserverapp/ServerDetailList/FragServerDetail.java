@@ -12,20 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.PrinterControll.ActivityPrinterControll;
 import com.android.repetierserverapp.ServerDetailList.PrinterListAdapter.PrinterListAdapterCallback;
-import com.android.repetierserverapp.ServerList.FragServerList.ServerAppCallbacks;
 import com.android.repetierserverapp.db.DbAdapter;
 import com.android.repetierserverapp.db.DbHelper;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Server;
 import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 
-public class FragServerDetail extends ListFragment implements ServerAppCallbacks {
+public class FragServerDetail extends ListFragment {
 
 
 
@@ -58,7 +58,20 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 	public FragServerDetail() {
 	}
 
+	
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
 
+		if (!(activity instanceof PrinterAppCallbacks)) {
+			throw new IllegalStateException(
+					"Activity must implement fragment's callbacks.");
+		}
+		callback = (PrinterAppCallbacks) activity;
+	}
+
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -152,6 +165,7 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 
 				@Override
 				public void onError(String error) {
+					Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
 				}
 			});
 			
@@ -159,19 +173,8 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 		}
 	}
 
+
 	
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-
-		if (!(activity instanceof PrinterAppCallbacks)) {
-			throw new IllegalStateException(
-					"Activity must implement fragment's callbacks.");
-		}
-		callback = (PrinterAppCallbacks) activity;
-	}
-
-
 	@Override
 	public void onDetach() {
 		super.onDetach();
@@ -179,9 +182,4 @@ public class FragServerDetail extends ListFragment implements ServerAppCallbacks
 	}
 
 
-
-	@Override
-	public void onServerSelected(long id) {
-		// TODO Auto-generated method stub
-	}
 }
