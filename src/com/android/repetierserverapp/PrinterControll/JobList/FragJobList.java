@@ -2,21 +2,19 @@ package com.android.repetierserverapp.PrinterControll.JobList;
 
 import java.util.ArrayList;
 import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ListView;
@@ -29,11 +27,13 @@ import com.grasselli.android.repetierserverapi.Printer.JobCallbacks;
 import com.grasselli.android.repetierserverapi.ReplyMessage;
 import com.grasselli.android.repetierserverapi.Server;
 
-public class FragJobList extends ListFragment implements OnItemLongClickListener, JobCallbacks{
+public class FragJobList extends ListFragment implements OnClickListener, OnItemLongClickListener, JobCallbacks{
 
 	private ListView listview;
 	private JobListAdapter adapter;
+
 	private TextView warning;
+	private ImageButton refresh;
 
 	private static Printer printer;
 
@@ -84,6 +84,8 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 		listview.setOnItemLongClickListener(this);
 
 		warning = (TextView) view.findViewById(R.id.warningTv);
+		refresh = (ImageButton) view.findViewById(R.id.refreshButton);
+		refresh.setOnClickListener(this);
 	}
 
 
@@ -250,6 +252,15 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 	@Override
 	public void onMessages(ArrayList<ReplyMessage> newMessages) {
 		// TODO Auto-generated method stub
+	}
+
+
+
+	@Override
+	public void onClick(View v) {
+		if (v.getId() == R.id.refreshButton){
+			printer.updateJobList(getActivity());
+		}
 	}		
 
 	/*
@@ -263,5 +274,5 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 	        }
 	    }, 5000);
 	}
-*/
+	 */
 }

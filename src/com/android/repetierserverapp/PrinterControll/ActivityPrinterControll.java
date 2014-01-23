@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
@@ -74,7 +75,7 @@ public class ActivityPrinterControll extends FragmentActivity implements Printer
 					
 				
 				mSectionsPagerAdapter.getItem(position);
-
+				
 
 			}
 		};
@@ -111,7 +112,7 @@ public class ActivityPrinterControll extends FragmentActivity implements Printer
 
 
 
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+	public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 		private Bundle args;
 
 		public SectionsPagerAdapter(FragmentManager fm, Bundle args) {
@@ -178,6 +179,6 @@ public class ActivityPrinterControll extends FragmentActivity implements Printer
 	@Override
 	public void updateJobList(Printer printer) {
 		Log.d("updateJobList Callback", "entrato");
-		fragJobList.updateListView(printer);	
+		//fragJobList.updateListView(printer);	
 	}
 }

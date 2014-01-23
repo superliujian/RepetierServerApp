@@ -22,13 +22,13 @@ import com.android.repetierserverapp.R;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
 
-public class PrinterListAdapter extends ArrayAdapter<Printer>{
+public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClickListener{
 
 	private Context context;
 	private ArrayList<Printer> printerList;
 	private Printer printer;
 	private PrinterListAdapterCallback listener;
-
+	private ImageButton power;
 
 
 	public PrinterListAdapter(Context context, int textViewResourceId, ArrayList<Printer> list, PrinterListAdapterCallback listener) {
@@ -77,7 +77,7 @@ public class PrinterListAdapter extends ArrayAdapter<Printer>{
 			}
 		});
 */
-		TextView activePrinter = (TextView) rowView.findViewById(R.id.activePrinter);
+/*		TextView activePrinter = (TextView) rowView.findViewById(R.id.activePrinter);
 		activePrinter.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -94,7 +94,11 @@ public class PrinterListAdapter extends ArrayAdapter<Printer>{
 				}
 			}
 		});
-
+*/
+		power = (ImageButton) rowView.findViewById(R.id.powerButton);
+		power.setFocusable(false);
+		power.setOnClickListener(this);
+		
 		printer = printerList.get(position);
 
 		printer.setPrinterCallbacks(new PrinterCallbacks() {
@@ -125,8 +129,9 @@ public class PrinterListAdapter extends ArrayAdapter<Printer>{
 //		sw.setChecked(active);
 		
 		if(active) {
-			activePrinter.setText(" SPEGNI ");
-			activePrinter.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.view_red));
+			power.setImageResource(R.drawable.off);
+//			activePrinter.setText(" SPEGNI ");
+//			activePrinter.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.view_red));
 			switch (online){
 			case 0:
 				printerStatus.setText("Scollegata");
@@ -144,8 +149,10 @@ public class PrinterListAdapter extends ArrayAdapter<Printer>{
 		}else {
 			printerStatus.setText("Disattivata");
 			printerStatus.setTextAppearance(getContext(), R.style.offline);
-			activePrinter.setText(" ACCENDI ");
-			activePrinter.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.view_green));
+			
+			power.setImageResource(R.drawable.on);
+//			activePrinter.setText(" ACCENDI ");
+//			activePrinter.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.view_green));
 		}
 
 		String currentJob = printer.getCurrentJob();
@@ -182,5 +189,18 @@ public class PrinterListAdapter extends ArrayAdapter<Printer>{
 
 	public interface PrinterListAdapterCallback {
 		public void updatePrinterList();
+	}
+
+
+	@Override
+	public void onClick(View v) {
+		if (v.getId() == R.id.powerButton){
+			if (printer.getActive()){
+				printer.turnOff(getContext());
+			}
+			else {
+				printer.turnOn(getContext());		
+			}
+		}		
 	}
 }

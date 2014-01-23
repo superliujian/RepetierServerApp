@@ -2,8 +2,6 @@ package com.android.repetierserverapp.PrinterControll.ModelList;
 
 
 import java.util.ArrayList;
-import java.util.Timer;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,10 +9,12 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ListView;
 
@@ -24,7 +24,7 @@ import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.ModelCallbacks;
 import com.grasselli.android.repetierserverapi.Server;
 
-public class FragModelList extends ListFragment {
+public class FragModelList extends ListFragment implements OnClickListener {
 
 	
 	public interface PrinterControlCallbacks {
@@ -41,6 +41,8 @@ public class FragModelList extends ListFragment {
 	private PrinterControlCallbacks callback;
 	
 	private ListView listview;
+	private ImageButton refresh;
+	
 	private ModelListAdapter adapter;
 
 	private Printer printer;
@@ -88,6 +90,9 @@ public class FragModelList extends ListFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
+		refresh = (ImageButton) view.findViewById(R.id.refreshButton);
+		refresh.setOnClickListener(this);
+		
 		listview = getListView();
 		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -186,6 +191,15 @@ public class FragModelList extends ListFragment {
 	public void onDetach() {
 		super.onDetach();
 		callback = sDummyCallbacks;
+	}
+
+
+
+	@Override
+	public void onClick(View v) {
+		if (v.getId() == R.id.refreshButton){
+			printer.updateModelList(getActivity());
+		}
 	}
 
 }

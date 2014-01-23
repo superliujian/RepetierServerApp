@@ -10,29 +10,40 @@
     android:paddingTop="@dimen/activity_vertical_margin" >
 
     <TextView
-        android:id="@+id/modelTV"
+        android:id="@+id/jobTV"
         style="@style/boldText"
-        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/warningTv"
-        android:text="@string/avaibleJob" />
+        android:layout_alignBottom="@+id/refreshButton"
+        android:layout_alignTop="@+id/refreshButton"
+        android:gravity="center_vertical|right"
+        android:text="@string/avaibleJob"
+        android:textSize="@dimen/bigbigText" />
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignLeft="@+id/warningTv"
-        android:layout_below="@+id/modelTV" >
-
+        android:layout_below="@+id/jobTV" >
     </ListView>
+
+    <ImageButton
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/warningTv"
+        
+        android:layout_alignRight="@android:id/list"
+        android:background="@android:color/transparent"
+        android:src="@drawable/refresh" />
 
     <TextView
         android:id="@+id/warningTv"
         style="@style/offline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/modelTV"
+        android:layout_alignLeft="@+id/jobTV"
         android:layout_alignParentTop="true"
         android:text="warning"
         android:textSize="@dimen/mediumText" />
