@@ -55,7 +55,6 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 	private static Timer myTimer;
 	public static int control2Interval;
-	private static boolean timerRunning;
 
 
 
@@ -71,7 +70,6 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		Log.d("frag3", "frag3");
 
 		control2Interval = 3000;
-		timerRunning = false;
 
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
@@ -308,7 +306,6 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	public void startTimer(){
 		Log.d("startTimer", "control2");
 		myTimer = new Timer();
-		timerRunning = true;
 		myTimer.schedule(new TimerTask() {          
 			@Override
 			public void run() {
@@ -321,9 +318,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 	public void stopTimer(){
 		Log.d("stopTimer", "control2");
-		if (timerRunning){
 			myTimer.cancel();
-		}
 	}
 
 

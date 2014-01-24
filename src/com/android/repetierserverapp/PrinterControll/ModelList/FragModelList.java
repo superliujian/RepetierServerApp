@@ -13,12 +13,10 @@ import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ListView;
 
@@ -47,7 +45,6 @@ public class FragModelList extends ListFragment {
 	private FragModelCallbacks callback;
 
 	private ListView listview;
-	private ImageButton refresh;
 
 	private ModelListAdapter adapter;
 
@@ -55,7 +52,6 @@ public class FragModelList extends ListFragment {
 
 	private static Timer myTimer;
 	public static int modelInterval;
-	private static boolean timerRunning;
 
 
 	public FragModelList() {
@@ -81,7 +77,6 @@ public class FragModelList extends ListFragment {
 		super.onCreate(savedInstanceState);
 		Log.d("frag0", "frag0");
 		modelInterval = 5000;
-		timerRunning = false;
 	}
 
 
@@ -139,6 +134,8 @@ public class FragModelList extends ListFragment {
 				return true;
 			}
 		});
+		
+
 	}
 
 
@@ -192,6 +189,7 @@ public class FragModelList extends ListFragment {
 		});
 
 		printer.updateModelList(getActivity());
+		
 	}
 
 
@@ -207,7 +205,6 @@ public class FragModelList extends ListFragment {
 	public void startTimer(){
 		Log.d("startTimer", "Model");
 		myTimer = new Timer();
-		timerRunning = true;
 		myTimer.schedule(new TimerTask() {          
 			@Override
 			public void run() {
@@ -219,8 +216,6 @@ public class FragModelList extends ListFragment {
 
 	public void stopTimer(){
 		Log.d("stopTimer", "Model");
-		if (timerRunning){
 			myTimer.cancel();
-		}
 	}
 }

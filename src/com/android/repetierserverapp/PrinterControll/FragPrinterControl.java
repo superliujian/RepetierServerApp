@@ -55,7 +55,6 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	
 	private static Timer myTimer;
 	public static int control1Interval;
-	private static boolean timerRunning;
 
 	public FragPrinterControl(){
 	}
@@ -69,7 +68,6 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		Log.d("frag2", "frag2");
 
 		control1Interval = 3000;
-		timerRunning = false;
 		
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
@@ -304,7 +302,6 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	public void startTimer(){
 		Log.d("startTimer", "control1");
 		myTimer = new Timer();
-		timerRunning = true;
 		myTimer.schedule(new TimerTask() {          
 			@Override
 			public void run() {
@@ -316,9 +313,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 
 	public void stopTimer(){
 		Log.d("stopTimer", "control1");
-		if (timerRunning){
 			myTimer.cancel();
-		}
 	}
 
 

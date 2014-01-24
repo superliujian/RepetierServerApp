@@ -34,10 +34,14 @@ public class ActivityPrinterControll extends FragmentActivity implements FragMod
 	private boolean created1;
 	private boolean created2;
 	private boolean created3;
-	
+	static public boolean jobTimerRunning;
+	static public boolean modelTimerRunning;
+	static public boolean controlTimerRunning;
+	static public boolean control2TimerRunning;
+
 	public static int LAST_ID;
 	public static int FILTER;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +54,10 @@ public class ActivityPrinterControll extends FragmentActivity implements FragMod
 		created1 = false;
 		created2 = false;
 		created3 = false;
+		jobTimerRunning = false;
+		modelTimerRunning = false;
+		controlTimerRunning = false;
+		control2TimerRunning = false;
 		FILTER = 13;
 
 		Bundle bundle = getIntent().getExtras();
@@ -85,42 +93,56 @@ public class ActivityPrinterControll extends FragmentActivity implements FragMod
 			public void onPageSelected(int position) {
 				Log.d("onPageSelected", Integer.toString(position));
 
-				if (created0 == true){
-					if (position == 0){
-						FragModelList frag0 = (FragModelList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(0));
-						frag0.startTimer();
-					} else {
-						FragModelList frag0 = (FragModelList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(0));
-						frag0.stopTimer();
-					}
+
+				if (position == 0 && created0 == true){
+					FragModelList frag = (FragModelList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(0));
+					frag.startTimer();
+					modelTimerRunning = true;
 				}
-				if (created1 == true){
-					if (position == 1){
-						FragJobList frag1 = (FragJobList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(1));
-						frag1.startTimer();
-					} else {
-						FragJobList frag1 = (FragJobList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(1));
-						frag1.stopTimer();
-					}
+
+				if (position == 1 && created1 == true){
+					FragJobList frag = (FragJobList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(1));
+					frag.startTimer();
+					jobTimerRunning = true;
 				}
-				if (created2 == true){
-					if (position == 2){
-						FragPrinterControl frag2 = (FragPrinterControl) getSupportFragmentManager().findFragmentByTag(makeFragmentName(2));
-						frag2.startTimer();
-					} else {
-						FragPrinterControl frag2 = (FragPrinterControl) getSupportFragmentManager().findFragmentByTag(makeFragmentName(2));
-						frag2.stopTimer();
-					}
+
+				if (position == 2 && created2 == true){
+					FragPrinterControl frag = (FragPrinterControl) getSupportFragmentManager().findFragmentByTag(makeFragmentName(2));
+					frag.startTimer();
+					controlTimerRunning = true;
 				}
-				if (created3 == true){
-					if (position == 3){
-						FragPrinterControl2 frag3 = (FragPrinterControl2) getSupportFragmentManager().findFragmentByTag(makeFragmentName(3));
-						frag3.startTimer();
-					} else {
-						FragPrinterControl2 frag3 = (FragPrinterControl2) getSupportFragmentManager().findFragmentByTag(makeFragmentName(3));
-						frag3.stopTimer();
-					}
+
+				if (position == 3 && created3 == true){
+					FragPrinterControl2 frag = (FragPrinterControl2) getSupportFragmentManager().findFragmentByTag(makeFragmentName(3));
+					frag.startTimer();
+					control2TimerRunning = true;
 				}
+
+				
+				if(position != 0 && modelTimerRunning == true){
+					FragModelList frag = (FragModelList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(0));
+					frag.stopTimer();
+					modelTimerRunning = false;
+				}
+
+				if(position != 1 && jobTimerRunning == true){
+					FragJobList frag = (FragJobList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(1));
+					frag.stopTimer();
+					jobTimerRunning = false;
+				}
+
+				if(position != 2 && controlTimerRunning == true){
+					FragPrinterControl frag = (FragPrinterControl) getSupportFragmentManager().findFragmentByTag(makeFragmentName(2));
+					frag.stopTimer();
+					controlTimerRunning = false;
+				}
+
+				if(position != 3 && control2TimerRunning == true){
+					FragPrinterControl2 frag = (FragPrinterControl2) getSupportFragmentManager().findFragmentByTag(makeFragmentName(3));
+					frag.stopTimer();
+					control2TimerRunning = false;
+				}
+
 
 				mSectionsPagerAdapter.getItem(position);
 			}

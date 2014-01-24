@@ -12,18 +12,15 @@ import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.android.repetierserverapp.R;
-import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList.FragModelCallbacks;
 import com.grasselli.android.repetierserverapi.Job;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.JobCallbacks;
@@ -36,13 +33,11 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 	private JobListAdapter adapter;
 
 	private TextView warning;
-	private ImageButton refresh;
 
 	private static Printer printer;
 
 	private static Timer myTimer;
 	public static int jobInterval;
-	private static boolean timerRunning;
 
 	public FragJobList() {
 	}
@@ -68,7 +63,6 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 		super.onCreate(savedInstanceState);
 		Log.d("frag1", "frag1");
 		jobInterval = 5000;
-		timerRunning = false;
 	}
 
 
@@ -263,7 +257,6 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 	public void startTimer(){
 		Log.d("startTimer", "Job");
 		myTimer = new Timer();
-		timerRunning = true;
 		myTimer.schedule(new TimerTask() {          
 			@Override
 			public void run() {
@@ -275,9 +268,7 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 
 	public void stopTimer(){
 		Log.d("stopTimer", "Job");
-		if (timerRunning){
 			myTimer.cancel();
-		}
 	}
 
 
