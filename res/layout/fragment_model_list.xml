@@ -18,23 +18,12 @@
         android:layout_marginTop="20dp" >
     </ListView>
 
-    <ImageButton
-        android:id="@+id/refreshButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@android:id/list"
-        android:background="@android:color/transparent"
-        android:src="@drawable/refresh" />
-
     <TextView
         android:id="@+id/modelTV"
         style="@style/boldText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/refreshButton"
         android:layout_alignLeft="@android:id/list"
-        android:layout_alignTop="@+id/refreshButton"
         android:gravity="center_vertical|right"
         android:text="@string/avaibleModel"
         android:textSize="@dimen/bigbigText" />

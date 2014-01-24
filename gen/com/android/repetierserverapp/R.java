@@ -51,7 +51,7 @@ public final class R {
         public static final int view_red=0x7f020009;
     }
     public static final class id {
-        public static final int action_settings=0x7f09005a;
+        public static final int action_settings=0x7f090059;
         public static final int bedSwitch=0x7f090035;
         public static final int bedTempReadTextView=0x7f090038;
         public static final int bedTempSetTextView=0x7f09003a;
@@ -60,12 +60,12 @@ public final class R {
         public static final int blueView=0x7f09001a;
         public static final int blueView2=0x7f09001d;
         public static final int createServerBtn=0x7f090005;
-        public static final int current=0x7f090052;
-        public static final int currentJob=0x7f090053;
+        public static final int current=0x7f090051;
+        public static final int currentJob=0x7f090052;
         public static final int deleteServerBtn=0x7f090008;
-        public static final int dimen=0x7f090048;
-        public static final int dimenJob=0x7f090049;
-        public static final int dimenModel=0x7f090050;
+        public static final int dimen=0x7f090047;
+        public static final int dimenJob=0x7f090048;
+        public static final int dimenModel=0x7f09004f;
         public static final int extrTempReadTextView=0x7f090033;
         public static final int extrTempSetTextView=0x7f09003c;
         public static final int extrtempTextView=0x7f090034;
@@ -83,50 +83,49 @@ public final class R {
         public static final int homexbutton=0x7f090027;
         public static final int homeybutton=0x7f090029;
         public static final int homezbutton=0x7f090021;
-        public static final int jobName=0x7f090047;
-        public static final int jobStatus=0x7f09004a;
+        public static final int jobName=0x7f090046;
+        public static final int jobStatus=0x7f090049;
         public static final int jobTV=0x7f090040;
-        public static final int mb=0x7f09004b;
-        public static final int modelName=0x7f09004f;
-        public static final int modelStatus=0x7f090051;
-        public static final int modelTV=0x7f090043;
-        public static final int nameServer=0x7f090058;
+        public static final int mb=0x7f09004a;
+        public static final int modelName=0x7f09004e;
+        public static final int modelStatus=0x7f090050;
+        public static final int modelTV=0x7f090042;
+        public static final int nameServer=0x7f090057;
         public static final int newBedTempBtn=0x7f09003f;
         public static final int newBedTempEt=0x7f09003e;
         public static final int newExtrTempBtn=0x7f09003d;
         public static final int newExtrTempEt=0x7f09003b;
-        public static final int newServerBtn=0x7f090046;
+        public static final int newServerBtn=0x7f090045;
         public static final int newServerTV=0x7f090000;
         public static final int newUrlTV=0x7f090004;
         public static final int pager=0x7f09000a;
         public static final int pager_title_strip=0x7f09000b;
-        public static final int perc=0x7f09004d;
-        public static final int powerButton=0x7f090056;
-        public static final int printerName=0x7f090057;
-        public static final int printerSelectionTV=0x7f090044;
-        public static final int printerStatus=0x7f090054;
-        public static final int progress=0x7f09004e;
-        public static final int progressJob=0x7f090055;
+        public static final int perc=0x7f09004c;
+        public static final int powerButton=0x7f090055;
+        public static final int printerName=0x7f090056;
+        public static final int printerSelectionTV=0x7f090043;
+        public static final int printerStatus=0x7f090053;
+        public static final int progress=0x7f09004d;
+        public static final int progressJob=0x7f090054;
         public static final int redView=0x7f090014;
         public static final int redView2=0x7f090017;
-        public static final int refreshButton=0x7f090041;
         public static final int saveServerBtn=0x7f090009;
         public static final int serverName=0x7f090006;
         public static final int serverNameET=0x7f090001;
-        public static final int serverSelectionTV=0x7f090045;
+        public static final int serverSelectionTV=0x7f090044;
         public static final int serverUrl=0x7f090007;
         public static final int serverUrlET=0x7f090003;
         public static final int server_detail_container=0x7f09000c;
         public static final int server_list=0x7f09000d;
-        public static final int status=0x7f09004c;
+        public static final int status=0x7f09004b;
         public static final int statusTextView=0x7f090022;
         public static final int textView1=0x7f090002;
         public static final int textView2=0x7f090039;
         public static final int textViewX=0x7f090024;
         public static final int textViewY=0x7f09002a;
         public static final int textViewZ=0x7f090026;
-        public static final int urlServer=0x7f090059;
-        public static final int warningTv=0x7f090042;
+        public static final int urlServer=0x7f090058;
+        public static final int warningTv=0x7f090041;
         public static final int xValueTextView=0x7f090023;
         public static final int x_10button=0x7f090018;
         public static final int x_1button=0x7f090019;
@@ -233,6 +232,7 @@ public final class R {
         public static final int yes=0x7f040023;
     }
     public static final class style {
+        public static final int ActionBarStyle=0x7f05000b;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -257,11 +257,13 @@ public final class R {
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
 
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
 
         
 

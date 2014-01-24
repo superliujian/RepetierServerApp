@@ -3,8 +3,6 @@ package com.android.repetierserverapp.ServerDetailList;
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.ServerDetailList.FragServerDetail.PrinterAppCallbacks;
 import com.android.repetierserverapp.ServerList.ActivityServerList;
-import com.android.repetierserverapp.ServerList.FragServerList.ServerAppCallbacks;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

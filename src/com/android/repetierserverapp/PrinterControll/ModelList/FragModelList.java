@@ -2,11 +2,15 @@ package com.android.repetierserverapp.PrinterControll.ModelList;
 
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,36 +23,40 @@ import android.widget.Toast;
 import android.widget.ListView;
 
 import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.PrinterControll.ActivityPrinterControll;
 import com.grasselli.android.repetierserverapi.Model;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.ModelCallbacks;
 import com.grasselli.android.repetierserverapi.Server;
 
-public class FragModelList extends ListFragment implements OnClickListener {
+public class FragModelList extends ListFragment {
 
-	
-	public interface PrinterControlCallbacks {
+
+	public interface FragModelCallbacks {
 		public void updateJobList(Printer printer);
 	};
-	
-	private static PrinterControlCallbacks sDummyCallbacks = new PrinterControlCallbacks() {
+
+	private static FragModelCallbacks sDummyCallbacks = new FragModelCallbacks() {
 		@Override
 		public void updateJobList(Printer printer) {
 		}
+
 	};
-	
-	
-	private PrinterControlCallbacks callback;
-	
+
+
+	private FragModelCallbacks callback;
+
 	private ListView listview;
 	private ImageButton refresh;
-	
+
 	private ModelListAdapter adapter;
 
 	private Printer printer;
 
+	private static Timer myTimer;
+	public static int modelInterval;
+	private static boolean timerRunning;
 
-	
 
 	public FragModelList() {
 	}
@@ -58,12 +66,12 @@ public class FragModelList extends ListFragment implements OnClickListener {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		
-		if (!(activity instanceof PrinterControlCallbacks)) {
+
+		if (!(activity instanceof FragModelCallbacks )) {
 			throw new IllegalStateException(
 					"Activity must implement fragment's callbacks.");
 		}
-		callback = (PrinterControlCallbacks) activity;
+		callback = (FragModelCallbacks) activity;
 	}
 
 
@@ -71,6 +79,9 @@ public class FragModelList extends ListFragment implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.d("frag0", "frag0");
+		modelInterval = 5000;
+		timerRunning = false;
 	}
 
 
@@ -90,9 +101,7 @@ public class FragModelList extends ListFragment implements OnClickListener {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		refresh = (ImageButton) view.findViewById(R.id.refreshButton);
-		refresh.setOnClickListener(this);
-		
+
 		listview = getListView();
 		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -177,29 +186,41 @@ public class FragModelList extends ListFragment implements OnClickListener {
 			}
 
 			@Override
-			public void onError(String error) {
-				Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+			public void onModelError(String error) {
+				Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();				
 			}
 		});
 
 		printer.updateModelList(getActivity());
 	}
 
-	
-	
+
+
 	@Override
 	public void onDetach() {
 		super.onDetach();
 		callback = sDummyCallbacks;
 	}
 
+	
 
-
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.refreshButton){
-			printer.updateModelList(getActivity());
-		}
+	public void startTimer(){
+		Log.d("startTimer", "Model");
+		myTimer = new Timer();
+		timerRunning = true;
+		myTimer.schedule(new TimerTask() {          
+			@Override
+			public void run() {
+				printer.updateModelList(getActivity().getApplicationContext());
+				Log.d("Timer", "Model");
+			}
+		}, 0, modelInterval);
 	}
 
+	public void stopTimer(){
+		Log.d("stopTimer", "Model");
+		if (timerRunning){
+			myTimer.cancel();
+		}
+	}
 }

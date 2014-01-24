@@ -1,6 +1,11 @@
 package com.android.repetierserverapp.PrinterControll;
 
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.android.repetierserverapp.R;
+import com.grasselli.android.repetierserverapi.Line;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterStatusCallbacks;
 import com.grasselli.android.repetierserverapi.PrinterStatus;
@@ -8,6 +13,7 @@ import com.grasselli.android.repetierserverapi.Server;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeListener, OnClickListener, PrinterStatusCallbacks, OnCheckedChangeListener{
-	
+
 	private TextView feedrateValue;
 	private TextView flowrateValue;				
 
@@ -47,17 +53,25 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private Printer printer;
 	private Toast toast;
 
-	private static final int FILTER = 13;
-	
-	
+	private static Timer myTimer;
+	public static int control2Interval;
+	private static boolean timerRunning;
+
+
+
 	public FragPrinterControl2(){
 	}
 
 
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		Log.d("frag3", "frag3");
+
+		control2Interval = 3000;
+		timerRunning = false;
 
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
@@ -69,10 +83,11 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		double progress = getArguments().getDouble("progress");
 
 		printer = new Printer(new Server(url, alias),name, slug, online, currentJob, active, progress);
+		printer.setPrinterStatusCallbacks(this);
 	}
 
 
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -83,10 +98,10 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	}
 
 
-	
+
 	@Override
 	public void onViewCreated(View v, Bundle savedInstanceState) {
-		
+
 		feedrateValue = (TextView) v.findViewById(R.id.feedrateValueTextView);
 		flowrateValue = (TextView) v.findViewById(R.id.flowrateValueTextView);
 
@@ -117,14 +132,14 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 		newExtrTempEt = (EditText) v.findViewById(R.id.newExtrTempEt);
 		newBedTempEt = (EditText) v.findViewById(R.id.newBedTempEt);
-		
+
 		boolean isOnLine;
 
 		if (printer.getOnline() == 0)
 			isOnLine = false;
 		else 
 			isOnLine = true;
-		
+
 		feedrateValue.setActivated(isOnLine);
 		flowrateValue.setActivated(isOnLine);
 		newBedTempBtn.setClickable(isOnLine);
@@ -134,15 +149,15 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	}
 
 
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -151,7 +166,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			int bedtemp = Integer.parseInt(newBedTempEt.getText().toString());
 			if(checkTemp(bedtemp, 1)){
 				printer.setBedTemp(getActivity(), bedtemp);
-				printer.updatePrinterStatus(getActivity(), printer.getLastId(), FILTER);
+				printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
 			}
 			break;
 
@@ -159,14 +174,14 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			int extrtemp = Integer.parseInt(newExtrTempEt.getText().toString());
 			if(checkTemp(extrtemp, 0)){
 				printer.setExtrTemp(getActivity(), extrtemp);
-				printer.updatePrinterStatus(getActivity(), printer.getLastId(), FILTER);
+				printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
 			}
 			break;
 		}
 	}
 
-	
-	
+
+
 	//type == 0 temperatura estrusore
 	//type == 1 temperatura letto riscaldato
 	private boolean checkTemp(int temp, int type){
@@ -196,30 +211,32 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 
 	@Override
-	public void onError(String error) {
-		// TODO Auto-generated method stub
-
+	public void onStatusError(String error) {
+		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
 	}
 
-	
-	
-	//aggiorna valori interfaccia
+
+
 	@Override
-	public void onPrinterStatusUpdated(PrinterStatus printerStatus) {
-		flowrateValue.setText(printerStatus.getFlow_multiply());
-		feedrateValue.setText(printerStatus.getSpeed_multiply());
-		extrRead.setText((int) printerStatus.getTemp_read());
-		extrSet.setText((int) printerStatus.getTemp_set());
-		bedRead.setText((int) printerStatus.getBed_temp_read());
-		bedSet.setText((int) printerStatus.getBed_temp_set());
-		if (printerStatus.getTemp_set()==0)	turnOff(extruderSwitch);
+	public void onPrinterStatusUpdated(PrinterStatus status, int lastId,
+			ArrayList<Line> tempLines) {
+		
+		ActivityPrinterControll.LAST_ID = lastId;
+		
+		flowrateValue.setText(status.getFlow_multiply());
+		feedrateValue.setText(status.getSpeed_multiply());
+		extrRead.setText((int) status.getTemp_read());
+		extrSet.setText((int) status.getTemp_set());
+		bedRead.setText((int) status.getBed_temp_read());
+		bedSet.setText((int) status.getBed_temp_set());
+		if (status.getTemp_set()==0)	turnOff(extruderSwitch);
 		else turnOn(extruderSwitch);
-		if (printerStatus.getBed_temp_set()==0)	turnOff(bedSwitch);
+		if (status.getBed_temp_set()==0)	turnOff(bedSwitch);
 		else turnOn(bedSwitch);
 	}
 
-	
-	
+
+
 	public void turnOn (Switch s){
 		s.setChecked(true);
 	}
@@ -228,8 +245,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		s.setChecked(false);
 	}
 
-	
-	
+
+
 	//Accendi/spegni estrusore/letto
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -237,13 +254,13 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		case R.id.extruderSwitch:
 			if (extruderSwitch.isChecked()){
 				printer.setExtrTemp(getActivity(), 0);
-				printer.updatePrinterStatus(getActivity(), printer.getLastId(), FILTER);
+				printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
 			}
 			else {
 				int extrtemp = Integer.parseInt(newExtrTempEt.getText().toString());
 				if(checkTemp(extrtemp, 0)){
 					printer.setExtrTemp(getActivity(), extrtemp);
-					printer.updatePrinterStatus(getActivity(), printer.getLastId(), FILTER);
+					printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
 				}
 			}
 			break;
@@ -252,14 +269,14 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			int bedtemp = Integer.parseInt(newBedTempEt.getText().toString());
 			if(checkTemp(bedtemp, 1)){
 				printer.setBedTemp(getActivity(), bedtemp);
-				printer.updatePrinterStatus(getActivity(), printer.getLastId(), FILTER);
+				printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
 			}
 			break;
 		}
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
@@ -285,4 +302,30 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			break;
 		}
 	}
+
+
+
+	public void startTimer(){
+		Log.d("startTimer", "control2");
+		myTimer = new Timer();
+		timerRunning = true;
+		myTimer.schedule(new TimerTask() {          
+			@Override
+			public void run() {
+				Log.d("Timer", "control2");
+				printer.updatePrinterStatus(getActivity().getApplicationContext(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);				
+				Log.d("Timer", "Timer");
+			}
+		}, 0, control2Interval);
+	}
+
+	public void stopTimer(){
+		Log.d("stopTimer", "control2");
+		if (timerRunning){
+			myTimer.cancel();
+		}
+	}
+
+
+
 }

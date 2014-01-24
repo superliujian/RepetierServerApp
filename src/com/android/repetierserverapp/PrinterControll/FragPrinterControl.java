@@ -2,25 +2,29 @@ package com.android.repetierserverapp.PrinterControll;
 
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.android.repetierserverapp.R;
+import com.grasselli.android.repetierserverapi.Line;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
 import com.grasselli.android.repetierserverapi.Printer.PrinterStatusCallbacks;
 import com.grasselli.android.repetierserverapi.PrinterStatus;
-import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 import com.grasselli.android.repetierserverapi.Server;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class FragPrinterControl extends Fragment implements PrinterStatusCallbacks, OnClickListener, PrinterCallbacks, ServerCallbacks {
+public class FragPrinterControl extends Fragment implements PrinterStatusCallbacks, OnClickListener, PrinterCallbacks {
 
 	private Button buttonXp10;
 	private Button buttonXp1;
@@ -48,8 +52,10 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	private TextView textViewStatus;
 
 	Printer printer;
-
-
+	
+	private static Timer myTimer;
+	public static int control1Interval;
+	private static boolean timerRunning;
 
 	public FragPrinterControl(){
 	}
@@ -59,7 +65,12 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Log.d("frag2", "frag2");
 
+		control1Interval = 3000;
+		timerRunning = false;
+		
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
 		String name = getArguments().getString("name");
@@ -92,7 +103,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	public void onViewCreated(View v, Bundle savedInstanceState) {
 		super.onViewCreated(v, savedInstanceState);
 
-		printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
+		printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
 
 		buttonXp10 = (Button) v.findViewById(R.id.xp10button);
 		buttonXp1 = (Button) v.findViewById(R.id.xp1button);
@@ -256,37 +267,22 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	}
 
 
-
 	@Override
-	public void onPrinterStatusUpdated(PrinterStatus printerStatus) {
-		String x = Double.toString(printerStatus.getX());		
-		String y = Double.toString(printerStatus.getY());		
-		String z = Double.toString(printerStatus.getZ());
+	public void onPrinterStatusUpdated(PrinterStatus status, int lastId,
+			ArrayList<Line> tempLines) {
+		
+		ActivityPrinterControll.LAST_ID = lastId;
+		
+		String x = Double.toString(status.getX());		
+		String y = Double.toString(status.getY());		
+		String z = Double.toString(status.getZ());
 
 		//TODO String current = 
-
 		textViewXvalue.setText(x);	
 		textViewYvalue.setText(y);	
 		textViewZvalue.setText(z);
-
+		
 	}
-
-
-
-	@Override
-	public void onError(String error) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-
-	@Override
-	public void onPrinterListUpdated(ArrayList<Printer> printerList) {
-		// TODO Auto-generated method stub
-
-	}
-
 
 
 	@Override
@@ -303,6 +299,41 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 
 	}
 
+
+
+	public void startTimer(){
+		Log.d("startTimer", "control1");
+		myTimer = new Timer();
+		timerRunning = true;
+		myTimer.schedule(new TimerTask() {          
+			@Override
+			public void run() {
+				printer.updatePrinterStatus(getActivity().getApplicationContext(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
+				Log.d("Timer", "control1");
+			}
+		}, 0, control1Interval);
+	}
+
+	public void stopTimer(){
+		Log.d("stopTimer", "control1");
+		if (timerRunning){
+			myTimer.cancel();
+		}
+	}
+
+
+
+	@Override
+	public void onPrinterError(String error) {
+		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+	}
+
+
+
+	@Override
+	public void onStatusError(String error) {
+		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+	}
 
 
 

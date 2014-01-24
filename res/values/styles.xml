@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -16,67 +16,69 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
-    
+
     <style name="PagerTitleStrip" parent="@android:style/Widget.Holo.TextView">
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:typeface">sans</item>  
+        <item name="android:typeface">sans</item>
         <item name="android:textSize">@dimen/bigText</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
-    
+
     <style name="home_buttons" parent="android:Widget.Button">
         <item name="android:textSize">@dimen/homeButtonText</item>
         <item name="android:minWidth">48dp</item>
         <item name="android:minHeight">48dp</item>
     </style>
 
-    
     <style name="control_buttons" parent="android:Widget.Button">
         <item name="android:textSize">@dimen/controlButtonText</item>
         <item name="android:minWidth">48dp</item>
         <item name="android:minHeight">48dp</item>
         <item name="android:textColor">@color/black</item>
     </style>
-    
+
     <style name="boldText" parent="@android:style/Widget.Holo.TextView">
         <item name="android:textColor">#000000</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:typeface">sans</item>  
+        <item name="android:typeface">sans</item>
     </style>
-    
+
     <style name="italicText" parent="@android:style/Widget.Holo.TextView">
         <item name="android:textColor">#000000</item>
         <item name="android:textStyle">italic</item>
-        <item name="android:typeface">sans</item>  
+        <item name="android:typeface">sans</item>
     </style>
-         
+
     <style name="Text" parent="@android:style/Widget.Holo.TextView">
         <item name="android:textColor">#000000</item>
         <item name="android:typeface">sans</item>
-        
     </style>
-    
+
     <style name="blueText" parent="@android:style/Widget.Holo.TextView">
         <item name="android:typeface">sans</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/blu_medio</item>
     </style>
-    
+
     <style name="offline" parent="@android:style/Widget.Holo.TextView">
         <item name="android:typeface">sans</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/red</item>
     </style>
-    
+
     <style name="online" parent="@android:style/Widget.Holo.TextView">
         <item name="android:typeface">sans</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/green</item>
     </style>
-    
+
+    <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/light_blue</item>
+        
+    </style>
+
 </resources>

@@ -104,12 +104,6 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 		printer.setPrinterCallbacks(new PrinterCallbacks() {
 
 			@Override
-			public void onError(String error) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
 			public void onCommandExecuted() {
 				// TODO Auto-generated method stub
 
@@ -118,6 +112,11 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 			@Override
 			public void onChangeState() {
 				listener.updatePrinterList();
+			}
+
+			@Override
+			public void onPrinterError(String error) {
+
 			}
 		});
 

@@ -164,8 +164,9 @@ public class FragServerDetail extends ListFragment {
 				}
 
 				@Override
-				public void onError(String error) {
+				public void onPrinterListError(String error) {
 					Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+					
 				}
 			});
 			

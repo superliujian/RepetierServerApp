@@ -2,6 +2,8 @@ package com.android.repetierserverapp.PrinterControll.JobList;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,13 +23,14 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList.FragModelCallbacks;
 import com.grasselli.android.repetierserverapi.Job;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.JobCallbacks;
 import com.grasselli.android.repetierserverapi.ReplyMessage;
 import com.grasselli.android.repetierserverapi.Server;
 
-public class FragJobList extends ListFragment implements OnClickListener, OnItemLongClickListener, JobCallbacks{
+public class FragJobList extends ListFragment implements OnItemLongClickListener, JobCallbacks{
 
 	private ListView listview;
 	private JobListAdapter adapter;
@@ -37,9 +40,9 @@ public class FragJobList extends ListFragment implements OnClickListener, OnItem
 
 	private static Printer printer;
 
-	private Timer myTimer;
-
-
+	private static Timer myTimer;
+	public static int jobInterval;
+	private static boolean timerRunning;
 
 	public FragJobList() {
 	}
@@ -49,7 +52,13 @@ public class FragJobList extends ListFragment implements OnClickListener, OnItem
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		Log.d("1", "entrato");
+	}
+
+
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
 	}
 
 
@@ -57,7 +66,9 @@ public class FragJobList extends ListFragment implements OnClickListener, OnItem
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d("2", "entrato");
+		Log.d("frag1", "frag1");
+		jobInterval = 5000;
+		timerRunning = false;
 	}
 
 
@@ -65,7 +76,6 @@ public class FragJobList extends ListFragment implements OnClickListener, OnItem
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Log.d("3", "entrato");
 
 		View rootView = inflater.inflate(R.layout.fragment_job_list,
 				container, false);
@@ -78,14 +88,10 @@ public class FragJobList extends ListFragment implements OnClickListener, OnItem
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		Log.d("4", "entrato");
-
 		listview = getListView();
 		listview.setOnItemLongClickListener(this);
 
 		warning = (TextView) view.findViewById(R.id.warningTv);
-		refresh = (ImageButton) view.findViewById(R.id.refreshButton);
-		refresh.setOnClickListener(this);
 	}
 
 
@@ -93,8 +99,6 @@ public class FragJobList extends ListFragment implements OnClickListener, OnItem
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
-		Log.d("5", "entrato");
 
 		getActivity().getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -202,7 +206,7 @@ public class FragJobList extends ListFragment implements OnClickListener, OnItem
 
 
 	public void updateListView (Printer printer){
-		Log.d("updateListView Frag Job", "entrato");
+		//Log.d("updateListView Frag Job", "entrato");
 		printer.setJobCallbacks(this);
 		printer.updateJobList(getActivity().getApplicationContext());
 	}
@@ -210,14 +214,15 @@ public class FragJobList extends ListFragment implements OnClickListener, OnItem
 
 
 	@Override
-	public void onError(String error) {
+	public void onJobError(String error) {
 		Toast.makeText(getActivity(), "JOB ERROR", Toast.LENGTH_LONG).show();	
+		
 	}
+
+
 
 	@Override
 	public void onJobListUpdated(ArrayList<Job> newJobList) {
-
-		Log.d("onJobListUpdated Frag Job", "entrato");
 
 		adapter = new JobListAdapter(getActivity(), R.layout.job_line, newJobList); 
 		listview = getListView();
@@ -255,24 +260,26 @@ public class FragJobList extends ListFragment implements OnClickListener, OnItem
 	}
 
 
-
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.refreshButton){
-			printer.updateJobList(getActivity());
-		}
-	}		
-
-	/*
 	public void startTimer(){
-		Log.d("startTimer", "startTimer");
+		Log.d("startTimer", "Job");
 		myTimer = new Timer();
-	    myTimer.schedule(new TimerTask() {          
-	        @Override
-	        public void run() {
-	        	printer.updateJobList(getActivity().getApplicationContext());
-	        }
-	    }, 5000);
+		timerRunning = true;
+		myTimer.schedule(new TimerTask() {          
+			@Override
+			public void run() {
+				printer.updateJobList(getActivity().getApplicationContext());
+				Log.d("Timer", "Job");
+			}
+		}, 0, jobInterval);
 	}
-	 */
+
+	public void stopTimer(){
+		Log.d("stopTimer", "Job");
+		if (timerRunning){
+			myTimer.cancel();
+		}
+	}
+
+
+
 }

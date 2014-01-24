@@ -1,15 +1,20 @@
 package com.android.repetierserverapp;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.util.Log;
+
 public class ToDo {
 
 	/*
-	 * switch attivazione stampante
-	 * 
-	 * rimuovi toast
+	 *
 	 * 
 	 * Gestione eccezzioni su connessioni
 	 * 
+	 * 
 	 * Caricare modello
+	 * 
 	 * 
 	 * titolo/icona
 	 * 
@@ -18,10 +23,7 @@ public class ToDo {
 	 * printerControllCallback
 	 * implementato ma non funziona bene
 	 * 
-	 * "AGGIORNA LISTA"
-	 * 
-	 * 
-	 * menu
+	 * timer chiamate
 	 * 
 	 * 
 	 * grafica
@@ -29,11 +31,7 @@ public class ToDo {
 	 * printercontroll2
 	 * 
 	 * 
-	 * timer chiamate
-	 * 
-	 * 
-	 * 
-	 * 
+
 	 * 
 	 * 
 	 * onAttach
@@ -57,5 +55,58 @@ public class ToDo {
         android:onClick="onClick"
         android:text=" ACCENDI "
         android:textSize="@dimen/bigText" />
-	 */
+        
+        
+        
+        	public void startTimer(){
+		Log.d("startTimer", "startTimer");
+		myTimer = new Timer();
+		myTimer.schedule(new TimerTask() {          
+			@Override
+			public void run() {
+				printer.updateJobList(getActivity().getApplicationContext());
+				Log.d("Timer", "Timer");
+			}
+		}, 0, 5000);
+	}
+
+	public void stopTimer(){
+		Log.d("stopTimer", "stopTimer");
+		myTimer.cancel();
+	}
+	
+	
+	/*
+				if (position == 0){
+//					fragModelList.startTimer();
+					modelTimer = true;
+				} 
+				
+				if (position == 1 && first == false){
+					fragJobList.startTimer();
+					jobTimer = true;
+				}
+				
+				if (position == 2){
+//					fragPrinterControl.startTimer();
+					controlTimer = true;
+				}
+				
+				if (position != 0 && modelTimer == true){
+//					fragModelList.stopTimer();
+					modelTimer = false;
+				} 
+				
+				if (position != 1 && jobTimer == true){
+					fragJobList.stopTimer();
+					jobTimer = false;
+				} 
+				
+				if (position != 2 && controlTimer == true){
+//					fragPrinterControl.stopTimer();
+					controlTimer = false;
+				} 
+				
+*/
+	 
 }
