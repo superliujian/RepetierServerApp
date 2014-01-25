@@ -7,11 +7,15 @@ import java.util.TimerTask;
 import com.android.repetierserverapp.R;
 import com.grasselli.android.repetierserverapi.Line;
 import com.grasselli.android.repetierserverapi.Printer;
+import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
 import com.grasselli.android.repetierserverapi.Printer.PrinterStatusCallbacks;
 import com.grasselli.android.repetierserverapi.PrinterStatus;
 import com.grasselli.android.repetierserverapi.Server;
+import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +32,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeListener, OnClickListener, PrinterStatusCallbacks, OnCheckedChangeListener{
+public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeListener, OnClickListener, PrinterStatusCallbacks, ServerCallbacks, PrinterCallbacks, OnCheckedChangeListener{
 
 	private TextView feedrateValue;
 	private TextView flowrateValue;				
@@ -51,9 +55,15 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private EditText newBedTempEt;
 
 	private Printer printer;
+	private Server server;
+	private int position;	
+	
 	private Toast toast;
 
 	private static Timer myTimer;
+	private Timer printerTimer;
+	
+	private SharedPreferences prefs;
 
 
 	public FragPrinterControl2(){
@@ -65,7 +75,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		Log.d("frag3", "frag3");
+		Log.d("FragPrinterControl2", "FragPrinterControl2");
 
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
@@ -75,9 +85,16 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		String currentJob = getArguments().getString("currentJob");
 		Boolean active = getArguments().getBoolean("active");
 		double progress = getArguments().getDouble("progress");
+		position = getArguments().getInt("position");
 
-		printer = new Printer(new Server(url, alias),name, slug, online, currentJob, active, progress);
+		server = new Server(url, alias);
+		printer = new Printer(server, name, slug, online, currentJob, active, progress);
+		
+		server.setCallbacks(this);
 		printer.setPrinterStatusCallbacks(this);
+		printer.setPrinterCallbacks(this);
+		
+		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 	}
 
 
@@ -127,19 +144,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		newExtrTempEt = (EditText) v.findViewById(R.id.newExtrTempEt);
 		newBedTempEt = (EditText) v.findViewById(R.id.newBedTempEt);
 
-		boolean isOnLine;
-
-		if (printer.getOnline() == 0)
-			isOnLine = false;
-		else 
-			isOnLine = true;
-
-		feedrateValue.setActivated(isOnLine);
-		flowrateValue.setActivated(isOnLine);
-		newBedTempBtn.setClickable(isOnLine);
-		newExtrTempBtn.setClickable(isOnLine);
-		extruderSwitch.setClickable(isOnLine);
-		bedSwitch.setClickable(isOnLine);
+		updateFrag(printer);
+		
 	}
 
 
@@ -160,7 +166,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			int bedtemp = Integer.parseInt(newBedTempEt.getText().toString());
 			if(checkTemp(bedtemp, 1)){
 				printer.setBedTemp(getActivity(), bedtemp);
-				printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
+				printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			}
 			break;
 
@@ -168,7 +174,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			int extrtemp = Integer.parseInt(newExtrTempEt.getText().toString());
 			if(checkTemp(extrtemp, 0)){
 				printer.setExtrTemp(getActivity(), extrtemp);
-				printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
+				printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			}
 			break;
 		}
@@ -203,29 +209,37 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	}
 
 
-
+	//PrinterStatus Callback
 	@Override
 	public void onStatusError(String error) {
 		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
 	}
 
 
-
+	//PrinterStatus Callback
 	@Override
 	public void onPrinterStatusUpdated(PrinterStatus status, int lastId,
 			ArrayList<Line> tempLines) {
+
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putInt("LAST_ID", lastId);
+		editor.commit();
 		
-		ActivityPrinterControll.LAST_ID = lastId;
+		Log.d("lastId stored: ", Integer.toString(lastId));
 		
-		flowrateValue.setText(status.getFlow_multiply());
-		feedrateValue.setText(status.getSpeed_multiply());
-		extrRead.setText((int) status.getTemp_read());
-		extrSet.setText((int) status.getTemp_set());
-		bedRead.setText((int) status.getBed_temp_read());
-		bedSet.setText((int) status.getBed_temp_set());
-		if (status.getTemp_set()==0)	turnOff(extruderSwitch);
+		flowrateValue.setText(Integer.toString(status.getFlow_multiply()));
+		feedrateValue.setText(Integer.toString(status.getSpeed_multiply()));
+		extrRead.setText(Double.toString(status.getTemp_read()));
+		extrSet.setText(Double.toString(status.getTemp_set()));
+		bedRead.setText(Double.toString(status.getBed_temp_read()));
+		bedSet.setText(Double.toString(status.getBed_temp_set()));
+		
+		if (status.getTemp_set()==0)	
+			turnOff(extruderSwitch);
 		else turnOn(extruderSwitch);
-		if (status.getBed_temp_set()==0)	turnOff(bedSwitch);
+		
+		if (status.getBed_temp_set()==0)	
+			turnOff(bedSwitch);
 		else turnOn(bedSwitch);
 	}
 
@@ -244,17 +258,18 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	//Accendi/spegni estrusore/letto
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+	/*	
 		switch (buttonView.getId()) {
 		case R.id.extruderSwitch:
 			if (extruderSwitch.isChecked()){
 				printer.setExtrTemp(getActivity(), 0);
-				printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
+				printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			}
 			else {
 				int extrtemp = Integer.parseInt(newExtrTempEt.getText().toString());
 				if(checkTemp(extrtemp, 0)){
 					printer.setExtrTemp(getActivity(), extrtemp);
-					printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
+					printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 				}
 			}
 			break;
@@ -263,12 +278,13 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			int bedtemp = Integer.parseInt(newBedTempEt.getText().toString());
 			if(checkTemp(bedtemp, 1)){
 				printer.setBedTemp(getActivity(), bedtemp);
-				printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
+				printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			}
 			break;
 		}
+		*/
 	}
-
+	
 
 
 	@Override
@@ -300,23 +316,85 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 
 	public void startTimer(int interval){
-		Log.d("startTimer", "control2");
+		Log.d("startTimer", "intervallo: " + Integer.toString(interval));
 		myTimer = new Timer();
 		myTimer.schedule(new TimerTask() {          
 			@Override
 			public void run() {
 				Log.d("Timer", "control2");
-				printer.updatePrinterStatus(getActivity().getApplicationContext(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);				
-				Log.d("Timer", "Timer");
+				printer.updatePrinterStatus(getActivity().getApplicationContext(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);				
 			}
 		}, 0, interval);
+		
+		printerTimer = new Timer();
+		printerTimer.schedule(new TimerTask() {          
+			@Override
+			public void run() {
+				server.updatePrinterList(getActivity());
+			}
+		}, 0, 10000);
 	}
 
 	public void stopTimer(){
 		Log.d("stopTimer", "control2");
 			myTimer.cancel();
+			printerTimer.cancel();
 	}
 
 
+
+	@Override
+	public void onPrinterListError(String error) {
+		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();	
+	}
+
+
+
+	@Override
+	public void onPrinterListUpdated(ArrayList<Printer> printerList) {
+		printer = (printerList.get(position));
+		printer.setPrinterCallbacks(this);
+		printer.setPrinterStatusCallbacks(this);
+		updateFrag(printer);
+	}
+
+
+
+	private void updateFrag(Printer printer) {
+		boolean isOnLine;
+
+		if (printer.getOnline() == 0)
+			isOnLine = false;
+		else 
+			isOnLine = true;
+
+		feedrateValue.setActivated(isOnLine);
+		flowrateValue.setActivated(isOnLine);
+		newBedTempBtn.setClickable(isOnLine);
+		newExtrTempBtn.setClickable(isOnLine);
+		extruderSwitch.setClickable(isOnLine);
+		bedSwitch.setClickable(isOnLine);
+		
+	}
+
+
+	// PrinterCallback
+	@Override
+	public void onPrinterError(String error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onChangeState() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCommandExecuted() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

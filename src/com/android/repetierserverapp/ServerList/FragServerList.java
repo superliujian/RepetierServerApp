@@ -24,7 +24,7 @@ import android.widget.Button;
 import android.widget.ListView; 
 import android.widget.Toast;
 
-public class FragServerList extends ListFragment implements OnClickListener, OnItemClickListener, OnItemLongClickListener{
+public class FragServerList extends ListFragment implements OnItemClickListener, OnItemLongClickListener{
 
 	
 	//TODO RIMUOVERE
@@ -41,8 +41,6 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 
 	private DbAdapter dbAdapter;
 	private Cursor cursor;
-
-	private Button newServer;
 
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
 	private int mActivatedPosition = ListView.INVALID_POSITION;
@@ -72,10 +70,7 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 	@Override
 	public void onViewCreated(View v, Bundle savedInstanceState) {
 
-		newServer = (Button) v.findViewById(R.id.newServerBtn);
 		listView = getListView();
-
-		newServer.setOnClickListener(this);
 
 		if (savedInstanceState != null
 				&& savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
@@ -122,16 +117,6 @@ public class FragServerList extends ListFragment implements OnClickListener, OnI
 		mCallbacks = sDummyCallbacks;
 	}
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.newServerBtn:
-			Intent myIntent = new Intent(v.getContext(), ActivityAddServer.class);
-			startActivityForResult(myIntent, 0);
-
-			break;
-		}
-	}
 
 	@Override
 	public void onItemClick(AdapterView<?> listView, View view, int position, long id) {

@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 
 public class ActivityServerDetail extends FragmentActivity implements PrinterAppCallbacks {
-
+	private FragServerDetail fragment;
 	
 	
 	@Override
@@ -27,7 +27,7 @@ public class ActivityServerDetail extends FragmentActivity implements PrinterApp
 			arguments.putLong(FragServerDetail.ARG_SERVER_ID, getIntent()
 					.getLongExtra(FragServerDetail.ARG_SERVER_ID, -1));
 					//.getStringExtra(FragServerDetail.ARG_SERVER_ID));
-			FragServerDetail fragment = new FragServerDetail();
+			fragment = new FragServerDetail();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.server_detail_container, fragment).commit();
@@ -40,13 +40,8 @@ public class ActivityServerDetail extends FragmentActivity implements PrinterApp
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
+
+			fragment.stopTimer();
 			NavUtils.navigateUpTo(this, new Intent(this,
 					ActivityServerList.class));
 			return true;
@@ -55,7 +50,19 @@ public class ActivityServerDetail extends FragmentActivity implements PrinterApp
 	}
 
 
+	
+	@Override
+	public void onBackPressed(){
 
+		fragment.stopTimer();		
+		
+		Intent detailIntent = new Intent(this, ActivityServerList.class);
+		startActivity(detailIntent);
+	}
+
+	
+	
+	
 	@Override
 	public void onPrinterSelected(long id) {
 		// TODO Auto-generated method stub

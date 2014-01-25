@@ -20,23 +20,11 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/newServerBtn"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/serverSelectionTV"
-        android:layout_marginTop="20dp" 
-        android:longClickable="true">
+        android:layout_marginTop="20dp"
+        android:longClickable="true" >
 
     </ListView>
-
-    <Button
-        android:id="@+id/newServerBtn"
-        style="@style/Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
-        android:text="CREA NUOVO SERVER"
-        android:textSize="@dimen/bigText" />
     
 </RelativeLayout>

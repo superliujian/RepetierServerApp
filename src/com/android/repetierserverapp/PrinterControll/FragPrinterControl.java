@@ -12,8 +12,11 @@ import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
 import com.grasselli.android.repetierserverapi.Printer.PrinterStatusCallbacks;
 import com.grasselli.android.repetierserverapi.PrinterStatus;
 import com.grasselli.android.repetierserverapi.Server;
+import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +27,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragPrinterControl extends Fragment implements PrinterStatusCallbacks, OnClickListener, PrinterCallbacks {
+public class FragPrinterControl extends Fragment implements  PrinterStatusCallbacks, OnClickListener, PrinterCallbacks, ServerCallbacks {
 
 	private Button buttonXp10;
 	private Button buttonXp1;
@@ -51,9 +54,14 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 
 	private TextView textViewStatus;
 
-	Printer printer;
-	
+	private Printer printer;
+	private Server server;
+	private int position;	
+
 	private static Timer myTimer;
+	private static Timer printerTimer;
+	
+	private SharedPreferences prefs;
 
 	public FragPrinterControl(){
 	}
@@ -63,9 +71,9 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		Log.d("frag2", "frag2");
-		
+
+		Log.d("fragPrinterControl", "fragPrinterControl");
+
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
 		String name = getArguments().getString("name");
@@ -74,11 +82,16 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		String currentJob = getArguments().getString("currentJob");
 		Boolean active = getArguments().getBoolean("active");
 		double progress = getArguments().getDouble("progress");
+		position = getArguments().getInt("position");
 
-		printer = new Printer(new Server(url, alias),name, slug, online, currentJob, active, progress);
+		server = new Server(url, alias);
+		printer = new Printer(server, name, slug, online, currentJob, active, progress);
 
 		printer.setPrinterCallbacks(this);
 		printer.setPrinterStatusCallbacks(this);	
+		server.setCallbacks(this);
+		
+		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 	}
 
 
@@ -98,7 +111,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	public void onViewCreated(View v, Bundle savedInstanceState) {
 		super.onViewCreated(v, savedInstanceState);
 
-		printer.updatePrinterStatus(getActivity(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
+		printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 
 		buttonXp10 = (Button) v.findViewById(R.id.xp10button);
 		buttonXp1 = (Button) v.findViewById(R.id.xp1button);
@@ -145,33 +158,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		buttonZhome.setOnClickListener(this);
 		buttonHome.setOnClickListener(this);
 
-		boolean isOnLine;
-
-		if (printer.getOnline() == 0)
-			isOnLine = false;
-		else 
-			isOnLine = true;
-
-		buttonXp10.setEnabled(isOnLine);
-		buttonXp1.setEnabled(isOnLine);
-		buttonX_1.setEnabled(isOnLine);
-		buttonX_10.setEnabled(isOnLine);
-		buttonXhome.setEnabled(isOnLine);
-
-		buttonYp10.setEnabled(isOnLine);
-		buttonYp1.setEnabled(isOnLine);
-		buttonY_1.setEnabled(isOnLine);
-		buttonY_10.setEnabled(isOnLine);
-		buttonYhome.setEnabled(isOnLine);
-
-		buttonZp10.setEnabled(isOnLine);
-		buttonZp1.setEnabled(isOnLine);
-		buttonZ_1.setEnabled(isOnLine);
-		buttonZ_10.setEnabled(isOnLine);
-		buttonZhome.setEnabled(isOnLine);
-
-		buttonHome.setEnabled(isOnLine);	
-
+		updateFrag(printer);
 	}
 
 
@@ -200,6 +187,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 			break;
 
 		case R.id.homexbutton:
+			printer.moveHomeX(getActivity());
 			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
 			break;
 
@@ -224,6 +212,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 			break;
 
 		case R.id.homeybutton:
+			printer.moveHomeY(getActivity());
 			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
 			break;
 
@@ -248,12 +237,13 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 			break;
 
 		case R.id.homezbutton:
+			printer.moveHomeZ(getActivity());
 			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
 			break;
 
 		case R.id.homeButton:
-			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
 			printer.moveHome(getActivity());
+			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
 			break;
 
 		default:
@@ -262,28 +252,36 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	}
 
 
+	//PrinterStatus Callback
 	@Override
 	public void onPrinterStatusUpdated(PrinterStatus status, int lastId,
 			ArrayList<Line> tempLines) {
+
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putInt("LAST_ID", lastId);
+		editor.commit();
 		
-		ActivityPrinterControll.LAST_ID = lastId;
+		Log.d("lastId stored: ", Integer.toString(lastId));
 		
-		String x = Double.toString(status.getX());		
-		String y = Double.toString(status.getY());		
-		String z = Double.toString(status.getZ());
+		String x = Double.toString(Math.round(status.getX()*100)/100);
+		String y = Double.toString(Math.round(status.getY()*100)/100);
+		String z = Double.toString(Math.round(status.getZ()*100)/100);
 
 		//TODO String current = 
 		textViewXvalue.setText(x);	
 		textViewYvalue.setText(y);	
 		textViewZvalue.setText(z);
-		
 	}
 
+	//PrinterStatus Callback
+	@Override
+	public void onStatusError(String error) {
+		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+	}
 
+	
 	@Override
 	public void onChangeState() {
-		// TODO Auto-generated method stub
-
 	}
 
 
@@ -302,33 +300,85 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		myTimer.schedule(new TimerTask() {          
 			@Override
 			public void run() {
-				printer.updatePrinterStatus(getActivity().getApplicationContext(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
 				Log.d("Timer", "control1");
+				printer.updatePrinterStatus(getActivity().getApplicationContext(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			}
 		}, 0, interval);
+		
+		printerTimer = new Timer();
+		printerTimer.schedule(new TimerTask() {          
+			@Override
+			public void run() {
+				server.updatePrinterList(getActivity());
+			}
+		}, 0, 10000);
 	}
 
 	public void stopTimer(){
 		Log.d("stopTimer", "control1");
-			myTimer.cancel();
+		myTimer.cancel();
+		printerTimer.cancel();
 	}
 
 
-
+	
 	@Override
 	public void onPrinterError(String error) {
 		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
 	}
 
-
+	@Override
+	public void onPrinterListError(String error) {
+		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();	
+	}
 
 	@Override
-	public void onStatusError(String error) {
-		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+	public void onPrinterListUpdated(ArrayList<Printer> printerList) {
+		printer = (printerList.get(position));
+		printer.setPrinterCallbacks(this);
+		printer.setPrinterStatusCallbacks(this);
+		
+		if(printer.getCurrentJob().equals("none")){
+			textViewStatus.setText(R.string.noJobRunning);
+		} else {
+			textViewStatus.setText(R.string.jobRunning);
+			textViewStatus.append(" " + Double.toString(Math.round(printer.getProgress()*100)/100) + " %");
+		}
+		
+		
+		updateFrag(printer);
 	}
 
 
+	private void updateFrag(Printer newPrinter) {
 
+		boolean isOnLine;
+
+		if (newPrinter.getOnline() == 0 || !newPrinter.getCurrentJob().equals("none"))
+			isOnLine = false;
+		else 
+			isOnLine = true;
+
+		buttonXp10.setEnabled(isOnLine);
+		buttonXp1.setEnabled(isOnLine);
+		buttonX_1.setEnabled(isOnLine);
+		buttonX_10.setEnabled(isOnLine);
+		buttonXhome.setEnabled(isOnLine);
+
+		buttonYp10.setEnabled(isOnLine);
+		buttonYp1.setEnabled(isOnLine);
+		buttonY_1.setEnabled(isOnLine);
+		buttonY_10.setEnabled(isOnLine);
+		buttonYhome.setEnabled(isOnLine);
+
+		buttonZp10.setEnabled(isOnLine);
+		buttonZp1.setEnabled(isOnLine);
+		buttonZ_1.setEnabled(isOnLine);
+		buttonZ_10.setEnabled(isOnLine);
+		buttonZhome.setEnabled(isOnLine);
+
+		buttonHome.setEnabled(isOnLine);	
+	}
 
 
 }

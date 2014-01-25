@@ -21,7 +21,6 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.android.repetierserverapp.R;
-import com.android.repetierserverapp.PrinterControll.ActivityPrinterControll;
 import com.grasselli.android.repetierserverapi.Job;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.JobCallbacks;

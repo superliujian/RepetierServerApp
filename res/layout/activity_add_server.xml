@@ -11,57 +11,87 @@
     <TextView
         android:id="@+id/newServerTV"
         style="@style/Text"
-        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/newServer" />
+        android:text="@string/newServer"
+        android:textSize="@dimen/bigText" />
 
     <EditText
         android:id="@+id/serverNameET"
         style="@style/italicText"
-        android:textSize="@dimen/mediumText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/newServerTV"
         android:layout_marginTop="10dp"
-        android:ems="10" >
+        android:ems="10"
+        android:textSize="@dimen/mediumText" />
 
-        <requestFocus />
-    </EditText>
+    <Spinner
+        android:id="@+id/spinner"
+        style="@style/italicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/serverUrlET"
+        android:layout_alignLeft="@+id/serverNameET"
+        android:layout_alignTop="@+id/serverUrlET"
+        android:layout_toLeftOf="@+id/createServerBtn"
+        android:textSize="@dimen/mediumText" />
 
     <EditText
         android:id="@+id/serverUrlET"
         style="@style/italicText"
-        android:textSize="@dimen/mediumText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/newUrlTV"
         android:layout_below="@+id/newUrlTV"
         android:layout_marginTop="5dp"
-        android:ems="10" 
-        android:text="http://"/>
+        android:layout_toLeftOf="@+id/portET"
+        android:layout_toRightOf="@+id/spinner"
+        android:text="indirizzo"
+        android:textSize="@dimen/mediumText" />
+
+    <TextView
+        android:id="@+id/newUrlTV"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/serverUrlET"
+        android:layout_below="@+id/serverNameET"
+        android:layout_marginTop="18dp"
+        android:text="@string/newUrl"
+        android:textSize="@dimen/bigText" />
 
     <Button
         android:id="@+id/createServerBtn"
         style="@style/Text"
-        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/serverUrlET"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="CREA NUOVO SERVER" />
+        android:text="CREA NUOVO SERVER"
+        android:textSize="@dimen/bigText" />
+
+    <EditText
+        android:id="@+id/portET"
+        style="@style/italicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/serverUrlET"
+        android:layout_alignParentRight="true"
+        android:inputType="number"
+        android:text=":8080  "
+        android:textSize="@dimen/mediumText" />
 
     <TextView
         android:id="@+id/newUrlTV"
         style="@style/Text"
-        android:textSize="@dimen/bigText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/serverNameET"
+        android:layout_alignLeft="@+id/portET"
         android:layout_below="@+id/serverNameET"
         android:layout_marginTop="18dp"
-        android:text="@string/newUrl" />
+        android:text="porta:"
+        android:textSize="@dimen/bigText" />
 
 </RelativeLayout>

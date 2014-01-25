@@ -59,46 +59,30 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 		TextView printerProgress = (TextView) rowView.findViewById(R.id.progress);
 		TextView printerProgressJob = (TextView) rowView.findViewById(R.id.progressJob);
 		TextView perc = (TextView) rowView.findViewById(R.id.perc);
-/*
+		/*
 		Switch sw = (Switch) rowView.findViewById(R.id.switch1);
 		sw.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked){
 					Log.d("on", "on");
 					printer.turnOn(getContext());
-					
+
 				}else{
 					Log.d ("off","off");
 					printer.turnOff(getContext());
 				}
-				
+
 			}
 		});
-*/
-/*		TextView activePrinter = (TextView) rowView.findViewById(R.id.activePrinter);
-		activePrinter.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				switch (v.getId()) {
-				case R.id.activePrinter:
-					if (printer.getActive()){
-						printer.turnOff(getContext());
-					}
-					else {
-						printer.turnOn(getContext());		
-					}
-					break;
-				}
-			}
-		});
-*/
+		 */
+
+
 		power = (ImageButton) rowView.findViewById(R.id.powerButton);
 		power.setFocusable(false);
 		power.setOnClickListener(this);
-		
+
 		printer = printerList.get(position);
 
 		printer.setPrinterCallbacks(new PrinterCallbacks() {
@@ -125,12 +109,10 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 		int online = printer.getOnline();
 		boolean active = printer.getActive();
 
-//		sw.setChecked(active);
-		
+		//		sw.setChecked(active);
+
 		if(active) {
 			power.setImageResource(R.drawable.off);
-//			activePrinter.setText(" SPEGNI ");
-//			activePrinter.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.view_red));
 			switch (online){
 			case 0:
 				printerStatus.setText("Scollegata");
@@ -148,42 +130,22 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 		}else {
 			printerStatus.setText("Disattivata");
 			printerStatus.setTextAppearance(getContext(), R.style.offline);
-			
+
 			power.setImageResource(R.drawable.on);
-//			activePrinter.setText(" ACCENDI ");
-//			activePrinter.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.view_green));
 		}
 
-		String currentJob = printer.getCurrentJob();
+		if(printer.getCurrentJob().equals("none")){
+			printerCurrentJob.setText(R.string.noJobRunning2);
+		} else {
+			printerCurrentJob.setText(printer.getCurrentJob());
+		}
 
-	//	if (isWorking(currentJob)){
-			printerCurrent.setVisibility(View.VISIBLE);
-			printerCurrentJob.setVisibility(View.VISIBLE);
-			printerProgress.setVisibility(View.VISIBLE);
-			printerProgressJob.setVisibility(View.VISIBLE);
-			perc.setVisibility(View.VISIBLE);
-
-			printerCurrentJob.setText(currentJob);
-
-			String progress = Double.toString(Math.round(printer.getProgress()*100)/100);
-			printerProgressJob.setText(progress);
-	/*	}
-		else {
-			printerCurrent.setVisibility(View.INVISIBLE);
-			printerCurrentJob.setVisibility(View.INVISIBLE);
-			printerProgress.setVisibility(View.INVISIBLE);
-			printerProgressJob.setVisibility(View.INVISIBLE);
-			perc.setVisibility(View.INVISIBLE);
-		}*/
+		String progress = Double.toString(Math.round(printer.getProgress()*100)/100);
+		printerProgressJob.setText(progress);
 
 		return rowView;
 	}
 
-
-	private Boolean isWorking (String currentJob){
-		if (currentJob.equals("none")) return false;
-		else return true;		
-	}
 
 
 	public interface PrinterListAdapterCallback {

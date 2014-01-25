@@ -16,8 +16,8 @@ public class ModelListAdapter extends ArrayAdapter<Model>{
 	private Context context;
 	private ArrayList<Model> modelList;
 	private Model model;
-	
-	
+
+
 
 	public ModelListAdapter(Context context, int textViewResourceId, ArrayList<Model> list) {
 		super(context, textViewResourceId, list);
@@ -47,7 +47,9 @@ public class ModelListAdapter extends ArrayAdapter<Model>{
 
 		modelName.setText(model.getName());
 
-		modelStatus.setText(model.getState());
+		if (model.getState().equals("stored")){
+			modelStatus.setText(R.string.stored);
+		}
 
 		double size = model.getLength();
 		String dimen = Double.toString(Math.round(size/1048576*100)/100);

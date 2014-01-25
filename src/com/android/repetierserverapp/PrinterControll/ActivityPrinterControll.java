@@ -5,7 +5,7 @@ import com.android.repetierserverapp.PrinterControll.JobList.FragJobList;
 import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList;
 import com.android.repetierserverapp.ServerDetailList.ActivityServerDetail;
 import com.android.repetierserverapp.ServerDetailList.FragServerDetail;
-import com.android.repetierserverapp.utils.PrefsActivity;
+import com.android.repetierserverapp.utils.PrefsPrinterControl;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Server;
 
@@ -45,7 +45,7 @@ public class ActivityPrinterControll extends FragmentActivity {
 	private boolean control2TimerRunning;
 
 	public static final String ARG_SERVER_ID = "item_id";
-	public static int LAST_ID;
+
 	public static int FILTER;
 	public int JOB_INTERVAL;
 	public int MODEL_INTERVAL;
@@ -79,10 +79,11 @@ public class ActivityPrinterControll extends FragmentActivity {
 		String currentJob = bundle.getString("currentJob");
 		boolean active = bundle.getBoolean("active");
 		double progress = bundle.getDouble("progress");
+		int position = bundle.getInt("position");
 
 		final Printer printer = new Printer(new Server(url, alias), name, slug, online, currentJob, active, progress);
 
-		Bundle arguments = newInstance(printer);
+		Bundle arguments = newInstance(printer, position);
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager(), arguments);
 
@@ -101,8 +102,7 @@ public class ActivityPrinterControll extends FragmentActivity {
 
 			@Override
 			public void onPageSelected(int position) {
-				Log.d("onPageSelected", Integer.toString(position));
-
+				//Log.d("onPageSelected", Integer.toString(position));
 
 				if (position == 0 && created0 == true){
 					FragModelList frag = (FragModelList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(0));
@@ -176,7 +176,7 @@ public class ActivityPrinterControll extends FragmentActivity {
 
 
 
-	public static Bundle newInstance(final Printer p) {
+	public static Bundle newInstance(final Printer p, int position) {
 		Log.d("newInstance", "entrato");
 
 		Bundle args = new Bundle();
@@ -188,7 +188,7 @@ public class ActivityPrinterControll extends FragmentActivity {
 		args.putString("currentJob", p.getCurrentJob());
 		args.putBoolean("active", p.getActive());
 		args.putDouble("progress", p.getProgress());
-
+		args.putInt("position", position);
 		return args;		
 	}
 
@@ -207,28 +207,24 @@ public class ActivityPrinterControll extends FragmentActivity {
 
 			switch (position) {
 			case 0:
-				Log.d("getItem0", "0getitem");
 				created0 = true;
 				fragModelList = new FragModelList();
 				fragModelList.setArguments(args);
 				return fragModelList;
 
 			case 1:
-				Log.d("getItem1", "1getitem");
 				created1 = true;
 				fragJobList = new FragJobList();
 				fragJobList.setArguments(args);
 				return fragJobList;
 
 			case 2:
-				Log.d("getItem2", "2getitem");
 				created2 = true;
 				fragPrinterControl = new FragPrinterControl();
 				fragPrinterControl.setArguments(args);
 				return fragPrinterControl;
 
 			case 3:
-				Log.d("getItem3", "3getitem");
 				created3 = true;
 				fragPrinterControl2 = new FragPrinterControl2();
 				fragPrinterControl2.setArguments(args);
@@ -293,7 +289,7 @@ public class ActivityPrinterControll extends FragmentActivity {
 			
 		case R.id.PrinterControlSettings:
 			
-			Intent intent = new Intent(ActivityPrinterControll.this, PrefsActivity.class);
+			Intent intent = new Intent(ActivityPrinterControll.this, PrefsPrinterControl.class);
 			startActivity(intent);
 			
 			break;
@@ -305,7 +301,7 @@ public class ActivityPrinterControll extends FragmentActivity {
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater=getMenuInflater();
-	    inflater.inflate(R.menu.printer_control, menu);
+	    inflater.inflate(R.menu.menu_printer_control, menu);
 	    return super.onCreateOptionsMenu(menu);
 	}
 
@@ -313,7 +309,7 @@ public class ActivityPrinterControll extends FragmentActivity {
 
 	private static String makeFragmentName(int index)
 	{
-		Log.d("makeFragmentName", "android:switcher:" + R.id.pager + ":" + index);
+		//Log.d("makeFragmentName", "android:switcher:" + R.id.pager + ":" + index);
 		return "android:switcher:" + R.id.pager + ":" + index;
 	}
 

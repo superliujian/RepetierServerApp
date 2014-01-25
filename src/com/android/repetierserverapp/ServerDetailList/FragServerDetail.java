@@ -1,6 +1,8 @@
 package com.android.repetierserverapp.ServerDetailList;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -56,6 +58,10 @@ public class FragServerDetail extends ListFragment {
 	private PrinterListAdapterCallback printerListAdapterCallback;
 	private OnItemClickListener itemClickListener;
 
+	private Timer myTimer;
+
+	
+	
 	public FragServerDetail() {
 	}
 
@@ -134,8 +140,8 @@ public class FragServerDetail extends ListFragment {
 				public void onItemClick(AdapterView<?> adapter, View view,
 						int position, long id) {
 					
-					Log.d("onItemClick", "entrato");
-
+					stopTimer();
+					
 					Printer p = printerList.get(position);
 
 					Intent detailIntent = new Intent(getActivity(), ActivityPrinterControll.class);
@@ -147,6 +153,7 @@ public class FragServerDetail extends ListFragment {
 					detailIntent.putExtra("currentJob", p.getCurrentJob());
 					detailIntent.putExtra("active", p.getActive());
 					detailIntent.putExtra("progress", p.getProgress());
+					detailIntent.putExtra("position", position);
 					startActivity(detailIntent);
 				}
 			};
@@ -173,6 +180,7 @@ public class FragServerDetail extends ListFragment {
 			});
 			
 			server.updatePrinterList(getActivity());
+			startTimer();
 		}
 	}
 
@@ -184,5 +192,22 @@ public class FragServerDetail extends ListFragment {
 		callback = sDummyCallbacks;
 	}
 
+
+	public void startTimer(){
+		Log.d("startTimer ",  "PrinterList");
+		myTimer = new Timer();
+		myTimer.schedule(new TimerTask() {          
+			@Override
+			public void run() {
+				server.updatePrinterList(getActivity());
+				Log.d("Timer", "PrinterList");
+			}
+		}, 0, 5000);
+	}
+
+	public void stopTimer(){
+		Log.d("stopTimer", "PrinterList");
+			myTimer.cancel();
+	}
 
 }

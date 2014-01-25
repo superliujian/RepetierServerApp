@@ -48,17 +48,18 @@ public class JobListAdapter extends ArrayAdapter<Job> {
 
 		jobName.setText(job.getName());
 
-		JobStatus.setText(job.getState());
 
 		double size = job.getLength();
 		String dimen = Double.toString(Math.round(size/1048576*100)/100);
 		dimenJob.setText(dimen);
 
 		if (job.getState().equals("stored")){
+			JobStatus.setText(R.string.stored);
 			progress.setVisibility(View.INVISIBLE);
 			perc.setVisibility(View.INVISIBLE);
 		}
 		else {
+			JobStatus.setText(R.string.jobRunning);
 			progress.setVisibility(View.VISIBLE);
 			perc.setVisibility(View.VISIBLE);
 			double d = job.getDone();

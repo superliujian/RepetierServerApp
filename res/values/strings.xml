@@ -57,4 +57,11 @@
 	<string name="models">MODELLI</string>
     <string name="jobs">LAVORI</string>
     <string name="status">STATO</string>
+    
+    <string name="noJobRunning">Nessun lavoro in esecuzione</string>
+    <string name="noJobRunning2">Nessuno</string>
+    <string name="jobRunning">In stampa..  </string>
+    <string name="stored">Salvato</string> 
+    
+    
 </resources>
