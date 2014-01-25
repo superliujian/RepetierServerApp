@@ -296,8 +296,8 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 
 
 
-	public void startTimer(){
-		Log.d("startTimer", "control1");
+	public void startTimer(int interval){
+		Log.d("startTimer", "intervallo: " + Integer.toString(interval));
 		myTimer = new Timer();
 		myTimer.schedule(new TimerTask() {          
 			@Override
@@ -305,7 +305,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 				printer.updatePrinterStatus(getActivity().getApplicationContext(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
 				Log.d("Timer", "control1");
 			}
-		}, 0, ActivityPrinterControll.STATUS_INTERVAL);
+		}, 0, interval);
 	}
 
 	public void stopTimer(){

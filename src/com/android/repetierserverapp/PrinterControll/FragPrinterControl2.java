@@ -299,7 +299,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 
 
-	public void startTimer(){
+	public void startTimer(int interval){
 		Log.d("startTimer", "control2");
 		myTimer = new Timer();
 		myTimer.schedule(new TimerTask() {          
@@ -309,7 +309,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 				printer.updatePrinterStatus(getActivity().getApplicationContext(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);				
 				Log.d("Timer", "Timer");
 			}
-		}, 0, ActivityPrinterControll.STATUS_INTERVAL);
+		}, 0, interval);
 	}
 
 	public void stopTimer(){

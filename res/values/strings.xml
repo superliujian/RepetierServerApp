@@ -47,16 +47,14 @@
     <string name="title_activity_activity_printer_control_setting">ActivityPrinterControlSetting</string>
     <string name="action_settings">Settings</string>
     
-    <string name="frequency">Frequenza aggiornamento valori:</string>
-    <string name="modelFrequency">Aggiorna i modelli ogni</string>
-    <string name="jobFrequency">Aggiorna i lavori ogni</string>
-    <string name="statusFrequency">Aggiorna lo stato ogni</string>
-    <string name="seconds">secondi</string>
+    <string name="frequency">Frequenza aggiornamento valori</string>
+    <string name="modelFrequency">Frequenza aggiornamento modelli</string>
+    <string name="jobFrequency">Frequenza aggiornamento lavori</string>
+    <string name="statusFrequency">Frequenza aggiornamento stato</string>
+    
     <string name="save">SALVA</string>
     
-    <string name="notNumeric">Attenzione: inserire valori numerici</string>
-    <string name="notGoodValue">Attenzione: inserire intervalli da 0 a 10 secondi</string>
-    <string name="saved">Impostazioni salvate correttamente</string>
-    
-
+	<string name="models">MODELLI</string>
+    <string name="jobs">LAVORI</string>
+    <string name="status">STATO</string>
 </resources>

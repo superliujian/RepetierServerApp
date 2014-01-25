@@ -5,11 +5,14 @@ import com.android.repetierserverapp.PrinterControll.JobList.FragJobList;
 import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList;
 import com.android.repetierserverapp.ServerDetailList.ActivityServerDetail;
 import com.android.repetierserverapp.ServerDetailList.FragServerDetail;
+import com.android.repetierserverapp.utils.PrefsActivity;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Server;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -44,9 +47,9 @@ public class ActivityPrinterControll extends FragmentActivity {
 	public static final String ARG_SERVER_ID = "item_id";
 	public static int LAST_ID;
 	public static int FILTER;
-	public static int JOB_INTERVAL;
-	public static int MODEL_INTERVAL;
-	public static int STATUS_INTERVAL;
+	public int JOB_INTERVAL;
+	public int MODEL_INTERVAL;
+	public int STATUS_INTERVAL;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +68,7 @@ public class ActivityPrinterControll extends FragmentActivity {
 		controlTimerRunning = false;
 		control2TimerRunning = false;
 		FILTER = 13;
-		JOB_INTERVAL = 5000;
-		MODEL_INTERVAL = 5000;
-		STATUS_INTERVAL = 3000;
+		
 
 		Bundle bundle = getIntent().getExtras();
 		String url = bundle.getString("url");
@@ -105,25 +106,38 @@ public class ActivityPrinterControll extends FragmentActivity {
 
 				if (position == 0 && created0 == true){
 					FragModelList frag = (FragModelList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(0));
-					frag.startTimer();
+					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ActivityPrinterControll.this);
+					String inter = prefs.getString("modelFreq", "5000");
+					MODEL_INTERVAL =  Integer.parseInt(inter);
+					frag.startTimer(MODEL_INTERVAL);
 					modelTimerRunning = true;
 				}
 
+				
 				if (position == 1 && created1 == true){
 					FragJobList frag = (FragJobList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(1));
-					frag.startTimer();
+					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ActivityPrinterControll.this);
+					String inter = prefs.getString("jobFreq", "5000");
+					JOB_INTERVAL =  Integer.parseInt(inter);
+					frag.startTimer(JOB_INTERVAL);
 					jobTimerRunning = true;
 				}
 
 				if (position == 2 && created2 == true){
 					FragPrinterControl frag = (FragPrinterControl) getSupportFragmentManager().findFragmentByTag(makeFragmentName(2));
-					frag.startTimer();
+					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ActivityPrinterControll.this);
+					String inter = prefs.getString("statusFreq", "3000");
+					STATUS_INTERVAL =  Integer.parseInt(inter);
+					frag.startTimer(STATUS_INTERVAL);
 					controlTimerRunning = true;
 				}
 
 				if (position == 3 && created3 == true){
 					FragPrinterControl2 frag = (FragPrinterControl2) getSupportFragmentManager().findFragmentByTag(makeFragmentName(3));
-					frag.startTimer();
+					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ActivityPrinterControll.this);
+					String inter = prefs.getString("statusFreq", "3000");
+					STATUS_INTERVAL =  Integer.parseInt(inter);
+					frag.startTimer(STATUS_INTERVAL);
 					control2TimerRunning = true;
 				}
 
@@ -279,8 +293,8 @@ public class ActivityPrinterControll extends FragmentActivity {
 			
 		case R.id.PrinterControlSettings:
 			
-			Intent myIntent = new Intent(getApplicationContext(), ActivityPrinterControlSetting.class);
-			startActivityForResult(myIntent, 0);
+			Intent intent = new Intent(ActivityPrinterControll.this, PrefsActivity.class);
+			startActivity(intent);
 			
 			break;
 		}

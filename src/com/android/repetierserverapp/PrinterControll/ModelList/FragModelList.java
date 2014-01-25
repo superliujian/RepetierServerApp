@@ -176,8 +176,8 @@ public class FragModelList extends ListFragment {
 	}
 
 	
-	public void startTimer(){
-		Log.d("startTimer", "Model");
+	public void startTimer(int interval){
+		Log.d("startTimer", "intervallo: " + Integer.toString(interval));
 		myTimer = new Timer();
 		myTimer.schedule(new TimerTask() {          
 			@Override
@@ -185,7 +185,7 @@ public class FragModelList extends ListFragment {
 				printer.updateModelList(getActivity().getApplicationContext());
 				Log.d("Timer", "Model");
 			}
-		}, 0, ActivityPrinterControll.MODEL_INTERVAL);
+		}, 0, interval);
 	}
 
 	public void stopTimer(){

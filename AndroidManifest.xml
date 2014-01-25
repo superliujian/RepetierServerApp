@@ -50,10 +50,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.android.repetierserverapp.PrinterControll.ActivityPrinterControlSetting"
-            android:label="@string/title_activity_activity_printer_control_setting" >
-        </activity>
-        <activity
             android:name="com.android.repetierserverapp.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>

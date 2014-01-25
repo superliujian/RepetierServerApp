@@ -254,8 +254,8 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 	}
 
 
-	public void startTimer(){
-		Log.d("startTimer", "Job");
+	public void startTimer(int interval){
+		Log.d("startTimer",  "intervallo: " + Integer.toString(interval));
 		myTimer = new Timer();
 		myTimer.schedule(new TimerTask() {          
 			@Override
@@ -263,7 +263,7 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 				printer.updateJobList(getActivity().getApplicationContext());
 				Log.d("Timer", "Job");
 			}
-		}, 0, ActivityPrinterControll.JOB_INTERVAL);
+		}, 0, interval);
 	}
 
 	public void stopTimer(){
