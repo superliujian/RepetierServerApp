@@ -29,21 +29,6 @@ import com.grasselli.android.repetierserverapi.Server;
 
 public class FragModelList extends ListFragment {
 
-
-	public interface FragModelCallbacks {
-		public void updateJobList(Printer printer);
-	};
-
-	private static FragModelCallbacks sDummyCallbacks = new FragModelCallbacks() {
-		@Override
-		public void updateJobList(Printer printer) {
-		}
-
-	};
-
-
-	private FragModelCallbacks callback;
-
 	private ListView listview;
 
 	private ModelListAdapter adapter;
@@ -51,7 +36,6 @@ public class FragModelList extends ListFragment {
 	private Printer printer;
 
 	private static Timer myTimer;
-	public static int modelInterval;
 
 
 	public FragModelList() {
@@ -62,12 +46,6 @@ public class FragModelList extends ListFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-
-		if (!(activity instanceof FragModelCallbacks )) {
-			throw new IllegalStateException(
-					"Activity must implement fragment's callbacks.");
-		}
-		callback = (FragModelCallbacks) activity;
 	}
 
 
@@ -76,7 +54,6 @@ public class FragModelList extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.d("frag0", "frag0");
-		modelInterval = 5000;
 	}
 
 
@@ -124,7 +101,6 @@ public class FragModelList extends ListFragment {
 
 						case 0:
 							printer.copyModel(getActivity(), idMod);
-							callback.updateJobList(printer);
 							break;
 						}
 					}
@@ -197,11 +173,9 @@ public class FragModelList extends ListFragment {
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		callback = sDummyCallbacks;
 	}
 
 	
-
 	public void startTimer(){
 		Log.d("startTimer", "Model");
 		myTimer = new Timer();
@@ -211,7 +185,7 @@ public class FragModelList extends ListFragment {
 				printer.updateModelList(getActivity().getApplicationContext());
 				Log.d("Timer", "Model");
 			}
-		}, 0, modelInterval);
+		}, 0, ActivityPrinterControll.MODEL_INTERVAL);
 	}
 
 	public void stopTimer(){

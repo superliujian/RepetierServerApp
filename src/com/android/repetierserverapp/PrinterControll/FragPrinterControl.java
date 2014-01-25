@@ -54,7 +54,6 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 	Printer printer;
 	
 	private static Timer myTimer;
-	public static int control1Interval;
 
 	public FragPrinterControl(){
 	}
@@ -66,8 +65,6 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 		super.onCreate(savedInstanceState);
 		
 		Log.d("frag2", "frag2");
-
-		control1Interval = 3000;
 		
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
@@ -308,7 +305,7 @@ public class FragPrinterControl extends Fragment implements PrinterStatusCallbac
 				printer.updatePrinterStatus(getActivity().getApplicationContext(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);
 				Log.d("Timer", "control1");
 			}
-		}, 0, control1Interval);
+		}, 0, ActivityPrinterControll.STATUS_INTERVAL);
 	}
 
 	public void stopTimer(){

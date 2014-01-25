@@ -54,8 +54,6 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private Toast toast;
 
 	private static Timer myTimer;
-	public static int control2Interval;
-
 
 
 	public FragPrinterControl2(){
@@ -68,8 +66,6 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		super.onCreate(savedInstanceState);
 
 		Log.d("frag3", "frag3");
-
-		control2Interval = 3000;
 
 		String url = getArguments().getString("url");
 		String alias = getArguments().getString("alias");
@@ -313,7 +309,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 				printer.updatePrinterStatus(getActivity().getApplicationContext(), ActivityPrinterControll.LAST_ID, ActivityPrinterControll.FILTER);				
 				Log.d("Timer", "Timer");
 			}
-		}, 0, control2Interval);
+		}, 0, ActivityPrinterControll.STATUS_INTERVAL);
 	}
 
 	public void stopTimer(){

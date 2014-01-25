@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.PrinterControll.ActivityPrinterControll;
 import com.grasselli.android.repetierserverapi.Job;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.JobCallbacks;
@@ -37,7 +38,7 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 	private static Printer printer;
 
 	private static Timer myTimer;
-	public static int jobInterval;
+	
 
 	public FragJobList() {
 	}
@@ -62,7 +63,6 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.d("frag1", "frag1");
-		jobInterval = 5000;
 	}
 
 
@@ -263,7 +263,7 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 				printer.updateJobList(getActivity().getApplicationContext());
 				Log.d("Timer", "Job");
 			}
-		}, 0, jobInterval);
+		}, 0, ActivityPrinterControll.JOB_INTERVAL);
 	}
 
 	public void stopTimer(){

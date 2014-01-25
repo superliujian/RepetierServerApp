@@ -46,6 +46,7 @@ public class FragServerDetail extends ListFragment {
 
 	private ListView listview;
 	public static final String ARG_SERVER_ID = "item_id";
+	public static long idPrinter;
 	private PrinterListAdapter adapter;
 
 	private Server server;
@@ -110,7 +111,8 @@ public class FragServerDetail extends ListFragment {
 
 			dbAdapter = new DbAdapter(getActivity());
 			dbAdapter.openReadOnly();
-			Cursor c = dbAdapter.fetchServerById(Long.toString(getArguments().getLong(ARG_SERVER_ID)));
+			idPrinter = getArguments().getLong(ARG_SERVER_ID);
+			Cursor c = dbAdapter.fetchServerById(Long.toString(idPrinter));
 			c.moveToFirst();
 			String url = c.getString(c.getColumnIndex(DbHelper.DB_URL));
 			String name = c.getString(c.getColumnIndex(DbHelper.DB_NAME));

@@ -3,8 +3,8 @@ package com.android.repetierserverapp.PrinterControll;
 import com.android.repetierserverapp.R;
 import com.android.repetierserverapp.PrinterControll.JobList.FragJobList;
 import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList;
-import com.android.repetierserverapp.PrinterControll.ModelList.FragModelList.FragModelCallbacks;
-import com.android.repetierserverapp.ServerList.ActivityServerList;
+import com.android.repetierserverapp.ServerDetailList.ActivityServerDetail;
+import com.android.repetierserverapp.ServerDetailList.FragServerDetail;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Server;
 
@@ -18,9 +18,11 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class ActivityPrinterControll extends FragmentActivity implements FragModelCallbacks {
+public class ActivityPrinterControll extends FragmentActivity {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
@@ -34,13 +36,17 @@ public class ActivityPrinterControll extends FragmentActivity implements FragMod
 	private boolean created1;
 	private boolean created2;
 	private boolean created3;
-	static public boolean jobTimerRunning;
-	static public boolean modelTimerRunning;
-	static public boolean controlTimerRunning;
-	static public boolean control2TimerRunning;
+	private boolean jobTimerRunning;
+	private boolean modelTimerRunning;
+	private boolean controlTimerRunning;
+	private boolean control2TimerRunning;
 
+	public static final String ARG_SERVER_ID = "item_id";
 	public static int LAST_ID;
 	public static int FILTER;
+	public static int JOB_INTERVAL;
+	public static int MODEL_INTERVAL;
+	public static int STATUS_INTERVAL;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,9 @@ public class ActivityPrinterControll extends FragmentActivity implements FragMod
 		controlTimerRunning = false;
 		control2TimerRunning = false;
 		FILTER = 13;
+		JOB_INTERVAL = 5000;
+		MODEL_INTERVAL = 5000;
+		STATUS_INTERVAL = 3000;
 
 		Bundle bundle = getIntent().getExtras();
 		String url = bundle.getString("url");
@@ -241,53 +250,86 @@ public class ActivityPrinterControll extends FragmentActivity implements FragMod
 		}
 	}
 
+	
+	
+	@Override
+	public void onBackPressed(){
+
+		turnOffTimers();		
+		
+		Intent detailIntent = new Intent(this, ActivityServerDetail.class);
+		detailIntent.putExtra(FragServerDetail.ARG_SERVER_ID, FragServerDetail.idPrinter);
+		startActivity(detailIntent);
+	}
 
 
-
-
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpTo(this, new Intent(this,
-					ActivityServerList.class));
-
+			
+			turnOffTimers();
+			
+			Intent detailIntent = new Intent(this, ActivityServerDetail.class);
+			detailIntent.putExtra(FragServerDetail.ARG_SERVER_ID, FragServerDetail.idPrinter);
+			
+			NavUtils.navigateUpTo(this, detailIntent);
 			return true;
+			
+		case R.id.PrinterControlSettings:
+			
+			Intent myIntent = new Intent(getApplicationContext(), ActivityPrinterControlSetting.class);
+			startActivityForResult(myIntent, 0);
+			
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 
-	@Override
-	public void updateJobList(Printer printer) {
-		Log.d("updateJobList Callback", "entrato");
-		//fragJobList.updateListView(printer);	
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater=getMenuInflater();
+	    inflater.inflate(R.menu.printer_control, menu);
+	    return super.onCreateOptionsMenu(menu);
 	}
 
 
-
-
-	/*
-	public Fragment findFragmentByPosition(int position) {
-	    FragmentPagerAdapter fragmentPagerAdapter = getFragmentPagerAdapter();
-	    return getSupportFragmentManager().findFragmentByTag(
-	            "android:switcher:" + getViewPager().getId() + ":"
-	                    + fragmentPagerAdapter.getItemId(position));
-	}
-	 */
 
 	private static String makeFragmentName(int index)
 	{
 		Log.d("makeFragmentName", "android:switcher:" + R.id.pager + ":" + index);
 		return "android:switcher:" + R.id.pager + ":" + index;
+	}
+
+	
+	
+	private void turnOffTimers(){
+		
+		if(modelTimerRunning == true){
+			FragModelList frag = (FragModelList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(0));
+			frag.stopTimer();
+			modelTimerRunning = false;
+		}
+
+		if(jobTimerRunning == true){
+			FragJobList frag = (FragJobList) getSupportFragmentManager().findFragmentByTag(makeFragmentName(1));
+			frag.stopTimer();
+			jobTimerRunning = false;
+		}
+
+		if(controlTimerRunning == true){
+			FragPrinterControl frag = (FragPrinterControl) getSupportFragmentManager().findFragmentByTag(makeFragmentName(2));
+			frag.stopTimer();
+			controlTimerRunning = false;
+		}
+
+		if(control2TimerRunning == true){
+			FragPrinterControl2 frag = (FragPrinterControl2) getSupportFragmentManager().findFragmentByTag(makeFragmentName(3));
+			frag.stopTimer();
+			control2TimerRunning = false;
+		}	
 	}
 
 }

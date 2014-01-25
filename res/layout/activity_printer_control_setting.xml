@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ActivityPrinterControlSetting" >
+
+    <TextView
+        android:id="@+id/frequencyTV"
+        style="@style/boldText"
+        android:textSize="@dimen/mediumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/frequency" />
+
+    <TextView
+        android:id="@+id/s2"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/jobFrequencyTV"
+        android:text="@string/seconds" />
+
+    <TextView
+        android:id="@+id/s3"
+        style="@style/Text"
+        android:textSize="@dimen/mediumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/statusFrequencyTV"
+        android:text="@string/seconds" />
+
+    <TextView
+        android:id="@+id/s1"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/modelFrequencyTV"
+        android:layout_alignParentRight="true"
+        android:text="@string/seconds"
+        android:textSize="@dimen/mediumText" />
+
+    <TextView
+        android:id="@+id/modelFrequencyTV"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/frequencyTV"
+        android:layout_below="@+id/frequencyTV"
+        android:layout_marginTop="20dp"
+        android:text="@string/modelFrequency"
+        android:textSize="@dimen/mediumText" />
+
+    <TextView
+        android:id="@+id/jobFrequencyTV"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/modelFrequencyTV"
+        android:layout_below="@+id/modelFrequencyTV"
+        android:layout_marginTop="20dp"
+        android:text="@string/jobFrequency"
+        android:textSize="@dimen/mediumText" />
+
+    <EditText
+        android:id="@+id/modelFreqET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/modelFrequencyTV"
+        android:layout_toLeftOf="@id/s1"
+        android:layout_toRightOf="@id/modelFrequencyTV"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/jobFreqET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/jobFrequencyTV"
+        android:layout_toRightOf="@id/jobFrequencyTV"
+        android:layout_toLeftOf="@+d/s2"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/statusFrequencyTV"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/jobFrequencyTV"
+        android:layout_below="@id/jobFrequencyTV"
+        android:layout_marginTop="20dp"
+        android:text="@string/statusFrequency"
+        android:textSize="@dimen/mediumText" />
+
+    <EditText
+        android:id="@+id/statusFreqET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/statusFrequencyTV"
+        android:layout_toRightOf="@id/statusFrequencyTV"
+        android:layout_toLeftOf="@id/s3"
+        android:ems="10"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/saveBtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/s3"
+        android:layout_centerVertical="true"
+        android:text="@string/save" />
+
+</RelativeLayout>

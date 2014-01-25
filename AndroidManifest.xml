@@ -10,13 +10,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
         <activity
             android:name="com.android.repetierserverapp.ServerList.ActivityServerList"
             android:label="@string/title_server_list"
@@ -27,7 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.android.repetierserverapp.ServerDetailList.ActivityServerDetail"
             android:label="@string/title_server_detail"
@@ -37,26 +34,33 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ServerListActivity" />
         </activity>
-        
-         <activity
+        <activity
             android:name="com.android.repetierserverapp.ActivityAddServer"
             android:label="@string/title_activity_activity_add_server"
             android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name="com.android.repetierserverapp.ActivityModifyServer"
             android:label="@string/title_activity_modify_server"
             android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name="com.android.repetierserverapp.PrinterControll.ActivityPrinterControll"
             android:label="@string/title_activity_activity_printer_controll"
             android:screenOrientation="portrait" >
         </activity>
-       
- 
+        <activity
+            android:name="com.android.repetierserverapp.PrinterControll.ActivityPrinterControlSetting"
+            android:label="@string/title_activity_activity_printer_control_setting" >
+        </activity>
+        <activity
+            android:name="com.android.repetierserverapp.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="com.android.repetierserverapp.utils.PrefsActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>
