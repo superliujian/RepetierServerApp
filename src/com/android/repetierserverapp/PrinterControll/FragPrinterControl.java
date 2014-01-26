@@ -53,6 +53,7 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 	private TextView textViewZvalue;
 
 	private TextView textViewStatus;
+	private TextView textViewError;
 
 	private Printer printer;
 	private Server server;
@@ -60,7 +61,7 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 
 	private static Timer myTimer;
 	private static Timer printerTimer;
-	
+
 	private SharedPreferences prefs;
 
 	public FragPrinterControl(){
@@ -90,7 +91,7 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 		printer.setPrinterCallbacks(this);
 		printer.setPrinterStatusCallbacks(this);	
 		server.setCallbacks(this);
-		
+
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 	}
 
@@ -138,6 +139,7 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 		textViewZvalue = (TextView) v.findViewById(R.id.zValueTextView);
 
 		textViewStatus = (TextView) v.findViewById(R.id.statusTextView);
+		textViewError = (TextView) v.findViewById(R.id.errorTV);
 
 		buttonXp10.setOnClickListener(this);
 		buttonXp1.setOnClickListener(this);
@@ -257,12 +259,14 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 	public void onPrinterStatusUpdated(PrinterStatus status, int lastId,
 			ArrayList<Line> tempLines) {
 
+		textViewError.setVisibility(View.GONE);
+
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("LAST_ID", lastId);
 		editor.commit();
-		
+
 		Log.d("lastId stored: ", Integer.toString(lastId));
-		
+
 		String x = Double.toString(Math.round(status.getX()*100)/100);
 		String y = Double.toString(Math.round(status.getY()*100)/100);
 		String z = Double.toString(Math.round(status.getZ()*100)/100);
@@ -276,10 +280,16 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 	//PrinterStatus Callback
 	@Override
 	public void onStatusError(String error) {
-		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+		textViewError.setVisibility(View.VISIBLE);
+
+		if(error.equals("Printer offline")){
+			textViewError.setText(getString(R.string.warningOffline));
+		} else {
+			textViewError.setText(error);
+		}
 	}
 
-	
+
 	@Override
 	public void onChangeState() {
 	}
@@ -304,7 +314,7 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 				printer.updatePrinterStatus(getActivity().getApplicationContext(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			}
 		}, 0, interval);
-		
+
 		printerTimer = new Timer();
 		printerTimer.schedule(new TimerTask() {          
 			@Override
@@ -321,7 +331,7 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 	}
 
 
-	
+
 	@Override
 	public void onPrinterError(String error) {
 		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
@@ -337,15 +347,17 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 		printer = (printerList.get(position));
 		printer.setPrinterCallbacks(this);
 		printer.setPrinterStatusCallbacks(this);
-		
+
 		if(printer.getCurrentJob().equals("none")){
+			textViewStatus.setTextAppearance(getActivity(), R.style.offline);
 			textViewStatus.setText(R.string.noJobRunning);
 		} else {
+			textViewStatus.setTextAppearance(getActivity(), R.style.online);
 			textViewStatus.setText(R.string.jobRunning);
 			textViewStatus.append(" " + Double.toString(Math.round(printer.getProgress()*100)/100) + " %");
 		}
-		
-		
+
+
 		updateFrag(printer);
 	}
 

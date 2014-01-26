@@ -63,5 +63,9 @@
     <string name="jobRunning">In stampa..  </string>
     <string name="stored">Salvato</string> 
     
+    <string name="notNumericPort">Attenzione: il campo PORTA deve contenere solo valori numerici.</string> 
+    
+    <string name="popModifyServer">Modifica Server</string>
+    <string name="popDeleteServer">Elimina Server</string>
     
 </resources>

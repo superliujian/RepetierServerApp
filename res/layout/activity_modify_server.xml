@@ -54,25 +54,14 @@
         android:text="http://"/>
 
     <Button
-        android:id="@+id/deleteServerBtn"
-        style="@style/Text"
-        android:textSize="@dimen/bigText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/serverUrl"
-        android:layout_below="@+id/serverUrl"
-        android:layout_marginTop="20dp"
-        android:text="ELIMINA" />
-
-    <Button
         android:id="@+id/saveServerBtn"
         style="@style/Text"
-        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/deleteServerBtn"
-        android:layout_alignBottom="@+id/deleteServerBtn"
         android:layout_alignRight="@+id/serverUrl"
-        android:text="SALVA" />
+        android:layout_below="@+id/serverUrl"
+        android:layout_marginTop="18dp"
+        android:text="SALVA MODIFICHE"
+        android:textSize="@dimen/bigText" />
 
 </RelativeLayout>

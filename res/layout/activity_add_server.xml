@@ -30,12 +30,11 @@
     <Spinner
         android:id="@+id/spinner"
         style="@style/italicText"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/serverUrlET"
         android:layout_alignLeft="@+id/serverNameET"
         android:layout_alignTop="@+id/serverUrlET"
-        android:layout_toLeftOf="@+id/createServerBtn"
         android:textSize="@dimen/mediumText" />
 
     <EditText
@@ -47,7 +46,7 @@
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/portET"
         android:layout_toRightOf="@+id/spinner"
-        android:text="indirizzo"
+        android:hint="192.168.1.2"
         android:textSize="@dimen/mediumText" />
 
     <TextView
@@ -80,7 +79,7 @@
         android:layout_alignBaseline="@+id/serverUrlET"
         android:layout_alignParentRight="true"
         android:inputType="number"
-        android:text=":8080  "
+        android:hint="8080"
         android:textSize="@dimen/mediumText" />
 
     <TextView

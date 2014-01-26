@@ -1,14 +1,11 @@
 package com.android.repetierserverapp;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,7 +26,6 @@ public class ActivityModifyServer extends Activity implements OnClickListener {
 	private TextView serverUrl;
 
 	private Button saveServer;
-	private Button deleteServer;
 
 	private String name;
 	private String url;
@@ -69,11 +65,9 @@ public class ActivityModifyServer extends Activity implements OnClickListener {
 		serverName.setText(name);
 		serverUrl.setText(url);
 
-		deleteServer = (Button) findViewById(R.id.deleteServerBtn);
 		saveServer = (Button) findViewById(R.id.saveServerBtn);
 
 		saveServer.setOnClickListener(this);
-		deleteServer.setOnClickListener(this);
 	}
 
 
@@ -124,35 +118,6 @@ public class ActivityModifyServer extends Activity implements OnClickListener {
 
 			Intent myIntent = new Intent(v.getContext(), ActivityServerList.class);
 			startActivityForResult(myIntent, 0);
-			break;
-
-		case R.id.deleteServerBtn:
-
-			AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setMessage(getString(R.string.removeServer));
-			
-			b.setPositiveButton(getString(R.string.yes),
-					new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					dbAdapter = new DbAdapter(context);
-					dbAdapter.open();
-					dbAdapter.deleteServer(id);
-					dbAdapter.close();
-					
-					Intent intent = new Intent(context, ActivityServerList.class);
-					startActivityForResult(intent, 0);
-				}
-			});
-			
-			b.setNegativeButton(getString(R.string.no),
-					new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,
-						int whichButton) {
-					dialog.cancel();
-				}
-			});
-			
-			b.show();
 			break;
 		}
 	}

@@ -48,6 +48,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private TextView bedRead;
 	private TextView bedSet;
 
+	private TextView textViewError;
+	
 	private Button newExtrTempBtn;
 	private Button newBedTempBtn;
 
@@ -135,6 +137,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		bedRead = (TextView) v.findViewById(R.id.bedTempReadTextView);
 		bedSet = (TextView) v.findViewById(R.id.bedTempSetTextView);
 
+		textViewError = (TextView) v.findViewById(R.id.errorTV);
+		
 		newBedTempBtn = (Button) v.findViewById(R.id.newBedTempBtn);
 		newExtrTempBtn = (Button) v.findViewById(R.id.newExtrTempBtn);
 
@@ -212,7 +216,13 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	//PrinterStatus Callback
 	@Override
 	public void onStatusError(String error) {
-		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+		textViewError.setVisibility(View.VISIBLE);
+
+		if(error.equals("Printer offline")){
+			textViewError.setText(getString(R.string.warningOffline));
+		} else {
+			textViewError.setText(error);
+		}
 	}
 
 
@@ -221,6 +231,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	public void onPrinterStatusUpdated(PrinterStatus status, int lastId,
 			ArrayList<Line> tempLines) {
 
+		textViewError.setVisibility(View.GONE);
+		
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("LAST_ID", lastId);
 		editor.commit();

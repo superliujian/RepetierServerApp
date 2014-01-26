@@ -37,5 +37,13 @@ public class ServerListAdapter extends CursorAdapter{
 	            bindView(v, context, cursor);
 	           return v;
 	}
+
+	public String getServerName() {
+		return serverName;
+	}
+
+	public String getServerUrl() {
+		return serverUrl;
+	}
 	
 }

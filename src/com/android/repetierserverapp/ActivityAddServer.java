@@ -1,10 +1,9 @@
 package com.android.repetierserverapp;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import com.android.repetierserverapp.ServerList.ActivityServerList;
 import com.android.repetierserverapp.db.DbAdapter;
+import com.android.repetierserverapp.utils.Utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,7 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,22 +20,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityAddServer extends Activity implements OnClickListener, OnItemSelectedListener  {
 	
 	private Button createServer;
-	private TextView serverName;
-	private TextView serverUrl;
+	private EditText serverName;
+	private EditText serverUrl;
+	private EditText serverPort;
 	private Spinner spinner;
+	
 	private String name;
 	private String url;
+	private String port;
 	
 	private String connectionType;
 
 	private DbAdapter dbAdapter;
 	private Context context;
+	
 
 	
 	@Override
@@ -54,7 +55,7 @@ public class ActivityAddServer extends Activity implements OnClickListener, OnIt
 		
 		serverName = (EditText) findViewById(R.id.serverNameET);
 		serverUrl = (EditText) findViewById(R.id.serverUrlET);
-
+		serverPort = (EditText) findViewById(R.id.portET);
 		
 		spinner = (Spinner) findViewById(R.id.spinner);
 		ArrayList<String> list = new ArrayList<String>();
@@ -99,14 +100,22 @@ public class ActivityAddServer extends Activity implements OnClickListener, OnIt
 				break;
 			}
 
-			url = String.valueOf(spinner.getSelectedItem()) + serverUrl.getText().toString();
+			url = serverUrl.getText().toString();
 			if (!isValidUrl(url)){ 
 				break;
 			}
 			
+			port = serverPort.getText().toString();
+			if (!Utils.isNumeric(port)){ 
+				Toast.makeText(context, getString(R.string.notNumericPort), Toast.LENGTH_LONG).show();
+				break;
+			}
+			
+			String completeUrl = String.valueOf(spinner.getSelectedItem()) + serverUrl.getText().toString() + ":" + port;
+			
 			dbAdapter = new DbAdapter(this);
 			dbAdapter.open();
-			dbAdapter.createServer(name, url);
+			dbAdapter.createServer(name, completeUrl);
 			dbAdapter.close();
 			
 			Intent myIntent = new Intent(v.getContext(), ActivityServerList.class);
@@ -117,20 +126,18 @@ public class ActivityAddServer extends Activity implements OnClickListener, OnIt
 	
 	
 	
+	private boolean isValidName(String name) {
+		//TODO
+		return true;
+	}
+	
 	private boolean isValidUrl(String url) {
 		//TODO 
 		return true;
 	}
 
 
-
-	private boolean isValidName(String name) {
-		//TODO 
-		return true;
-	}
-
-
-
+	
 	//OnItemSelectedListener
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
