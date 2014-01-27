@@ -33,7 +33,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeListener, OnClickListener, PrinterStatusCallbacks, ServerCallbacks, PrinterCallbacks, OnCheckedChangeListener{
+public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeListener, OnClickListener, PrinterStatusCallbacks, ServerCallbacks, PrinterCallbacks{
 
 	private TextView feedrateValue;
 	private TextView flowrateValue;				
@@ -44,8 +44,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private TextView newSpeed;
 	private TextView newFlow;
 
-	private Switch extruderSwitch;
-	private Switch bedSwitch;
+	private Button turnOffExtr;
+	private Button turnOffBed;
 
 	private TextView extrRead;
 	private TextView extrSet;
@@ -71,6 +71,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 	private SharedPreferences prefs;
 
+	public boolean fragLoaded = false;
 
 	public FragPrinterControl2(){
 	}
@@ -122,6 +123,12 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		feedrateValue = (TextView) v.findViewById(R.id.feedrateValueTextView);
 		flowrateValue = (TextView) v.findViewById(R.id.flowrateValueTextView);
 
+		newSpeed = (TextView) v.findViewById(R.id.newSpeedTV);
+		newFlow = (TextView) v.findViewById(R.id.newFlowTV);
+		
+		newSpeed.setVisibility(View.INVISIBLE);
+		newFlow.setVisibility(View.INVISIBLE);
+
 		feedrateSeek = (SeekBar) v.findViewById(R.id.feedrateSeekBar);
 		feedrateSeek.setOnSeekBarChangeListener(this);
 		feedrateSeek.setMax(200);
@@ -130,14 +137,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		flowrateSeek.setOnSeekBarChangeListener(this);
 		flowrateSeek.setMax(200);	
 
-		newSpeed = (TextView) v.findViewById(R.id.newSpeedTV);
-		newFlow = (TextView) v.findViewById(R.id.newFlowTV);
-
-		extruderSwitch = (Switch) v.findViewById(R.id.extruderSwitch);
-		bedSwitch = (Switch) v.findViewById(R.id.bedSwitch);
-
-		bedSwitch.setOnCheckedChangeListener(this);
-		extruderSwitch.setOnCheckedChangeListener(this);
+		turnOffExtr = (Button) v.findViewById(R.id.powerExtrButton);
+		turnOffBed = (Button) v.findViewById(R.id.powerBedButton);
 
 		extrRead = (TextView) v.findViewById(R.id.extrTempReadTextView);
 		extrSet = (TextView) v.findViewById(R.id.extrTempSetTextView);
@@ -155,6 +156,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		newExtrTempEt = (EditText) v.findViewById(R.id.newExtrTempEt);
 		newBedTempEt = (EditText) v.findViewById(R.id.newBedTempEt);
 
+		fragLoaded = true; 
+
 		updateFrag(printer);
 
 	}
@@ -163,7 +166,6 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 	}
 
@@ -174,12 +176,18 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		switch (v.getId()) {
 
 		case R.id.newBedTempBtn:
-			if (!Utils.isNumeric(newBedTempEt.getText().toString())){
+
+			String bedValue = newBedTempEt.getText().toString();
+			if (bedValue.equals("") || bedValue == null){
+				toast= Toast.makeText(getActivity(),getString(R.string.notValue), Toast.LENGTH_LONG);
+				toast.show();
+				break;
+			}
+			if (!Utils.isNumeric(bedValue)){
 				toast= Toast.makeText(getActivity(),getString(R.string.notNumericValue), Toast.LENGTH_LONG);
 				toast.show();
 				break;
 			}
-
 			int bedtemp = Integer.parseInt(newBedTempEt.getText().toString());
 			if(checkTemp(bedtemp, 1)){
 				printer.setBedTemp(getActivity(), bedtemp);
@@ -188,7 +196,14 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			break;
 
 		case R.id.newExtrTempBtn:
-			if (!Utils.isNumeric(newExtrTempEt.getText().toString())){
+
+			String extrValue = newExtrTempEt.getText().toString();
+			if (extrValue.equals("") || extrValue == null){
+				toast= Toast.makeText(getActivity(),getString(R.string.notValue), Toast.LENGTH_LONG);
+				toast.show(); 
+				break;
+			}
+			if (!Utils.isNumeric(extrValue)){
 				toast= Toast.makeText(getActivity(),getString(R.string.notNumericValue), Toast.LENGTH_LONG);
 				toast.show();
 				break;
@@ -198,6 +213,16 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 				printer.setExtrTemp(getActivity(), extrtemp);
 				printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			}
+			break;
+
+		case R.id.powerExtrButton:
+			printer.setExtrTemp(getActivity(), 0);
+			printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
+			break;
+
+		case R.id.powerBedButton:
+			printer.setBedTemp(getActivity(), 0);
+			printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			break;
 		}
 	}
@@ -262,6 +287,13 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		int feed = status.getSpeed_multiply();
 		feedrateValue.setText(Integer.toString(feed));
 
+		if (flow == Integer.parseInt(newFlow.getText().toString()))
+			newFlow.setVisibility(View.INVISIBLE);
+		
+		if (feed == Integer.parseInt(newSpeed.getText().toString()))
+			newSpeed.setVisibility(View.INVISIBLE);
+		
+		
 		extrRead.setText(Double.toString(status.getTemp_read()));
 		extrSet.setText(Double.toString(status.getTemp_set()));
 		bedRead.setText(Double.toString(status.getBed_temp_read()));
@@ -271,54 +303,12 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		feedrateSeek.setProgress(feed);
 
 		if (status.getTemp_set()==0)	
-			turnOff(extruderSwitch);
-		else turnOn(extruderSwitch);
+			turnOffExtr.setVisibility(View.INVISIBLE);
+		else turnOffExtr.setVisibility(View.VISIBLE);
 
 		if (status.getBed_temp_set()==0)	
-			turnOff(bedSwitch);
-		else turnOn(bedSwitch);
-	}
-
-
-
-	public void turnOn (Switch s){
-		s.setChecked(true);
-	}
-
-	public void turnOff (Switch s){
-		s.setChecked(false);
-	}
-
-
-
-	//Accendi/spegni estrusore/letto
-	@Override
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		/*	
-		switch (buttonView.getId()) {
-		case R.id.extruderSwitch:
-			if (extruderSwitch.isChecked()){
-				printer.setExtrTemp(getActivity(), 0);
-				printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
-			}
-			else {
-				int extrtemp = Integer.parseInt(newExtrTempEt.getText().toString());
-				if(checkTemp(extrtemp, 0)){
-					printer.setExtrTemp(getActivity(), extrtemp);
-					printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
-				}
-			}
-			break;
-
-		case R.id.bedSwitch:
-			int bedtemp = Integer.parseInt(newBedTempEt.getText().toString());
-			if(checkTemp(bedtemp, 1)){
-				printer.setBedTemp(getActivity(), bedtemp);
-				printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
-			}
-			break;
-		}
-		 */
+			turnOffBed.setVisibility(View.INVISIBLE);
+		else turnOffBed.setVisibility(View.VISIBLE);
 	}
 
 
@@ -326,23 +316,24 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
+
+		switch (seekBar.getId()) {
+
+		case R.id.feedrateSeekBar:
+			newSpeed.setVisibility(View.VISIBLE);
+			newSpeed.setText("" + progress);
+			break;
+
+		case R.id.flowrateSeekBar:
+			newFlow.setVisibility(View.VISIBLE);
+			newFlow.setText("" + progress);
+			break;
+		}
 	}
 
 	// Seekbar callback
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
-		switch (seekBar.getId()) {
-
-		case R.id.feedrateSeekBar:
-			newSpeed.setVisibility(View.VISIBLE);
-			newSpeed.setText(seekBar.getProgress());
-			break;
-
-		case R.id.flowrateSeekBar:
-			newFlow.setVisibility(View.VISIBLE);
-			newFlow.setText(seekBar.getProgress());
-			break;
-		}
 	}
 
 	// Seekbar callback
@@ -351,12 +342,12 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		switch (seekBar.getId()) {
 
 		case R.id.feedrateSeekBar:
-			feedrateSeek.setSecondaryProgress(feedrateSeek.getProgress());
+			//feedrateSeek.setSecondaryProgress(feedrateSeek.getProgress());
 			printer.setSpeed(getActivity(), seekBar.getProgress());
 			break;
 
 		case R.id.flowrateSeekBar:
-			flowrateSeek.setSecondaryProgress(flowrateSeek.getProgress());
+			//flowrateSeek.setSecondaryProgress(flowrateSeek.getProgress());
 			printer.setFlowrate(getActivity(), seekBar.getProgress());
 			break;
 		}
@@ -416,14 +407,12 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			isOnLine = false;
 		else 
 			isOnLine = true;
-
 		feedrateValue.setActivated(isOnLine);
 		flowrateValue.setActivated(isOnLine);
 		newBedTempBtn.setClickable(isOnLine);
 		newExtrTempBtn.setClickable(isOnLine);
-		extruderSwitch.setClickable(isOnLine);
-		bedSwitch.setClickable(isOnLine);
-
+		turnOffBed.setClickable(isOnLine);
+		turnOffExtr.setClickable(isOnLine);
 	}
 
 

@@ -53,66 +53,6 @@
         android:textSize="@dimen/bigText" />
 
     <TextView
-        android:id="@+id/extruderTextView"
-        style="@style/blueText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/extruderSwitch"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/extruderSwitch"
-        android:text="Estrusore:"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Switch
-        android:id="@+id/bedSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/bedTextView"
-        android:layout_alignLeft="@+id/extrTempReadTextView" />
-
-    <TextView
-        android:id="@+id/bedTempReadTextView"
-        style="@style/Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/bedtempTextView"
-        android:layout_alignBottom="@+id/bedtempTextView"
-        android:layout_alignLeft="@+id/bedSwitch"
-        android:text="999"
-        android:textSize="@dimen/bigText" />
-
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/bedTempReadTextView"
-        android:layout_toRightOf="@+id/bedTempReadTextView"
-        android:text="  /  "
-        android:textSize="@dimen/bigText" />
-
-    <TextView
-        android:id="@+id/bedTempSetTextView"
-        style="@style/boldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:text="999"
-        android:textSize="@dimen/bigText" />
-
-    <Button
-        android:id="@+id/newExtrTempBtn"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/newExtrTempEt"
-        android:layout_alignTop="@+id/newExtrTempEt"
-        android:layout_toRightOf="@+id/newExtrTempEt"
-        android:text="SALVA" />
-
-    <TextView
         android:id="@+id/errorTV"
         style="@style/offline"
         android:layout_width="match_parent"
@@ -135,118 +75,14 @@
         android:textSize="@dimen/bigText" />
 
     <TextView
-        android:id="@+id/bedTextView"
-        style="@style/blueText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/newExtrTempEt"
-        android:layout_marginTop="31dp"
-        android:layout_toLeftOf="@+id/bedSwitch"
-        android:text="Piano riscaldato:"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/extrtempModTextView"
-        style="@style/boldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/newExtrTempEt"
-        android:layout_alignParentLeft="true"
-        android:text="Modifica:"
-        android:textSize="@dimen/bigText" />
-
-    <Switch
-        android:id="@+id/extruderSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/flowrateSeekBar"
-        android:layout_below="@+id/flowrateSeekBar"
-        android:layout_marginTop="17dp" />
-
-    <TextView
-        android:id="@+id/extrtempTextView"
-        style="@style/boldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/extrtempModTextView"
-        android:layout_below="@+id/extruderTextView"
-        android:layout_marginTop="10dp"
-        android:text="Temperatura:"
-        android:textSize="@dimen/bigText" />
-
-    <TextView
         android:id="@+id/bedtempTextView"
         style="@style/boldText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/bedTextView"
         android:layout_below="@+id/bedTextView"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="Temperatura:"
-        android:textSize="@dimen/bigText" />
-
-    <TextView
-        android:id="@+id/bedtempModTextView"
-        style="@style/boldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/newBedTempEt"
-        android:layout_alignParentLeft="true"
-        android:text="Modifica:"
-        android:textSize="@dimen/bigText" />
-
-    <EditText
-        android:id="@+id/newExtrTempEt"
-        style="@style/boldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/extrtempTextView"
-        android:layout_toRightOf="@+id/extrtempTextView"
-        android:hint="999"
-        android:inputType="number" />
-
-    <Button
-        android:id="@+id/newBedTempBtn"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/newBedTempEt"
-        android:layout_alignTop="@+id/newBedTempEt"
-        android:layout_toRightOf="@+id/newBedTempEt"
-        android:text="SALVA" />
-
-    <EditText
-        android:id="@+id/newBedTempEt"
-        style="@style/boldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bedtempTextView"
-        android:layout_toRightOf="@+id/bedtempTextView"
-        android:hint="999"
-        android:inputType="number" >
-    </EditText>
-
-    <TextView
-        android:id="@+id/newSpeedTV"
-        style="@style/offline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/feedrateValueTextView"
-        android:layout_alignBottom="@+id/feedrateValueTextView"
-        android:layout_alignParentRight="true"
-        android:text="100"
-        android:textSize="@dimen/bigText" />
-
-    <TextView
-        android:id="@+id/newFlowTV"
-        style="@style/offline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/flowrateValueTextView"
-        android:layout_alignBottom="@+id/flowrateValueTextView"
-        android:layout_alignParentRight="true"
-        android:text="100"
         android:textSize="@dimen/bigText" />
 
     <TextView
@@ -254,9 +90,9 @@
         style="@style/boldText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBaseline="@+id/extrtempTextView"
         android:layout_alignBottom="@+id/textView1"
-        android:layout_alignRight="@+id/extruderSwitch"
+        android:layout_alignRight="@+id/flowrateSeekBar"
         android:text="999"
         android:textSize="@dimen/bigText" />
 
@@ -265,7 +101,7 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/extrTempReadTextView"
+        android:layout_alignBaseline="@+id/extrtempTextView"
         android:layout_alignBottom="@+id/extrTempReadTextView"
         android:layout_toLeftOf="@+id/extrTempSetTextView"
         android:text="  /  "
@@ -276,9 +112,156 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/newExtrTempBtn"
+        android:layout_alignBaseline="@+id/extrtempTextView"
         android:layout_toLeftOf="@+id/textView1"
         android:text="999"
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:id="@+id/bedTempSetTextView"
+        style="@style/boldText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bedtempTextView"
+        android:layout_alignParentRight="true"
+        android:text="999"
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bedtempTextView"
+        android:layout_toLeftOf="@+id/bedTempSetTextView"
+        android:text="  /  "
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:id="@+id/bedTempReadTextView"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bedtempTextView"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toLeftOf="@+id/textView2"
+        android:text="999"
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:id="@+id/extruderTextView"
+        style="@style/blueText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/powerExtrButton"
+        android:layout_alignLeft="@+id/flowrateSeekBar"
+        android:layout_alignTop="@+id/powerExtrButton"
+        android:gravity="center_vertical|right"
+        android:text="Estrusore:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageButton
+        android:id="@+id/powerExtrButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/flowrateSeekBar"
+        android:layout_below="@+id/flowrateSeekBar"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/off" />
+
+    <TextView
+        android:id="@+id/extrtempTextView"
+        style="@style/boldText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/extruderTextView"
+        android:layout_marginTop="15dp"
+        android:text="Temperatura:"
+        android:textSize="@dimen/bigText" />
+
+    <EditText
+        android:id="@+id/newExtrTempEt"
+        style="@style/boldText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/extrTempReadTextView"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/extrtempTextView"        
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/newExtrTempBtn"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/newExtrTempEt"
+        android:layout_alignTop="@+id/newExtrTempEt"
+        android:layout_centerHorizontal="true"
+        android:text="@string/modify" />
+
+    <EditText
+        android:id="@+id/newBedTempEt"
+        style="@style/boldText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bedTempReadTextView"
+        android:layout_alignRight="@+id/bedTempSetTextView"
+        android:layout_below="@+id/bedtempTextView"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/newBedTempBtn"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/newBedTempEt"
+        android:layout_below="@+id/bedtempTextView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/modify" />
+
+    <TextView
+        android:id="@+id/bedTextView"
+        style="@style/blueText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/powerBedButton"
+        android:layout_alignLeft="@+id/extrtempTextView"
+        android:layout_alignTop="@+id/powerBedButton"
+        android:gravity="center_vertical|right"
+        android:text="Piano riscaldato:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageButton
+        android:id="@+id/powerBedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/newExtrTempEt"
+        android:layout_below="@+id/newExtrTempEt"
+        android:layout_marginTop="17dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/off" />
+
+    <TextView
+        android:id="@+id/newSpeedTV"
+        style="@style/offline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/feedrateSeekBar"
+        android:layout_marginLeft="13dp"
+        android:layout_toRightOf="@+id/feedrateValueTextView"
+        android:text="100"
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:id="@+id/newFlowTV"
+        style="@style/offline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/flowrateValueTextView"
+        android:layout_alignBottom="@+id/flowrateValueTextView"
+        android:layout_alignLeft="@+id/newSpeedTV"
+        android:text="100"
         android:textSize="@dimen/bigText" />
 
 </RelativeLayout>
