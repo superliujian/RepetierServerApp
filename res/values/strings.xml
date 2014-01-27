@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">3D Printer Control </string>
+    <string name="app_name">3D Printer Control</string>
     <string name="PrinterControlSettings">Impostazioni</string>
     <string name="ServerSelection">Seleziona Server:</string>
     <string name="PrinterSelection">Seleziona 3d Printer:</string>
@@ -64,8 +64,14 @@
     <string name="stored">Salvato</string> 
     
     <string name="notNumericPort">Attenzione: il campo PORTA deve contenere solo valori numerici.</string> 
+    <string name="notNumericValue">Attenzione: valore non numerico.</string>
+    
     
     <string name="popModifyServer">Modifica Server</string>
     <string name="popDeleteServer">Elimina Server</string>
+    
+    <string name="feedrate">Velocità</string>
+    <string name="flowrate">Flusso</string>
+    
     
 </resources>

@@ -289,19 +289,22 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 		}
 	}
 
-
+	// PrinterCallback
 	@Override
 	public void onChangeState() {
 	}
 
-
-
+	// PrinterCallback
 	@Override
 	public void onCommandExecuted() {
 		// TODO Auto-generated method stub
-
 	}
 
+	// PrinterCallback
+	@Override
+	public void onChangeFanState() {
+		// TODO Auto-generated method stub
+	}
 
 
 	public void startTimer(int interval){
@@ -313,7 +316,7 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 				Log.d("Timer", "control1");
 				printer.updatePrinterStatus(getActivity().getApplicationContext(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			}
-		}, 0, interval);
+		}, 1000, interval);
 
 		printerTimer = new Timer();
 		printerTimer.schedule(new TimerTask() {          
@@ -391,6 +394,8 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 
 		buttonHome.setEnabled(isOnLine);	
 	}
+
+
 
 
 }

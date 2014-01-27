@@ -32,7 +32,6 @@ public class ActivityServerList extends FragmentActivity implements
 		if (findViewById(R.id.server_detail_container) != null) {
 
 			mTwoPane = true;
-
 		
 			((FragServerList) getSupportFragmentManager().findFragmentById(
 					R.id.server_list)).setActivateOnItemClick(true);

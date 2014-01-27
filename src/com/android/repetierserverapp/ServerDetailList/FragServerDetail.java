@@ -30,20 +30,6 @@ import com.grasselli.android.repetierserverapi.Server.ServerCallbacks;
 public class FragServerDetail extends ListFragment {
 
 
-
-	public interface PrinterAppCallbacks {
-		public void onPrinterSelected(long id);
-	};
-
-	private static PrinterAppCallbacks sDummyCallbacks = new PrinterAppCallbacks() {
-		@Override
-		public void onPrinterSelected(long id) {
-		}
-	};
-
-
-	private PrinterAppCallbacks callback;
-
 	private DbAdapter dbAdapter;
 
 	private ListView listview;
@@ -70,12 +56,6 @@ public class FragServerDetail extends ListFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-
-		if (!(activity instanceof PrinterAppCallbacks)) {
-			throw new IllegalStateException(
-					"Activity must implement fragment's callbacks.");
-		}
-		callback = (PrinterAppCallbacks) activity;
 	}
 
 	
@@ -189,7 +169,6 @@ public class FragServerDetail extends ListFragment {
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		callback = sDummyCallbacks;
 	}
 
 

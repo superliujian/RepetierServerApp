@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/server_list"
-        android:name="com.android.repetierserverapp.ServerListFragment"
+        android:name="com.android.repetierserverapp.ServerList.FragServerList"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

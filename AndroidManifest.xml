@@ -17,8 +17,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.android.repetierserverapp.ServerList.ActivityServerList"
-            android:label="@string/title_server_list"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_server_list" >
+
+            <!-- android:screenOrientation="portrait" > -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,26 +29,22 @@
         <activity
             android:name="com.android.repetierserverapp.ServerDetailList.ActivityServerDetail"
             android:label="@string/title_server_detail"
-            android:parentActivityName="com.android.repetierserverapp.ServerList.ActivityServerList"
-            android:screenOrientation="portrait" >
+            android:parentActivityName="com.android.repetierserverapp.ServerList.ActivityServerList" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ServerListActivity" />
         </activity>
         <activity
             android:name="com.android.repetierserverapp.ActivityAddServer"
-            android:label="@string/title_activity_activity_add_server"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_activity_add_server" >
         </activity>
         <activity
             android:name="com.android.repetierserverapp.ActivityModifyServer"
-            android:label="@string/title_activity_modify_server"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_modify_server" >
         </activity>
         <activity
             android:name="com.android.repetierserverapp.PrinterControll.ActivityPrinterControll"
-            android:label="@string/title_activity_activity_printer_controll"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_activity_printer_controll" >
         </activity>
         <activity
             android:name="com.android.repetierserverapp.SettingsActivity"

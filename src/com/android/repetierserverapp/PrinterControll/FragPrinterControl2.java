@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.android.repetierserverapp.R;
+import com.android.repetierserverapp.utils.Utils;
 import com.grasselli.android.repetierserverapi.Line;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
@@ -40,6 +41,9 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private SeekBar feedrateSeek;
 	private SeekBar flowrateSeek;
 
+	private TextView newSpeed;
+	private TextView newFlow;
+
 	private Switch extruderSwitch;
 	private Switch bedSwitch;
 
@@ -49,7 +53,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private TextView bedSet;
 
 	private TextView textViewError;
-	
+
 	private Button newExtrTempBtn;
 	private Button newBedTempBtn;
 
@@ -59,12 +63,12 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private Printer printer;
 	private Server server;
 	private int position;	
-	
+
 	private Toast toast;
 
 	private static Timer myTimer;
 	private Timer printerTimer;
-	
+
 	private SharedPreferences prefs;
 
 
@@ -91,11 +95,11 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 		server = new Server(url, alias);
 		printer = new Printer(server, name, slug, online, currentJob, active, progress);
-		
+
 		server.setCallbacks(this);
 		printer.setPrinterStatusCallbacks(this);
 		printer.setPrinterCallbacks(this);
-		
+
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 	}
 
@@ -126,6 +130,9 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		flowrateSeek.setOnSeekBarChangeListener(this);
 		flowrateSeek.setMax(200);	
 
+		newSpeed = (TextView) v.findViewById(R.id.newSpeedTV);
+		newFlow = (TextView) v.findViewById(R.id.newFlowTV);
+
 		extruderSwitch = (Switch) v.findViewById(R.id.extruderSwitch);
 		bedSwitch = (Switch) v.findViewById(R.id.bedSwitch);
 
@@ -138,7 +145,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		bedSet = (TextView) v.findViewById(R.id.bedTempSetTextView);
 
 		textViewError = (TextView) v.findViewById(R.id.errorTV);
-		
+
 		newBedTempBtn = (Button) v.findViewById(R.id.newBedTempBtn);
 		newExtrTempBtn = (Button) v.findViewById(R.id.newExtrTempBtn);
 
@@ -149,7 +156,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		newBedTempEt = (EditText) v.findViewById(R.id.newBedTempEt);
 
 		updateFrag(printer);
-		
+
 	}
 
 
@@ -167,6 +174,12 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		switch (v.getId()) {
 
 		case R.id.newBedTempBtn:
+			if (!Utils.isNumeric(newBedTempEt.getText().toString())){
+				toast= Toast.makeText(getActivity(),getString(R.string.notNumericValue), Toast.LENGTH_LONG);
+				toast.show();
+				break;
+			}
+
 			int bedtemp = Integer.parseInt(newBedTempEt.getText().toString());
 			if(checkTemp(bedtemp, 1)){
 				printer.setBedTemp(getActivity(), bedtemp);
@@ -175,6 +188,11 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			break;
 
 		case R.id.newExtrTempBtn:
+			if (!Utils.isNumeric(newExtrTempEt.getText().toString())){
+				toast= Toast.makeText(getActivity(),getString(R.string.notNumericValue), Toast.LENGTH_LONG);
+				toast.show();
+				break;
+			}
 			int extrtemp = Integer.parseInt(newExtrTempEt.getText().toString());
 			if(checkTemp(extrtemp, 0)){
 				printer.setExtrTemp(getActivity(), extrtemp);
@@ -204,7 +222,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			toast.show();
 			return false;
 		}
-		if (temp > 100 && type ==0 ){
+		if (temp > 100 && type ==1 ){
 			toast= Toast.makeText(getActivity(),"Temperatura letto riscaldato eccessiva", Toast.LENGTH_LONG);
 			toast.show();
 			return false;
@@ -232,24 +250,30 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			ArrayList<Line> tempLines) {
 
 		textViewError.setVisibility(View.GONE);
-		
+
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("LAST_ID", lastId);
 		editor.commit();
-		
+
 		Log.d("lastId stored: ", Integer.toString(lastId));
-		
-		flowrateValue.setText(Integer.toString(status.getFlow_multiply()));
-		feedrateValue.setText(Integer.toString(status.getSpeed_multiply()));
+
+		int flow = status.getFlow_multiply();
+		flowrateValue.setText(Integer.toString(flow));
+		int feed = status.getSpeed_multiply();
+		feedrateValue.setText(Integer.toString(feed));
+
 		extrRead.setText(Double.toString(status.getTemp_read()));
 		extrSet.setText(Double.toString(status.getTemp_set()));
 		bedRead.setText(Double.toString(status.getBed_temp_read()));
 		bedSet.setText(Double.toString(status.getBed_temp_set()));
-		
+
+		flowrateSeek.setProgress(flow);
+		feedrateSeek.setProgress(feed);
+
 		if (status.getTemp_set()==0)	
 			turnOff(extruderSwitch);
 		else turnOn(extruderSwitch);
-		
+
 		if (status.getBed_temp_set()==0)	
 			turnOff(bedSwitch);
 		else turnOn(bedSwitch);
@@ -270,7 +294,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	//Accendi/spegni estrusore/letto
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-	/*	
+		/*	
 		switch (buttonView.getId()) {
 		case R.id.extruderSwitch:
 			if (extruderSwitch.isChecked()){
@@ -294,33 +318,46 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			}
 			break;
 		}
-		*/
+		 */
 	}
-	
 
 
+	// Seekbar callback
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
 	}
 
+	// Seekbar callback
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
-		// TODO inserire valore cambiamento
+		switch (seekBar.getId()) {
+
+		case R.id.feedrateSeekBar:
+			newSpeed.setVisibility(View.VISIBLE);
+			newSpeed.setText(seekBar.getProgress());
+			break;
+
+		case R.id.flowrateSeekBar:
+			newFlow.setVisibility(View.VISIBLE);
+			newFlow.setText(seekBar.getProgress());
+			break;
+		}
 	}
 
+	// Seekbar callback
 	@Override
 	public void onStopTrackingTouch(SeekBar seekBar) {
 		switch (seekBar.getId()) {
 
 		case R.id.feedrateSeekBar:
 			feedrateSeek.setSecondaryProgress(feedrateSeek.getProgress());
-			//TODO printer.setFeedRate(seekBar.getProgress());
+			printer.setSpeed(getActivity(), seekBar.getProgress());
 			break;
 
 		case R.id.flowrateSeekBar:
 			flowrateSeek.setSecondaryProgress(flowrateSeek.getProgress());
-			//TODO printer.setFlowRate(seekBar.getProgress());
+			printer.setFlowrate(getActivity(), seekBar.getProgress());
 			break;
 		}
 	}
@@ -337,7 +374,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 				printer.updatePrinterStatus(getActivity().getApplicationContext(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);				
 			}
 		}, 0, interval);
-		
+
 		printerTimer = new Timer();
 		printerTimer.schedule(new TimerTask() {          
 			@Override
@@ -349,8 +386,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 	public void stopTimer(){
 		Log.d("stopTimer", "control2");
-			myTimer.cancel();
-			printerTimer.cancel();
+		myTimer.cancel();
+		printerTimer.cancel();
 	}
 
 
@@ -386,27 +423,32 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		newExtrTempBtn.setClickable(isOnLine);
 		extruderSwitch.setClickable(isOnLine);
 		bedSwitch.setClickable(isOnLine);
-		
+
 	}
 
 
 	// PrinterCallback
 	@Override
 	public void onPrinterError(String error) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
+	// PrinterCallback
 	@Override
 	public void onChangeState() {
 		// TODO Auto-generated method stub
-		
 	}
 
+	// PrinterCallback
 	@Override
 	public void onCommandExecuted() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
+	}
+
+	// PrinterCallback
+	@Override
+	public void onChangeFanState() {
+		// TODO Auto-generated method stub		
 	}
 
 }

@@ -90,7 +90,6 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 			@Override
 			public void onCommandExecuted() {
 				// TODO Auto-generated method stub
-
 			}
 
 			@Override
@@ -100,7 +99,11 @@ public class PrinterListAdapter extends ArrayAdapter<Printer> implements OnClick
 
 			@Override
 			public void onPrinterError(String error) {
+			}
 
+			@Override
+			public void onChangeFanState() {
+				// TODO Auto-generated method stub
 			}
 		});
 
