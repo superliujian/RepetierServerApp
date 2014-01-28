@@ -72,6 +72,7 @@
     
     <string name="feedrate">Velocità</string>
     <string name="flowrate">Flusso</string>
+    <string name="fan">Ventola</string>
     
     <string name="modify">MODIFICA</string>
     

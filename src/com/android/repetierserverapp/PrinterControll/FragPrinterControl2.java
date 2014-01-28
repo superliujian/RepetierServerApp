@@ -37,19 +37,24 @@ import android.widget.Toast;
 public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeListener, OnClickListener, PrinterStatusCallbacks, ServerCallbacks, PrinterCallbacks{
 
 	private TextView feedrateValue;
-	private TextView flowrateValue;				
+	private TextView flowrateValue;		
+	private TextView fanValue;		
 
 	private SeekBar feedrateSeek;
 	private SeekBar flowrateSeek;
+	private SeekBar fanSeek;
 
 	private TextView newSpeed;
 	private TextView newFlow;
+	private TextView newFan;
 
 	private int speed;
 	private int flow;
+	private int fan;
 
 	private int settedSpeed = -1;
 	private int settedFlow = -1;
+	private int settedFan = -1;
 
 	private ImageButton turnOffExtr;
 	private ImageButton turnOffBed;
@@ -129,12 +134,15 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 		feedrateValue = (TextView) v.findViewById(R.id.feedrateValueTextView);
 		flowrateValue = (TextView) v.findViewById(R.id.flowrateValueTextView);
-
+		fanValue = (TextView) v.findViewById(R.id.fanValueTextView);
+				
 		newSpeed = (TextView) v.findViewById(R.id.newSpeedTV);
 		newFlow = (TextView) v.findViewById(R.id.newFlowTV);
+		newFan = (TextView) v.findViewById(R.id.newFanTV);
 
 		newSpeed.setVisibility(View.INVISIBLE);
 		newFlow.setVisibility(View.INVISIBLE);
+		newFan.setVisibility(View.INVISIBLE);
 
 		feedrateSeek = (SeekBar) v.findViewById(R.id.feedrateSeekBar);
 		feedrateSeek.setOnSeekBarChangeListener(this);
@@ -143,6 +151,10 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		flowrateSeek = (SeekBar) v.findViewById(R.id.flowrateSeekBar);
 		flowrateSeek.setOnSeekBarChangeListener(this);
 		flowrateSeek.setMax(200);	
+
+		fanSeek = (SeekBar) v.findViewById(R.id.fanSeekBar);
+		fanSeek.setOnSeekBarChangeListener(this);
+		fanSeek.setMax(100);	
 
 		turnOffExtr = (ImageButton) v.findViewById(R.id.powerExtrButton);
 		turnOffBed = (ImageButton) v.findViewById(R.id.powerBedButton);
@@ -296,13 +308,15 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 		flow = status.getFlow_multiply();
 		speed = status.getSpeed_multiply();
-
+		fan = status.getFan_voltage()*100/255;
+		
 		flowrateValue.setText(Integer.toString(flow));
 		feedrateValue.setText(Integer.toString(speed));
+		fanValue.setText(Integer.toString(fan));
 
 		flowrateSeek.setProgress(flow);
 		feedrateSeek.setProgress(flow);
-
+		fanSeek.setProgress(fan);
 
 		if (flow == settedFlow){
 			newFlow.setVisibility(View.INVISIBLE);
@@ -310,6 +324,10 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 		if (speed == settedSpeed){
 			newSpeed.setVisibility(View.INVISIBLE);	
+		}
+		
+		if (fan == settedFan){
+			newFan.setVisibility(View.INVISIBLE);	
 		}
 
 		extrRead.setText(Double.toString(status.getTemp_read()));
@@ -345,8 +363,17 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			newFlow.setVisibility(View.VISIBLE);
 			newFlow.setText("" + progress);
 			break;
+
+		case R.id.fanSeekBar:
+			settedFan = progress;
+			newFan.setVisibility(View.VISIBLE);
+			newFan.setText("" + progress);
+			fanSeek.setSecondaryProgress(fanSeek.getProgress());
+
+			break;
 		}
 	}
+
 
 	// Seekbar callback
 	@Override
@@ -360,18 +387,20 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 		case R.id.feedrateSeekBar:
 			//feedrateSeek.setSecondaryProgress(feedrateSeek.getProgress());
-			settedSpeed = seekBar.getProgress();
 			printer.setSpeed(getActivity(), settedSpeed);
 			break;
 
 		case R.id.flowrateSeekBar:
 			//flowrateSeek.setSecondaryProgress(flowrateSeek.getProgress());
-			settedFlow = seekBar.getProgress();
 			printer.setFlowrate(getActivity(), settedFlow);
+			break;
+
+		case R.id.fanSeekBar:
+			printer.setFan(getActivity(), settedFan);
+			Log.d("settedfan", Integer.toString(settedFan));
 			break;
 		}
 	}
-
 
 
 	public void startTimer(int interval){
