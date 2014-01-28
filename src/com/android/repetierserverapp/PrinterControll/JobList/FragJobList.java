@@ -208,8 +208,7 @@ public class FragJobList extends ListFragment implements OnItemLongClickListener
 
 	@Override
 	public void onJobError(String error) {
-		Toast.makeText(getActivity(), "JOB ERROR", Toast.LENGTH_LONG).show();	
-		
+		Toast.makeText(getActivity(), "JOB ERROR: " + error, Toast.LENGTH_LONG).show();	
 	}
 
 

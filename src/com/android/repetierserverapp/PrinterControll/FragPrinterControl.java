@@ -48,6 +48,12 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 	private Button buttonZhome;
 	private Button buttonHome;
 
+	private Button extr1;
+	private Button extr10;
+	private Button retr1;
+	private Button retr10;
+
+
 	private TextView textViewXvalue;
 	private TextView textViewYvalue;
 	private TextView textViewZvalue;
@@ -134,6 +140,12 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 
 		buttonHome = (Button) v.findViewById(R.id.homeButton);
 
+		extr1 = (Button) v.findViewById(R.id.extrudep1button);
+		extr10 = (Button) v.findViewById(R.id.extrudep10button);
+		retr1 = (Button) v.findViewById(R.id.retract1button);
+		retr10 = (Button) v.findViewById(R.id.retract10button);
+
+
 		textViewXvalue = (TextView) v.findViewById(R.id.xValueTextView);
 		textViewYvalue = (TextView) v.findViewById(R.id.yValueTextView);
 		textViewZvalue = (TextView) v.findViewById(R.id.zValueTextView);
@@ -159,6 +171,11 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 		buttonZ_10.setOnClickListener(this);
 		buttonZhome.setOnClickListener(this);
 		buttonHome.setOnClickListener(this);
+
+		extr1.setOnClickListener(this);
+		extr10.setOnClickListener(this);
+		retr1.setOnClickListener(this);
+		retr10.setOnClickListener(this);
 
 		updateFrag(printer);
 	}
@@ -248,6 +265,25 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
 			break;
 
+		case R.id.extrudep1button:
+			printer.move(getActivity(), 0, 0, 0, 1);
+			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
+			break;
+
+		case R.id.extrudep10button:
+			printer.move(getActivity(), 0, 0, 0, 10);
+			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
+			break;
+
+		case R.id.retract1button:
+			printer.move(getActivity(), 0, 0, 0, -1);
+			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
+			break;
+
+		case R.id.retract10button:
+			printer.move(getActivity(), 0, 0, 0, -10);
+			printer.updatePrinterStatus(getActivity(), printer.getLastId(), 13);
+			break;
 		default:
 			break;
 		}
@@ -393,6 +429,11 @@ public class FragPrinterControl extends Fragment implements  PrinterStatusCallba
 		buttonZhome.setEnabled(isOnLine);
 
 		buttonHome.setEnabled(isOnLine);	
+
+		extr1.setEnabled(isOnLine);
+		extr10.setEnabled(isOnLine);
+		retr1.setEnabled(isOnLine);
+		retr10.setEnabled(isOnLine);
 	}
 
 

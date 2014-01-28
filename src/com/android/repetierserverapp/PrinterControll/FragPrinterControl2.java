@@ -5,7 +5,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.android.repetierserverapp.R;
-import com.android.repetierserverapp.utils.Utils;
 import com.grasselli.android.repetierserverapi.Line;
 import com.grasselli.android.repetierserverapi.Printer;
 import com.grasselli.android.repetierserverapi.Printer.PrinterCallbacks;
@@ -22,15 +21,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +48,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private int speed;
 	private int flow;
 	private int fan;
+	private int extr;
+	private int bed;
 
 	private int settedSpeed = -1;
 	private int settedFlow = -1;
@@ -70,17 +64,9 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 	private TextView textViewError;
 
-	private Button newExtrTempBtn;
-	private Button newBedTempBtn;
-
-	private EditText newExtrTempEt;
-	private EditText newBedTempEt;
-
 	private Printer printer;
 	private Server server;
 	private int position;	
-
-	private Toast toast;
 
 	private static Timer myTimer;
 	private Timer printerTimer;
@@ -172,9 +158,9 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		bedSeek.setOnSeekBarChangeListener(this);
 		bedSeek.setMax(100);
 
-
 		extrRead = (TextView) v.findViewById(R.id.extrTempReadTextView);
 		extrSet = (TextView) v.findViewById(R.id.extrTempSetTextView);
+
 		bedRead = (TextView) v.findViewById(R.id.bedTempReadTextView);
 		bedSet = (TextView) v.findViewById(R.id.bedTempSetTextView);
 
@@ -183,8 +169,8 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		fragLoaded = true; 
 
 		updateFrag(printer);
-
 	}
+
 
 
 
@@ -194,6 +180,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	}
 
 
+	
 	//PrinterStatus Callback
 	@Override
 	public void onStatusError(String error) {
@@ -207,6 +194,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	}
 
 
+	
 	//PrinterStatus Callback
 	@Override
 	public void onPrinterStatusUpdated(PrinterStatus status, int lastId,
@@ -224,13 +212,18 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		speed = status.getSpeed_multiply();
 		fan = status.getFan_voltage()*100/255;
 
+		extr = (int) status.getTemp_set();
+		bed = (int) status.getBed_temp_set();
+
 		flowrateValue.setText(Integer.toString(flow));
 		feedrateValue.setText(Integer.toString(speed));
 		fanValue.setText(Integer.toString(fan));
 
 		flowrateSeek.setProgress(flow);
-		feedrateSeek.setProgress(flow);
+		feedrateSeek.setProgress(speed);
 		fanSeek.setProgress(fan);
+		extrSeek.setProgress(extr);
+		bedSeek.setProgress(bed);
 
 		if (flow == settedFlow){
 			newFlow.setVisibility(View.INVISIBLE);
@@ -244,22 +237,25 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			newFan.setVisibility(View.INVISIBLE);	
 		}
 
+		if (extr == settedExtr){
+			newExtr.setVisibility(View.INVISIBLE);	
+		}
+
+		if (bed == settedBed){
+			newBed.setVisibility(View.INVISIBLE);	
+		}
+
 		extrRead.setText(Double.toString(status.getTemp_read()));
-		extrSet.setText(Double.toString(status.getTemp_set()));
+		extrSet.setText(Integer.toString(extr));
 
 		bedRead.setText(Double.toString(status.getBed_temp_read()));
-		bedSet.setText(Double.toString(status.getBed_temp_set()));
+		bedSet.setText(Integer.toString(bed));
 
-		if(settedExtr != (int) status.getTemp_set()){
-			extrSeek.setProgress(((int) status.getTemp_set()));
-		}
 
-		if(settedBed != (int) status.getBed_temp_set()){
-			bedSeek.setProgress(((int) status.getBed_temp_set()));
-		}
 	}
 
 
+	
 	// Seekbar callback
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
@@ -300,6 +296,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	}
 
 
+	
 	// Seekbar callback
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
@@ -335,6 +332,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		}
 	}
 
+	
 
 	public void startTimer(int interval){
 		Log.d("startTimer", "intervallo: " + Integer.toString(interval));
@@ -388,34 +386,35 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			isOnLine = false;
 		else 
 			isOnLine = true;
-		feedrateValue.setActivated(isOnLine);
-		flowrateValue.setActivated(isOnLine);
 
+		feedrateSeek.setClickable(isOnLine);
+		flowrateSeek.setClickable(isOnLine);
+		fanSeek.setClickable(isOnLine);
+		extrSeek.setClickable(isOnLine);
+		bedSeek.setClickable(isOnLine);
 	}
 
+	
 
 	// PrinterCallback
 	@Override
 	public void onPrinterError(String error) {
-		// TODO Auto-generated method stub		
-	}
+		Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();	
+	}	
 
 	// PrinterCallback
 	@Override
 	public void onChangeState() {
-		// TODO Auto-generated method stub
 	}
 
 	// PrinterCallback
 	@Override
 	public void onCommandExecuted() {
-		// TODO Auto-generated method stub		
 	}
 
 	// PrinterCallback
 	@Override
 	public void onChangeFanState() {
-		// TODO Auto-generated method stub		
 	}
 
 }
