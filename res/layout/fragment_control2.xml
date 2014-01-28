@@ -183,9 +183,11 @@
     <EditText
         android:id="@+id/newExtrTempEt"
         style="@style/boldText"
+        android:gravity="right"
+        android:maxLength="4"
+        android:hint="9999"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/extrTempReadTextView"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/extrtempTextView"        
         android:inputType="number" />
@@ -203,9 +205,11 @@
     <EditText
         android:id="@+id/newBedTempEt"
         style="@style/boldText"
+        android:gravity="right"
+        android:maxLength="4"
+        android:hint="9999"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bedTempReadTextView"
         android:layout_alignRight="@+id/bedTempSetTextView"
         android:layout_below="@+id/bedtempTextView"
         android:inputType="number" />

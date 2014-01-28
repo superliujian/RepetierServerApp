@@ -16,7 +16,6 @@
      <item>5000</item>
      <item>10000</item> 
    </string-array>
-   
-   <bool name="isTablet">true</bool>
+
    
  </resources>

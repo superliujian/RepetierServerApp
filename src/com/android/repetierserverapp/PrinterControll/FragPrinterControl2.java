@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Switch;
@@ -44,8 +45,14 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 	private TextView newSpeed;
 	private TextView newFlow;
 
-	private Button turnOffExtr;
-	private Button turnOffBed;
+	private int speed;
+	private int flow;
+
+	private int settedSpeed = -1;
+	private int settedFlow = -1;
+
+	private ImageButton turnOffExtr;
+	private ImageButton turnOffBed;
 
 	private TextView extrRead;
 	private TextView extrSet;
@@ -125,7 +132,7 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 		newSpeed = (TextView) v.findViewById(R.id.newSpeedTV);
 		newFlow = (TextView) v.findViewById(R.id.newFlowTV);
-		
+
 		newSpeed.setVisibility(View.INVISIBLE);
 		newFlow.setVisibility(View.INVISIBLE);
 
@@ -137,8 +144,11 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		flowrateSeek.setOnSeekBarChangeListener(this);
 		flowrateSeek.setMax(200);	
 
-		turnOffExtr = (Button) v.findViewById(R.id.powerExtrButton);
-		turnOffBed = (Button) v.findViewById(R.id.powerBedButton);
+		turnOffExtr = (ImageButton) v.findViewById(R.id.powerExtrButton);
+		turnOffBed = (ImageButton) v.findViewById(R.id.powerBedButton);
+
+		turnOffExtr.setOnClickListener(this);
+		turnOffBed.setOnClickListener(this);
 
 		extrRead = (TextView) v.findViewById(R.id.extrTempReadTextView);
 		extrSet = (TextView) v.findViewById(R.id.extrTempSetTextView);
@@ -216,11 +226,13 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 			break;
 
 		case R.id.powerExtrButton:
+
 			printer.setExtrTemp(getActivity(), 0);
 			printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			break;
 
 		case R.id.powerBedButton:
+
 			printer.setBedTemp(getActivity(), 0);
 			printer.updatePrinterStatus(getActivity(), prefs.getInt("LAST_ID", 0), ActivityPrinterControll.FILTER);
 			break;
@@ -282,25 +294,28 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 		Log.d("lastId stored: ", Integer.toString(lastId));
 
-		int flow = status.getFlow_multiply();
-		flowrateValue.setText(Integer.toString(flow));
-		int feed = status.getSpeed_multiply();
-		feedrateValue.setText(Integer.toString(feed));
+		flow = status.getFlow_multiply();
+		speed = status.getSpeed_multiply();
 
-		if (flow == Integer.parseInt(newFlow.getText().toString()))
+		flowrateValue.setText(Integer.toString(flow));
+		feedrateValue.setText(Integer.toString(speed));
+
+		flowrateSeek.setProgress(flow);
+		feedrateSeek.setProgress(flow);
+
+
+		if (flow == settedFlow){
 			newFlow.setVisibility(View.INVISIBLE);
-		
-		if (feed == Integer.parseInt(newSpeed.getText().toString()))
-			newSpeed.setVisibility(View.INVISIBLE);
-		
-		
+		}			
+
+		if (speed == settedSpeed){
+			newSpeed.setVisibility(View.INVISIBLE);	
+		}
+
 		extrRead.setText(Double.toString(status.getTemp_read()));
 		extrSet.setText(Double.toString(status.getTemp_set()));
 		bedRead.setText(Double.toString(status.getBed_temp_read()));
 		bedSet.setText(Double.toString(status.getBed_temp_set()));
-
-		flowrateSeek.setProgress(flow);
-		feedrateSeek.setProgress(feed);
 
 		if (status.getTemp_set()==0)	
 			turnOffExtr.setVisibility(View.INVISIBLE);
@@ -320,11 +335,13 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 		switch (seekBar.getId()) {
 
 		case R.id.feedrateSeekBar:
+			settedSpeed = progress;
 			newSpeed.setVisibility(View.VISIBLE);
 			newSpeed.setText("" + progress);
 			break;
 
 		case R.id.flowrateSeekBar:
+			settedFlow = progress;
 			newFlow.setVisibility(View.VISIBLE);
 			newFlow.setText("" + progress);
 			break;
@@ -343,12 +360,14 @@ public class FragPrinterControl2 extends Fragment implements OnSeekBarChangeList
 
 		case R.id.feedrateSeekBar:
 			//feedrateSeek.setSecondaryProgress(feedrateSeek.getProgress());
-			printer.setSpeed(getActivity(), seekBar.getProgress());
+			settedSpeed = seekBar.getProgress();
+			printer.setSpeed(getActivity(), settedSpeed);
 			break;
 
 		case R.id.flowrateSeekBar:
 			//flowrateSeek.setSecondaryProgress(flowrateSeek.getProgress());
-			printer.setFlowrate(getActivity(), seekBar.getProgress());
+			settedFlow = seekBar.getProgress();
+			printer.setFlowrate(getActivity(), settedFlow);
 			break;
 		}
 	}

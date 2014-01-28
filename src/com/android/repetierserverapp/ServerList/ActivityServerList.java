@@ -8,18 +8,21 @@ import com.android.repetierserverapp.R.layout;
 import com.android.repetierserverapp.ServerDetailList.ActivityServerDetail;
 import com.android.repetierserverapp.ServerDetailList.FragServerDetail;
 import com.android.repetierserverapp.utils.PrefsPrinterControl;
+import com.android.repetierserverapp.utils.Utils;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
 public class ActivityServerList extends FragmentActivity implements
-		FragServerList.ServerAppCallbacks {
+FragServerList.ServerAppCallbacks {
 
 
 	private boolean mTwoPane;
@@ -29,16 +32,20 @@ public class ActivityServerList extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_server_list);
 
+		
+		Utils.setOrentation(this);
+
+
 		if (findViewById(R.id.server_detail_container) != null) {
 
 			mTwoPane = true;
-		
+
 			((FragServerList) getSupportFragmentManager().findFragmentById(
 					R.id.server_list)).setActivateOnItemClick(true);
 		}
 	}
 
-		
+
 	@Override
 	public void onServerSelected(long id) {
 		if (mTwoPane) {
@@ -47,7 +54,7 @@ public class ActivityServerList extends FragmentActivity implements
 			FragServerDetail fragment = new FragServerDetail();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.server_detail_container, fragment).commit();
+			.replace(R.id.server_detail_container, fragment).commit();
 
 		} else {
 			Intent detailIntent = new Intent(this, ActivityServerDetail.class);
@@ -55,23 +62,23 @@ public class ActivityServerList extends FragmentActivity implements
 			startActivity(detailIntent);
 		}
 	}
-	
-	
+
+
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater=getMenuInflater();
-	    inflater.inflate(R.menu.menu_add_server, menu);
-	    return super.onCreateOptionsMenu(menu);
+		MenuInflater inflater=getMenuInflater();
+		inflater.inflate(R.menu.menu_add_server, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
-	
-	
+
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.addServerMenu:
-			
+
 			Intent myIntent = new Intent(getApplicationContext(), ActivityAddServer.class);
 			startActivityForResult(myIntent, 0);
-			
+
 			break;
 		}
 		return super.onOptionsItemSelected(item);

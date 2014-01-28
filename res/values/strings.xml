@@ -2,42 +2,43 @@
 <resources>
 
     <string name="app_name">3D Printer Control</string>
-    <string name="PrinterControlSettings">Impostazioni</string>
+    <string name="createServer">Crea server</string>
+
     <string name="ServerSelection">Seleziona Server:</string>
-    <string name="PrinterSelection">Seleziona 3d Printer:</string>
-    <string name="createServer">CREA SERVER</string>
-    <string name="loadServer">CARICA SERVER</string>
-    <string name="serverList">LISTA SERVER DISPONIBILI</string>
-    <string name="title_activity_printer_control">USA STAMPANTE</string>
-    <string name="title_activity_login">Login</string>
-    <string name="title_activity_add_server">AGGIUNGI SERVER</string>
-    <string name="title_activity_printer_control2">PrinterControl2</string>
-    <string name="title_server_list">SERVER</string>
-    <string name="title_server_detail">STAMPANTI</string>
-    <string name="title_activity_activity_add_server">AGGIUNGI SERVER</string>
-    <string name="title_activity_activity_printer_controll">USA STAMPANTE</string>
-    <string name="title_activity_frag_model_list">FragModelList</string>
-    <string name="title_activity_frag_printer_controller">FragPrinterController</string>
-    <string name="title_activity_modify_server">MODIFICA SERVER</string>
+    <string name="PrinterSelection">Seleziona Stampante:</string>
+
+    <string name="title_activity_activity_add_server">Crea server</string>
+    
+    <string name="title_activity_modify_server">Modifica server</string>
     <string name="newServer">Nome server:</string>
     <string name="newUrl">Indirizzo server:</string>
+   
+    <string name="title_activity_activity_printer_controll">3D Printer Control</string>
+    <string name="PrinterControlSettings">Impostazioni</string>
+        
     <string name="tab_model">MODELLI</string>
     <string name="tab_job">LAVORI</string>
     <string name="tab_control">CONTROLLO</string>
     <string name="tab_control2">CONTROLLO</string>
+    
     <string name="popModelDelete">Elimina modello</string>
     <string name="popModelToQueue">Aggiungi ai lavori</string>
+    
     <string name="onModelUploaded">Il modello è stato caricato</string>
     <string name="onModelDeleted">Il modello è stato eliminato</string>
     <string name="onModelCopied">Il modello è stato copiato</string>
+    
     <string name="popJobStart">Avvia lavoro</string>
     <string name="popJobStop">Ferma lavoro</string>
     <string name="popJobDelete">Elimina lavoro</string>
+    
     <string name="onJobStarted">Il lavoro è stato avviato</string>
     <string name="onJobStopped">Il lavoro è stato fermato</string>
     <string name="onJobRemoved">Il lavoro è stato rimosso</string>
+    
     <string name="yes">SI</string>
     <string name="no">NO</string>
+    
     <string name="removeServer">Vuoi rimuovere questo Server?</string>
     <string name="insertServerName">Inserire un nome per il server</string>
     <string name="invalidServerName">Il nome per il server non è valido</string>
@@ -66,9 +67,8 @@
     <string name="notNumericPort">Attenzione: il campo PORTA deve contenere solo valori numerici.</string> 
     <string name="notNumericValue">Attenzione: valore non numerico.</string>
     
-    
-    <string name="popModifyServer">Modifica Server</string>
-    <string name="popDeleteServer">Elimina Server</string>
+    <string name="popModifyServer">Modifica server</string>
+    <string name="popDeleteServer">Elimina server</string>
     
     <string name="feedrate">Velocità</string>
     <string name="flowrate">Flusso</string>

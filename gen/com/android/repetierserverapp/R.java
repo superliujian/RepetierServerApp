@@ -19,7 +19,7 @@ public final class R {
     public static final class attr {
     }
     public static final class bool {
-        public static final int isTablet=0x7f090000;
+        public static final int isTablet=0x7f0a0000;
     }
     public static final class color {
         public static final int black=0x7f070002;
@@ -40,14 +40,14 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f0a0000;
-        public static final int activity_vertical_margin=0x7f0a0001;
-        public static final int bigText=0x7f0a0005;
-        public static final int bigbigText=0x7f0a0004;
-        public static final int controlButtonText=0x7f0a0002;
-        public static final int homeButtonText=0x7f0a0003;
-        public static final int mediumText=0x7f0a0006;
-        public static final int smallText=0x7f0a0007;
+        public static final int activity_horizontal_margin=0x7f090000;
+        public static final int activity_vertical_margin=0x7f090001;
+        public static final int bigText=0x7f090005;
+        public static final int bigbigText=0x7f090004;
+        public static final int controlButtonText=0x7f090002;
+        public static final int homeButtonText=0x7f090003;
+        public static final int mediumText=0x7f090006;
+        public static final int smallText=0x7f090007;
     }
     public static final class drawable {
         public static final int corner=0x7f020000;
@@ -91,8 +91,8 @@ public final class R {
         public static final int greenView=0x7f0c000f;
         public static final int greenView2=0x7f0c0012;
         public static final int homeButton=0x7f0c0021;
-        public static final int homexbutton=0x7f0c0029;
-        public static final int homeybutton=0x7f0c002b;
+        public static final int homexbutton=0x7f0c0026;
+        public static final int homeybutton=0x7f0c0027;
         public static final int homezbutton=0x7f0c0022;
         public static final int jobName=0x7f0c0049;
         public static final int jobStatus=0x7f0c004c;
@@ -137,9 +137,9 @@ public final class R {
         public static final int statusTextView=0x7f0c0023;
         public static final int textView1=0x7f0c0002;
         public static final int textView2=0x7f0c0039;
-        public static final int textViewX=0x7f0c0026;
-        public static final int textViewY=0x7f0c002c;
-        public static final int textViewZ=0x7f0c0028;
+        public static final int textViewX=0x7f0c002b;
+        public static final int textViewY=0x7f0c0028;
+        public static final int textViewZ=0x7f0c002a;
         public static final int urlServer=0x7f0c005b;
         public static final int warningTv=0x7f0c0045;
         public static final int xValueTextView=0x7f0c0024;
@@ -147,12 +147,12 @@ public final class R {
         public static final int x_1button=0x7f0c001a;
         public static final int xp10button=0x7f0c0017;
         public static final int xp1button=0x7f0c0016;
-        public static final int yValueTextView=0x7f0c002a;
+        public static final int yValueTextView=0x7f0c0029;
         public static final int y_10button=0x7f0c001d;
         public static final int y_1button=0x7f0c001c;
         public static final int yp10button=0x7f0c0020;
         public static final int yp1button=0x7f0c001f;
-        public static final int zValueTextView=0x7f0c0027;
+        public static final int zValueTextView=0x7f0c002c;
         public static final int z_10button=0x7f0c0010;
         public static final int z_1button=0x7f0c0011;
         public static final int zp10button=0x7f0c0013;
@@ -197,93 +197,83 @@ public final class R {
         public static final int menu_printer_control=0x7f0b0002;
     }
     public static final class string {
-        public static final int PrinterControlSettings=0x7f050001;
+        public static final int PrinterControlSettings=0x7f050009;
         public static final int PrinterSelection=0x7f050003;
         public static final int ServerSelection=0x7f050002;
-        public static final int action_settings=0x7f05002c;
+        public static final int action_settings=0x7f050022;
         public static final int app_name=0x7f050000;
-        public static final int avaibleJob=0x7f050028;
-        public static final int avaibleModel=0x7f05002a;
-        public static final int createServer=0x7f050004;
-        public static final int feedrate=0x7f05003d;
-        public static final int flowrate=0x7f05003e;
-        public static final int frequency=0x7f05002d;
-        public static final int insertServerName=0x7f050026;
-        public static final int invalidServerName=0x7f050027;
-        public static final int jobFrequency=0x7f05002f;
-        public static final int jobRunning=0x7f050037;
-        public static final int jobs=0x7f050033;
-        public static final int loadServer=0x7f050005;
-        public static final int modelFrequency=0x7f05002e;
-        public static final int models=0x7f050032;
-        public static final int modify=0x7f05003f;
-        public static final int newServer=0x7f050012;
-        public static final int newUrl=0x7f050013;
-        public static final int no=0x7f050024;
-        public static final int noJobRunning=0x7f050035;
-        public static final int noJobRunning2=0x7f050036;
-        public static final int notNumericPort=0x7f050039;
-        public static final int notNumericValue=0x7f05003a;
-        public static final int notValue=0x7f050040;
-        public static final int onJobRemoved=0x7f050022;
-        public static final int onJobStarted=0x7f050020;
-        public static final int onJobStopped=0x7f050021;
-        public static final int onModelCopied=0x7f05001c;
-        public static final int onModelDeleted=0x7f05001b;
-        public static final int onModelUploaded=0x7f05001a;
-        public static final int popDeleteServer=0x7f05003c;
-        public static final int popJobDelete=0x7f05001f;
-        public static final int popJobStart=0x7f05001d;
-        public static final int popJobStop=0x7f05001e;
-        public static final int popModelDelete=0x7f050018;
-        public static final int popModelToQueue=0x7f050019;
-        public static final int popModifyServer=0x7f05003b;
-        public static final int pref_default_display_name=0x7f050046;
-        public static final int pref_description_social_recommendations=0x7f050044;
+        public static final int avaibleJob=0x7f05001e;
+        public static final int avaibleModel=0x7f050020;
+        public static final int createServer=0x7f050001;
+        public static final int feedrate=0x7f050033;
+        public static final int flowrate=0x7f050034;
+        public static final int frequency=0x7f050023;
+        public static final int insertServerName=0x7f05001c;
+        public static final int invalidServerName=0x7f05001d;
+        public static final int jobFrequency=0x7f050025;
+        public static final int jobRunning=0x7f05002d;
+        public static final int jobs=0x7f050029;
+        public static final int modelFrequency=0x7f050024;
+        public static final int models=0x7f050028;
+        public static final int modify=0x7f050035;
+        public static final int newServer=0x7f050006;
+        public static final int newUrl=0x7f050007;
+        public static final int no=0x7f05001a;
+        public static final int noJobRunning=0x7f05002b;
+        public static final int noJobRunning2=0x7f05002c;
+        public static final int notNumericPort=0x7f05002f;
+        public static final int notNumericValue=0x7f050030;
+        public static final int notValue=0x7f050036;
+        public static final int onJobRemoved=0x7f050018;
+        public static final int onJobStarted=0x7f050016;
+        public static final int onJobStopped=0x7f050017;
+        public static final int onModelCopied=0x7f050012;
+        public static final int onModelDeleted=0x7f050011;
+        public static final int onModelUploaded=0x7f050010;
+        public static final int popDeleteServer=0x7f050032;
+        public static final int popJobDelete=0x7f050015;
+        public static final int popJobStart=0x7f050013;
+        public static final int popJobStop=0x7f050014;
+        public static final int popModelDelete=0x7f05000e;
+        public static final int popModelToQueue=0x7f05000f;
+        public static final int popModifyServer=0x7f050031;
+        public static final int pref_default_display_name=0x7f05003c;
+        public static final int pref_description_social_recommendations=0x7f05003a;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f050048;
+        public static final int pref_header_data_sync=0x7f05003e;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f050042;
+        public static final int pref_header_general=0x7f050038;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f05004b;
-        public static final int pref_ringtone_silent=0x7f05004e;
-        public static final int pref_title_add_friends_to_messages=0x7f050047;
-        public static final int pref_title_display_name=0x7f050045;
-        public static final int pref_title_new_message_notifications=0x7f05004c;
-        public static final int pref_title_ringtone=0x7f05004d;
-        public static final int pref_title_social_recommendations=0x7f050043;
-        public static final int pref_title_sync_frequency=0x7f050049;
-        public static final int pref_title_system_sync_settings=0x7f05004a;
-        public static final int pref_title_vibrate=0x7f05004f;
-        public static final int removeServer=0x7f050025;
-        public static final int save=0x7f050031;
-        public static final int serverList=0x7f050006;
-        public static final int status=0x7f050034;
-        public static final int statusFrequency=0x7f050030;
-        public static final int stored=0x7f050038;
-        public static final int tab_control=0x7f050016;
-        public static final int tab_control2=0x7f050017;
-        public static final int tab_job=0x7f050015;
-        public static final int tab_model=0x7f050014;
-        public static final int title_activity_activity_add_server=0x7f05000d;
-        public static final int title_activity_activity_printer_control_setting=0x7f05002b;
-        public static final int title_activity_activity_printer_controll=0x7f05000e;
-        public static final int title_activity_add_server=0x7f050009;
-        public static final int title_activity_frag_model_list=0x7f05000f;
-        public static final int title_activity_frag_printer_controller=0x7f050010;
-        public static final int title_activity_login=0x7f050008;
-        public static final int title_activity_modify_server=0x7f050011;
-        public static final int title_activity_printer_control=0x7f050007;
-        public static final int title_activity_printer_control2=0x7f05000a;
-        public static final int title_activity_settings=0x7f050041;
-        public static final int title_server_detail=0x7f05000c;
-        public static final int title_server_list=0x7f05000b;
-        public static final int warningOffline=0x7f050029;
-        public static final int yes=0x7f050023;
+        public static final int pref_header_notifications=0x7f050041;
+        public static final int pref_ringtone_silent=0x7f050044;
+        public static final int pref_title_add_friends_to_messages=0x7f05003d;
+        public static final int pref_title_display_name=0x7f05003b;
+        public static final int pref_title_new_message_notifications=0x7f050042;
+        public static final int pref_title_ringtone=0x7f050043;
+        public static final int pref_title_social_recommendations=0x7f050039;
+        public static final int pref_title_sync_frequency=0x7f05003f;
+        public static final int pref_title_system_sync_settings=0x7f050040;
+        public static final int pref_title_vibrate=0x7f050045;
+        public static final int removeServer=0x7f05001b;
+        public static final int save=0x7f050027;
+        public static final int status=0x7f05002a;
+        public static final int statusFrequency=0x7f050026;
+        public static final int stored=0x7f05002e;
+        public static final int tab_control=0x7f05000c;
+        public static final int tab_control2=0x7f05000d;
+        public static final int tab_job=0x7f05000b;
+        public static final int tab_model=0x7f05000a;
+        public static final int title_activity_activity_add_server=0x7f050004;
+        public static final int title_activity_activity_printer_control_setting=0x7f050021;
+        public static final int title_activity_activity_printer_controll=0x7f050008;
+        public static final int title_activity_modify_server=0x7f050005;
+        public static final int title_activity_settings=0x7f050037;
+        public static final int warningOffline=0x7f05001f;
+        public static final int yes=0x7f050019;
     }
     public static final class style {
         public static final int ActionBarStyle=0x7f06000b;

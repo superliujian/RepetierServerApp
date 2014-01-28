@@ -2,12 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    >
+    android:paddingTop="@dimen/activity_vertical_margin" >
 
     <View
         android:id="@+id/greenView"
@@ -17,12 +16,11 @@
         android:layout_alignLeft="@+id/z_10button"
         android:layout_alignRight="@+id/z_1button"
         android:layout_alignTop="@+id/z_10button"
-        android:background="@drawable/view_green"
-        android:layout_marginTop="-5dp" 
-        android:layout_marginBottom="-5dp" 
+        android:layout_marginBottom="-5dp"
         android:layout_marginLeft="-5dp"
         android:layout_marginRight="-5dp"
-        />
+        android:layout_marginTop="-5dp"
+        android:background="@drawable/view_green" />
 
     <View
         android:id="@+id/greenView2"
@@ -32,11 +30,11 @@
         android:layout_alignLeft="@+id/zp1button"
         android:layout_alignRight="@+id/zp10button"
         android:layout_alignTop="@+id/zp10button"
-        android:background="@drawable/view_green"
-        android:layout_marginTop="-5dp" 
-        android:layout_marginBottom="-5dp" 
+        android:layout_marginBottom="-5dp"
         android:layout_marginLeft="-5dp"
-        android:layout_marginRight="-5dp" />
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="-5dp"
+        android:background="@drawable/view_green" />
 
     <View
         android:id="@+id/redView"
@@ -46,11 +44,11 @@
         android:layout_alignLeft="@+id/xp10button"
         android:layout_alignRight="@+id/xp10button"
         android:layout_alignTop="@+id/xp10button"
-        android:background="@drawable/view_red"
-        android:layout_marginTop="-5dp" 
-        android:layout_marginBottom="-5dp" 
+        android:layout_marginBottom="-5dp"
         android:layout_marginLeft="-5dp"
-        android:layout_marginRight="-5dp" />
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="-5dp"
+        android:background="@drawable/view_red" />
 
     <View
         android:id="@+id/redView2"
@@ -60,11 +58,11 @@
         android:layout_alignLeft="@+id/x_10button"
         android:layout_alignRight="@+id/x_10button"
         android:layout_alignTop="@+id/x_1button"
-        android:background="@drawable/view_red"
-        android:layout_marginTop="-5dp" 
-        android:layout_marginBottom="-5dp" 
+        android:layout_marginBottom="-5dp"
         android:layout_marginLeft="-5dp"
-        android:layout_marginRight="-5dp" />
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="-5dp"
+        android:background="@drawable/view_red" />
 
     <View
         android:id="@+id/blueView"
@@ -74,11 +72,11 @@
         android:layout_alignLeft="@+id/y_10button"
         android:layout_alignRight="@+id/y_1button"
         android:layout_alignTop="@+id/y_1button"
-        android:background="@drawable/view_blue"
-        android:layout_marginTop="-5dp" 
-        android:layout_marginBottom="-5dp" 
+        android:layout_marginBottom="-5dp"
         android:layout_marginLeft="-5dp"
-        android:layout_marginRight="-5dp" />
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="-5dp"
+        android:background="@drawable/view_blue" />
 
     <View
         android:id="@+id/blueView2"
@@ -88,11 +86,11 @@
         android:layout_alignLeft="@+id/yp1button"
         android:layout_alignRight="@+id/yp10button"
         android:layout_alignTop="@+id/yp1button"
-        android:background="@drawable/view_blue"
-        android:layout_marginTop="-5dp" 
-        android:layout_marginBottom="-5dp" 
+        android:layout_marginBottom="-5dp"
         android:layout_marginLeft="-5dp"
-        android:layout_marginRight="-5dp" />
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="-5dp"
+        android:background="@drawable/view_blue" />
 
     <Button
         android:id="@+id/xp10button"
@@ -123,13 +121,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:paddingTop="10dp"
-        android:text="Home"
-        android:layout_marginTop="10dp" 
-        android:layout_marginBottom="10dp" 
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-         />
+        android:layout_marginTop="10dp"
+        android:paddingTop="10dp"
+        android:text="Home" />
 
     <Button
         android:id="@+id/x_1button"
@@ -156,14 +153,14 @@
     <Button
         android:id="@+id/homezbutton"
         style="@style/control_buttons"
-        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/x_10button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:background="@drawable/view_green"
-        android:text=" Home z " />
+        android:text=" Home z "
+        android:textSize="@dimen/bigText" />
 
     <TextView
         android:id="@+id/statusTextView"
@@ -176,68 +173,6 @@
         android:gravity="center"
         android:text="Stato stampante"
         android:textSize="@dimen/bigText" />
-
-    <TextView
-        android:id="@+id/xValueTextView"
-        style="@style/Text"
-        android:textSize="@dimen/bigText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewX"
-        android:layout_alignBottom="@+id/textViewX"
-        android:layout_toRightOf="@+id/textViewX"
-        android:gravity="right"
-        android:text="0"
-        />
-
-    <TextView
-        android:id="@+id/zValueTextView"
-        style="@style/Text"
-        android:textSize="@dimen/bigText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewZ"
-        android:layout_alignBottom="@+id/textViewZ"
-        android:layout_alignRight="@+id/blueView2"
-        android:gravity="right"
-        android:text="0"
-        />
-
-    <TextView
-        android:id="@+id/textViewX"
-        style="@style/Text"
-        android:textSize="@dimen/bigText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/homexbutton"
-        android:layout_alignLeft="@+id/blueView"
-        android:layout_marginBottom="15dp"
-        android:text="X ="
-        />
-
-    <TextView
-        android:id="@+id/textViewZ"
-        style="@style/Text"
-        android:textSize="@dimen/bigText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/yValueTextView"
-        android:layout_alignBottom="@+id/yValueTextView"
-        android:layout_toLeftOf="@+id/zValueTextView"
-        android:text="Z ="
-        />
-
-    <Button
-        android:id="@+id/homeybutton"
-        style="@style/control_buttons"
-        android:textSize="@dimen/bigText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/xp1button"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/view_blue"
-        android:text=" Home Y " />
 
     <Button
         android:id="@+id/z_10button"
@@ -282,18 +217,6 @@
         android:layout_toLeftOf="@+id/zp10button"
         android:background="@drawable/corner"
         android:text="+ 1" />
-
-    <Button
-        android:id="@+id/homexbutton"
-        style="@style/control_buttons"
-        android:textSize="@dimen/bigText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/xp1button"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="30dp"
-        android:background="@drawable/view_red"
-        android:text=" Home X " />
 
     <Button
         android:id="@+id/y_1button"
@@ -342,19 +265,17 @@
     <TextView
         android:id="@+id/textViewY"
         style="@style/Text"
-        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/xValueTextView"
         android:layout_alignBottom="@+id/xValueTextView"
         android:layout_alignLeft="@+id/redView"
         android:text="Y ="
-        />
+        android:textSize="@dimen/bigText" />
 
     <TextView
         android:id="@+id/yValueTextView"
         style="@style/Text"
-        android:textSize="@dimen/bigText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textViewY"
@@ -362,7 +283,7 @@
         android:layout_alignRight="@+id/redView"
         android:gravity="right"
         android:text="0"
-        />
+        android:textSize="@dimen/bigText" />
 
     <TextView
         android:id="@+id/errorTV"
@@ -374,5 +295,74 @@
         android:gravity="center"
         android:text="error"
         android:textSize="@dimen/mediumText" />
+
+    <Button
+        android:id="@+id/homexbutton"
+        style="@style/control_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/xp1button"
+        android:layout_alignLeft="@+id/statusTextView"
+        android:layout_marginLeft="11dp"
+        android:background="@drawable/view_red"
+        android:text=" Home X "
+        android:textSize="@dimen/bigText" />
+
+    <Button
+        android:id="@+id/homeybutton"
+        style="@style/control_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/xp10button"
+        android:layout_alignBottom="@+id/xp10button"
+        android:layout_alignRight="@+id/statusTextView"
+        android:layout_marginRight="11dp"
+        android:background="@drawable/view_blue"
+        android:text=" Home Y "
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:id="@+id/textViewZ"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/homeybutton"
+        android:layout_below="@+id/statusTextView"
+        android:text="Z ="
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:id="@+id/textViewX"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/homeybutton"
+        android:layout_alignLeft="@+id/homexbutton"
+        android:layout_marginBottom="15dp"
+        android:text="X ="
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:id="@+id/xValueTextView"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewX"
+        android:layout_alignBottom="@+id/textViewX"
+        android:layout_alignRight="@+id/homexbutton"
+        android:gravity="right"
+        android:text="0"
+        android:textSize="@dimen/bigText" />
+
+    <TextView
+        android:id="@+id/zValueTextView"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/homeybutton"
+        android:layout_below="@+id/statusTextView"
+        android:gravity="right"
+        android:text="0"
+        android:textSize="@dimen/bigText" />
 
 </RelativeLayout>
